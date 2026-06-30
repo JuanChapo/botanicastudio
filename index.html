@@ -1,0 +1,2434 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Botanica Studio — Florería CDMX | Envío a Domicilio Mismo Día</title>
+    <meta name="description" content="Florería premium en CDMX. Ramos, arreglos florales y plantas con envío a domicilio el mismo día. Más de 2,500 clientes felices.">
+    <meta property="og:title" content="Botanica Studio — Florería CDMX">
+    <meta property="og:description" content="Arreglos florales únicos con envío el mismo día en CDMX. Sorprende a quien más quieres.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #FDFCFA;
+            --text: #1A1A1A;
+            --text-light: #7A7A7A;
+            --accent: #C4917B;
+            --accent-dark: #A67460;
+            --accent-light: #F5EDE8;
+            --green: #6B8F71;
+            --green-light: #EDF2ED;
+            --red: #D4545E;
+            --border: #EBEBEB;
+            --white: #FFFFFF;
+            --cream: #F8F5F1;
+            --gold: #D4A853;
+            --serif: 'Playfair Display', Georgia, serif;
+            --sans: 'Inter', -apple-system, sans-serif;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 20px rgba(0,0,0,0.06);
+            --shadow-lg: 0 12px 40px rgba(0,0,0,0.08);
+            --radius: 16px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--sans);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+        /* ═══ URGENCY BAR ═══ */
+        .urgency-bar {
+            background: linear-gradient(90deg, #1A1A1A 0%, #2D2D2D 100%);
+            color: white;
+            text-align: center;
+            padding: 0.65rem 1rem;
+            font-size: 0.78rem;
+            letter-spacing: 0.03em;
+            font-weight: 300;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .urgency-bar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 168, 83, 0.08), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(50%); }
+        }
+
+        .urgency-bar strong { font-weight: 600; color: var(--gold); }
+        .urgency-bar .separator { margin: 0 0.8rem; opacity: 0.3; }
+        .urgency-bar .timer { color: var(--gold); font-weight: 600; }
+
+        /* ═══ NAV ═══ */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(253, 252, 250, 0.96);
+            backdrop-filter: blur(24px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px;
+        }
+
+        .logo {
+            font-family: var(--serif);
+            font-size: 1.45rem;
+            font-weight: 500;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: -0.01em;
+        }
+
+        .nav-center {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-center a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-size: 0.8rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .nav-center a:hover { color: var(--accent-dark); }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-ig {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            text-decoration: none;
+            color: var(--text-light);
+            font-size: 0.78rem;
+            font-weight: 400;
+            transition: color 0.3s;
+        }
+
+        .nav-ig:hover { color: #E1306C; }
+
+        .nav-ig svg { width: 20px; height: 20px; }
+
+        .nav-icon {
+            position: relative;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 4px;
+        }
+
+        .nav-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: var(--text);
+            fill: none;
+            stroke-width: 1.5;
+        }
+
+        .badge {
+            position: absolute;
+            top: -4px;
+            right: -6px;
+            background: var(--red);
+            color: white;
+            font-size: 0.6rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .menu-btn svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--text);
+        }
+
+        /* ═══ HERO ═══ */
+        .hero {
+            min-height: 88vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .hero-text { max-width: 520px; }
+
+        .hero-social-proof {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-avatars {
+            display: flex;
+        }
+
+        .hero-avatars span {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid white;
+            margin-left: -8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .hero-avatars span:first-child { margin-left: 0; }
+        .hero-avatars span:nth-child(1) { background: var(--accent); }
+        .hero-avatars span:nth-child(2) { background: var(--green); }
+        .hero-avatars span:nth-child(3) { background: #7B8EC4; }
+        .hero-avatars span:nth-child(4) { background: var(--gold); }
+
+        .hero-social-proof p {
+            font-size: 0.78rem;
+            color: var(--text-light);
+        }
+
+        .hero-social-proof p strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .hero h1 {
+            font-family: var(--serif);
+            font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+            font-weight: 400;
+            line-height: 1.15;
+            margin-bottom: 1.2rem;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            color: var(--accent-dark);
+        }
+
+        .hero-desc {
+            font-size: 1rem;
+            color: var(--text-light);
+            font-weight: 300;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            max-width: 420px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 0.8rem;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.85rem 2rem;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            font-family: var(--sans);
+            letter-spacing: 0.02em;
+        }
+
+        .btn-fill {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-fill:hover {
+            background: var(--accent-dark);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 24px rgba(196, 145, 123, 0.35);
+        }
+
+        .btn-dark {
+            background: var(--text);
+            color: white;
+        }
+
+        .btn-dark:hover {
+            background: #333;
+            transform: translateY(-1px);
+        }
+
+        .btn-wa {
+            background: #25D366;
+            color: white;
+        }
+
+        .btn-wa:hover {
+            background: #1FAD54;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 24px rgba(37, 211, 102, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent);
+            color: var(--accent-dark);
+        }
+
+        .hero-guarantee {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .guarantee-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.78rem;
+            color: var(--text-light);
+        }
+
+        .guarantee-item svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--green);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .hero-visual {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+            height: 520px;
+        }
+
+        .hero-img {
+            border-radius: var(--radius);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hero-img:first-child {
+            grid-row: span 2;
+        }
+
+        .hero-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .live-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            padding: 0.3rem 0.7rem;
+            border-radius: 100px;
+            font-size: 0.68rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            backdrop-filter: blur(8px);
+        }
+
+        .live-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #25D366;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        /* ═══ TRUST BAR ═══ */
+        .trust-bar {
+            padding: 2.5rem 2rem;
+            background: var(--white);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .trust-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .trust-stat {
+            text-align: center;
+        }
+
+        .trust-stat h3 {
+            font-family: var(--serif);
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: var(--accent-dark);
+        }
+
+        .trust-stat p {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-top: 0.2rem;
+        }
+
+        .trust-divider {
+            width: 1px;
+            height: 40px;
+            background: var(--border);
+        }
+
+        /* ═══ CATEGORIES ═══ */
+        .categories {
+            padding: 5rem 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 2.5rem;
+        }
+
+        .section-label {
+            font-size: 0.72rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent-dark);
+            margin-bottom: 0.4rem;
+            display: block;
+        }
+
+        .section-top h2 {
+            font-family: var(--serif);
+            font-size: clamp(1.8rem, 3vw, 2.2rem);
+            font-weight: 400;
+        }
+
+        .section-top a {
+            font-size: 0.82rem;
+            color: var(--accent-dark);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .cat-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .cat-card {
+            position: relative;
+            border-radius: var(--radius);
+            overflow: hidden;
+            cursor: pointer;
+            aspect-ratio: 3/4;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .cat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .cat-card img {
+            transition: transform 0.5s;
+        }
+
+        .cat-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .cat-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(transparent 40%, rgba(0,0,0,0.6));
+        }
+
+        .cat-card-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            color: white;
+            z-index: 1;
+        }
+
+        .cat-card-label h3 {
+            font-family: var(--serif);
+            font-size: 1.15rem;
+            font-weight: 400;
+            margin-bottom: 0.15rem;
+        }
+
+        .cat-card-label p {
+            font-size: 0.75rem;
+            opacity: 0.85;
+            font-weight: 300;
+        }
+
+        .cat-count {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(8px);
+            padding: 0.3rem 0.7rem;
+            border-radius: 100px;
+            font-size: 0.68rem;
+            font-weight: 600;
+            color: var(--text);
+            z-index: 1;
+        }
+
+        /* ═══ PRODUCTS ═══ */
+        .products {
+            padding: 5rem 2rem;
+            background: var(--cream);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-header-center {
+            text-align: center;
+            max-width: 500px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .section-header-center h2 {
+            font-family: var(--serif);
+            font-size: clamp(1.8rem, 3vw, 2.2rem);
+            font-weight: 400;
+            margin-bottom: 0.4rem;
+        }
+
+        .section-header-center p {
+            color: var(--text-light);
+            font-weight: 300;
+            font-size: 0.9rem;
+        }
+
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 0.4rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            padding: 0.5rem 1.1rem;
+            border-radius: 100px;
+            border: 1px solid var(--border);
+            background: var(--white);
+            font-family: var(--sans);
+            font-size: 0.8rem;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-tab:hover { border-color: var(--accent); color: var(--accent-dark); }
+        .filter-tab.active { background: var(--text); color: white; border-color: var(--text); }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .product-img {
+            position: relative;
+            height: 280px;
+            overflow: hidden;
+            background: var(--cream);
+        }
+
+        .product-img img {
+            transition: transform 0.5s;
+        }
+
+        .product-card:hover .product-img img {
+            transform: scale(1.05);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 0.8rem;
+            left: 0.8rem;
+            padding: 0.25rem 0.7rem;
+            border-radius: 100px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            z-index: 1;
+        }
+
+        .badge-popular { background: var(--accent); color: white; }
+        .badge-new { background: var(--green); color: white; }
+        .badge-sale { background: var(--red); color: white; }
+        .badge-limited { background: var(--gold); color: white; }
+
+        .product-viewers {
+            position: absolute;
+            bottom: 0.8rem;
+            left: 0.8rem;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            padding: 0.25rem 0.6rem;
+            border-radius: 100px;
+            font-size: 0.65rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            backdrop-filter: blur(8px);
+            z-index: 1;
+        }
+
+        .product-viewers .eye { font-size: 0.7rem; }
+
+        .product-wishlist {
+            position: absolute;
+            top: 0.8rem;
+            right: 0.8rem;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s;
+            z-index: 1;
+        }
+
+        .product-wishlist:hover { transform: scale(1.1); }
+        .product-wishlist.liked svg { fill: var(--red); stroke: var(--red); }
+
+        .product-wishlist svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--text-light);
+            fill: none;
+            stroke-width: 1.5;
+        }
+
+        .product-body {
+            padding: 1.1rem 1.3rem 1.3rem;
+        }
+
+        .product-cat {
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--accent-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .product-body h3 {
+            font-family: var(--serif);
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .product-desc {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            font-weight: 300;
+            line-height: 1.5;
+            margin-bottom: 0.8rem;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .stars { color: var(--gold); font-size: 0.75rem; letter-spacing: 1px; }
+        .rating-count { font-size: 0.72rem; color: var(--text-light); }
+
+        .product-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-price {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .product-price .old {
+            font-size: 0.78rem;
+            color: var(--text-light);
+            font-weight: 400;
+            text-decoration: line-through;
+            margin-left: 0.3rem;
+        }
+
+        .product-price .save {
+            display: block;
+            font-size: 0.68rem;
+            color: var(--red);
+            font-weight: 600;
+        }
+
+        .btn-cart {
+            padding: 0.55rem 1rem;
+            border-radius: 100px;
+            background: var(--text);
+            color: white;
+            border: none;
+            font-family: var(--sans);
+            font-size: 0.76rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .btn-cart:hover { background: var(--accent-dark); }
+
+        .btn-cart svg {
+            width: 13px;
+            height: 13px;
+            stroke: white;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .stock-warning {
+            margin-top: 0.5rem;
+            font-size: 0.7rem;
+            color: var(--red);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        /* ═══ URGENCY SECTION ═══ */
+        .urgency-cta {
+            padding: 3.5rem 2rem;
+            background: linear-gradient(135deg, #1A1A1A 0%, #2D2D2D 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .urgency-cta-inner {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .urgency-cta h2 {
+            font-family: var(--serif);
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 400;
+            margin-bottom: 0.6rem;
+        }
+
+        .urgency-cta h2 span { color: var(--gold); }
+
+        .urgency-cta p {
+            font-weight: 300;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .countdown-item {
+            text-align: center;
+        }
+
+        .countdown-item .num {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: 700;
+            font-family: var(--sans);
+            color: var(--gold);
+            line-height: 1;
+        }
+
+        .countdown-item .label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0.6;
+        }
+
+        .countdown-sep {
+            font-size: 1.5rem;
+            color: var(--gold);
+            opacity: 0.5;
+            align-self: flex-start;
+            margin-top: 0.2rem;
+        }
+
+        /* ═══ DELIVERY ═══ */
+        .delivery {
+            padding: 5rem 2rem;
+        }
+
+        .delivery-grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .delivery-card {
+            text-align: center;
+            padding: 2rem 1.2rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            background: var(--white);
+            transition: all 0.3s;
+        }
+
+        .delivery-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .delivery-icon {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 1rem;
+            border-radius: 50%;
+            background: var(--accent-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .delivery-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: var(--accent-dark);
+            fill: none;
+            stroke-width: 1.5;
+        }
+
+        .delivery-card h3 {
+            font-family: var(--serif);
+            font-size: 1.05rem;
+            font-weight: 500;
+            margin-bottom: 0.4rem;
+        }
+
+        .delivery-card p {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        /* ═══ HOW IT WORKS ═══ */
+        .how-it-works {
+            padding: 5rem 2rem;
+            background: var(--white);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .steps-grid {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .steps-grid::before {
+            content: '';
+            position: absolute;
+            top: 24px;
+            left: 20%;
+            right: 20%;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .step-number {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 1rem;
+            border-radius: 50%;
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--serif);
+            font-size: 1.15rem;
+            color: white;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step h3 {
+            font-family: var(--serif);
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 0.4rem;
+        }
+
+        .step p {
+            font-size: 0.82rem;
+            color: var(--text-light);
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        /* ═══ OCCASIONS ═══ */
+        .occasions {
+            padding: 5rem 2rem;
+        }
+
+        .occasion-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .occasion-card {
+            position: relative;
+            border-radius: var(--radius);
+            overflow: hidden;
+            cursor: pointer;
+            height: 200px;
+            transition: all 0.3s;
+        }
+
+        .occasion-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+        .occasion-card:hover img { transform: scale(1.05); }
+        .occasion-card img { transition: transform 0.5s; }
+
+        .occasion-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.65));
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.5rem;
+            color: white;
+        }
+
+        .occasion-overlay h3 {
+            font-family: var(--serif);
+            font-size: 1.15rem;
+            font-weight: 400;
+        }
+
+        .occasion-overlay p {
+            font-size: 0.78rem;
+            opacity: 0.85;
+            font-weight: 300;
+        }
+
+        /* ═══ TESTIMONIALS ═══ */
+        .testimonials {
+            padding: 5rem 2rem;
+            background: var(--cream);
+            border-top: 1px solid var(--border);
+        }
+
+        .testimonials-grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.2rem;
+        }
+
+        .testimonial {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 1.8rem;
+            border: 1px solid var(--border);
+        }
+
+        .testimonial-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-stars { color: var(--gold); font-size: 0.8rem; letter-spacing: 1px; }
+
+        .testimonial-verified {
+            font-size: 0.65rem;
+            color: var(--green);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .testimonial-verified svg {
+            width: 12px;
+            height: 12px;
+            stroke: var(--green);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .testimonial blockquote {
+            font-size: 0.88rem;
+            color: var(--text);
+            font-weight: 300;
+            line-height: 1.7;
+            margin-bottom: 1.2rem;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .testimonial-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: var(--accent-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--serif);
+            font-weight: 500;
+            color: var(--accent-dark);
+            font-size: 0.9rem;
+        }
+
+        .testimonial-author strong { font-size: 0.82rem; display: block; }
+        .testimonial-author span { font-size: 0.72rem; color: var(--text-light); }
+
+        /* ═══ INSTAGRAM FEED ═══ */
+        .ig-section {
+            padding: 5rem 2rem;
+        }
+
+        .ig-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .ig-handle {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: var(--text);
+            font-size: 1rem;
+            font-weight: 500;
+            margin-top: 0.6rem;
+            transition: color 0.3s;
+        }
+
+        .ig-handle:hover { color: #E1306C; }
+
+        .ig-handle svg { width: 22px; height: 22px; }
+
+        .ig-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.4rem;
+        }
+
+        .ig-item {
+            aspect-ratio: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            position: relative;
+            display: block;
+        }
+
+        .ig-item:hover img { transform: scale(1.05); }
+        .ig-item img { transition: transform 0.4s; }
+
+        .ig-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0);
+            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ig-item:hover::after {
+            background: rgba(0,0,0,0.25);
+        }
+
+        /* ═══ CTA ═══ */
+        .final-cta {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .final-cta-inner {
+            max-width: 560px;
+            margin: 0 auto;
+        }
+
+        .final-cta h2 {
+            font-family: var(--serif);
+            font-size: clamp(1.8rem, 3vw, 2.4rem);
+            font-weight: 400;
+            margin-bottom: 0.8rem;
+        }
+
+        .final-cta p {
+            font-weight: 300;
+            font-size: 0.92rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .final-cta-form {
+            display: flex;
+            gap: 0.6rem;
+            max-width: 420px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .final-cta-form input {
+            flex: 1;
+            padding: 0.85rem 1.2rem;
+            border: 1px solid rgba(255,255,255,0.35);
+            border-radius: 100px;
+            background: rgba(255,255,255,0.15);
+            color: white;
+            font-family: var(--sans);
+            font-size: 0.88rem;
+            outline: none;
+        }
+
+        .final-cta-form input::placeholder { color: rgba(255,255,255,0.65); }
+
+        .final-cta-form button {
+            padding: 0.85rem 1.6rem;
+            border-radius: 100px;
+            background: white;
+            color: var(--accent-dark);
+            border: none;
+            font-family: var(--sans);
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s;
+        }
+
+        .final-cta-form button:hover { transform: translateY(-1px); }
+
+        .cta-guarantee {
+            font-size: 0.75rem;
+            opacity: 0.75;
+        }
+
+        /* ═══ FOOTER ═══ */
+        footer {
+            background: #111;
+            color: rgba(255,255,255,0.7);
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.3fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand .logo { color: white; display: inline-block; margin-bottom: 0.8rem; }
+
+        .footer-brand p {
+            font-size: 0.84rem;
+            font-weight: 300;
+            line-height: 1.7;
+            margin-bottom: 1.2rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 0.6rem;
+        }
+
+        .footer-social a {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .footer-social a:hover { border-color: var(--accent); background: rgba(196,145,123,0.1); }
+        .footer-social a svg { width: 16px; height: 16px; fill: rgba(255,255,255,0.7); }
+
+        footer h4 {
+            color: white;
+            font-size: 0.78rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        footer ul { list-style: none; }
+        footer ul li { margin-bottom: 0.5rem; }
+        footer ul a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.82rem; font-weight: 300; transition: color 0.3s; }
+        footer ul a:hover { color: var(--accent); }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 0.7rem;
+            font-size: 0.82rem;
+            font-weight: 300;
+        }
+
+        .footer-contact-item svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--accent);
+            fill: none;
+            stroke-width: 1.5;
+            flex-shrink: 0;
+        }
+
+        .footer-contact-item a {
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-contact-item a:hover { color: var(--accent); }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            font-weight: 300;
+        }
+
+        .footer-payments {
+            display: flex;
+            gap: 0.4rem;
+        }
+
+        .pay-icon {
+            padding: 0.25rem 0.5rem;
+            background: rgba(255,255,255,0.08);
+            border-radius: 4px;
+            font-size: 0.68rem;
+            color: rgba(255,255,255,0.5);
+            font-weight: 600;
+        }
+
+        /* ═══ WHATSAPP FLOAT ═══ */
+        .wa-float {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            z-index: 99;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #25D366;
+            color: white;
+            padding: 0.75rem 1.1rem 0.75rem 0.85rem;
+            border-radius: 100px;
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 500;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s;
+        }
+
+        .wa-float:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(37, 211, 102, 0.5); }
+        .wa-float svg { width: 24px; height: 24px; fill: white; }
+
+        /* ═══ CART SIDEBAR ═══ */
+        .cart-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.45);
+            z-index: 200;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            backdrop-filter: blur(4px);
+        }
+
+        .cart-overlay.open { opacity: 1; visibility: visible; }
+
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -420px;
+            width: 400px;
+            max-width: 92vw;
+            height: 100%;
+            background: var(--white);
+            z-index: 201;
+            transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-sidebar.open { right: 0; }
+
+        .cart-header {
+            padding: 1.3rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-header h3 { font-family: var(--serif); font-size: 1.15rem; font-weight: 500; }
+
+        .cart-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .cart-close svg { width: 22px; height: 22px; stroke: var(--text); stroke-width: 1.5; }
+
+        .cart-free-shipping {
+            padding: 0.8rem 1.5rem;
+            background: var(--green-light);
+            font-size: 0.78rem;
+            color: var(--green);
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0.5rem 1.5rem;
+        }
+
+        .cart-empty {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-light);
+        }
+
+        .cart-empty p { font-size: 0.88rem; font-weight: 300; margin-top: 0.5rem; }
+
+        .cart-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+            align-items: center;
+        }
+
+        .cart-item-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .cart-item-info { flex: 1; }
+        .cart-item-info h4 { font-size: 0.85rem; font-weight: 500; margin-bottom: 0.1rem; }
+        .cart-item-info p { font-size: 0.78rem; color: var(--accent-dark); font-weight: 600; }
+
+        .cart-item-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.4rem;
+        }
+
+        .cart-item-remove {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.7rem;
+            color: var(--text-light);
+            text-decoration: underline;
+            padding: 0;
+        }
+
+        .cart-item-qty {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .qty-btn {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            background: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            color: var(--text);
+            transition: all 0.2s;
+        }
+
+        .qty-btn:hover { border-color: var(--accent); color: var(--accent-dark); }
+
+        .cart-item-qty span { font-size: 0.85rem; font-weight: 600; min-width: 18px; text-align: center; }
+
+        .cart-footer {
+            padding: 1.2rem 1.5rem;
+            border-top: 1px solid var(--border);
+            background: var(--bg);
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.4rem;
+            font-size: 0.85rem;
+        }
+
+        .cart-total.final {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            padding-top: 0.6rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .cart-footer .btn { width: 100%; justify-content: center; padding: 0.9rem; }
+        .cart-footer .btn + .btn { margin-top: 0.5rem; }
+
+        /* ═══ ANIMATIONS ═══ */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
+
+        /* ═══ RESPONSIVE ═══ */
+        @media (max-width: 1024px) {
+            .hero { grid-template-columns: 1fr; min-height: auto; padding-top: 2rem; }
+            .hero-visual { height: 320px; order: -1; }
+            .hero-text { max-width: 100%; text-align: center; margin: 0 auto; }
+            .hero-desc { margin: 0 auto 2rem; }
+            .hero-actions { justify-content: center; }
+            .hero-guarantee { justify-content: center; }
+            .hero-social-proof { justify-content: center; }
+            .cat-grid { grid-template-columns: repeat(2, 1fr); }
+            .delivery-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .nav-center { display: none; position: absolute; top: 64px; left: 0; right: 0; background: var(--bg); flex-direction: column; padding: 1.5rem 2rem; gap: 1rem; border-bottom: 1px solid var(--border); box-shadow: var(--shadow-md); z-index: 100; }
+            .nav-center.active { display: flex; }
+            .menu-btn { display: block; }
+            .nav-ig span { display: none; }
+            .products, .categories, .delivery, .how-it-works, .occasions, .testimonials, .ig-section, .final-cta { padding: 3.5rem 1.5rem; }
+            .steps-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .steps-grid::before { display: none; }
+            .occasion-grid { grid-template-columns: 1fr; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .ig-grid { grid-template-columns: repeat(3, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+            .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+            .final-cta-form { flex-direction: column; }
+            .hero-visual { grid-template-columns: 1fr 1fr; height: 240px; }
+            .trust-grid { flex-wrap: wrap; gap: 1.5rem; }
+            .trust-divider { display: none; }
+            .trust-stat { width: 40%; }
+            .wa-float span { display: none; }
+            .wa-float { padding: 0.9rem; border-radius: 50%; }
+            .products-grid { grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+            .urgency-bar .hide-mobile { display: none; }
+            .countdown .num { font-size: 1.4rem; }
+        }
+
+        @media (max-width: 480px) {
+            .products-grid { grid-template-columns: 1fr; }
+            .cat-grid { grid-template-columns: 1fr; }
+            .delivery-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- URGENCY BAR -->
+    <div class="urgency-bar">
+        <strong>ENVÍO GRATIS</strong> en CDMX en compras +$599
+        <span class="separator hide-mobile">|</span>
+        <span class="hide-mobile">Pedí antes de las <strong class="timer" id="cutoffTime">2:00 PM</strong> y recibe <strong>HOY</strong></span>
+    </div>
+
+    <!-- NAV -->
+    <nav>
+        <div class="nav-inner">
+            <a href="#" class="logo">Botanica Studio</a>
+            <ul class="nav-center" id="navLinks">
+                <li><a href="#tienda">Tienda</a></li>
+                <li><a href="#ocasiones">Ocasiones</a></li>
+                <li><a href="#como-funciona">Envíos</a></li>
+                <li><a href="#testimonios">Reseñas</a></li>
+            </ul>
+            <div class="nav-right">
+                <a href="https://instagram.com/botanicastudio.mx" target="_blank" rel="noopener" class="nav-ig" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5"/>
+                        <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5"/>
+                        <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/>
+                    </svg>
+                    <span>@botanicastudio.mx</span>
+                </a>
+                <button class="nav-icon" onclick="toggleCart()" aria-label="Carrito">
+                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+                        <line x1="3" y1="6" x2="21" y2="6"/>
+                        <path d="M16 10a4 4 0 01-8 0"/>
+                    </svg>
+                    <span class="badge" id="cartBadge">0</span>
+                </button>
+                <button class="menu-btn" id="menuBtn" aria-label="Menú">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round">
+                        <line x1="4" y1="6" x2="20" y2="6"/>
+                        <line x1="4" y1="12" x2="20" y2="12"/>
+                        <line x1="4" y1="18" x2="20" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-text">
+            <div class="hero-social-proof">
+                <div class="hero-avatars">
+                    <span>V</span><span>D</span><span>S</span><span>+</span>
+                </div>
+                <p><strong>2,500+ clientes</strong> ya confían en nosotros</p>
+            </div>
+            <h1>Haz que cada momento sea <em>inolvidable</em></h1>
+            <p class="hero-desc">Arreglos florales artesanales con flores frescas del día. Entrega el mismo día en CDMX y área metropolitana. Sorprende a quien más quieres.</p>
+            <div class="hero-actions">
+                <a href="#tienda" class="btn btn-fill">
+                    Elegir mi arreglo
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <a href="https://wa.me/525554097367?text=Hola%20%F0%9F%91%8B%20Me%20gustar%C3%ADa%20un%20arreglo%20floral%20personalizado" class="btn btn-wa" target="_blank" rel="noopener">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    Pedir personalizado
+                </a>
+            </div>
+            <div class="hero-guarantee">
+                <div class="guarantee-item">
+                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    Entrega mismo día
+                </div>
+                <div class="guarantee-item">
+                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    100% frescas
+                </div>
+                <div class="guarantee-item">
+                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    Pago seguro
+                </div>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="hero-img">
+                <div class="live-badge"><span class="live-dot"></span> <span id="liveViewers">12</span> personas viendo</div>
+                <img src="https://images.unsplash.com/photo-1487530811176-3780de880c2d?w=600&h=800&fit=crop" alt="Ramo de rosas premium">
+            </div>
+            <div class="hero-img">
+                <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?w=400&h=400&fit=crop" alt="Arreglo floral elegante">
+            </div>
+            <div class="hero-img">
+                <img src="https://images.unsplash.com/photo-1490750967868-88aa4f44baee?w=400&h=400&fit=crop" alt="Flores de temporada">
+            </div>
+        </div>
+    </section>
+
+    <!-- TRUST BAR -->
+    <div class="trust-bar">
+        <div class="trust-grid">
+            <div class="trust-stat">
+                <h3>2,500+</h3>
+                <p>Pedidos entregados</p>
+            </div>
+            <div class="trust-divider"></div>
+            <div class="trust-stat">
+                <h3>4.9 &#9733;</h3>
+                <p>Calificación promedio</p>
+            </div>
+            <div class="trust-divider"></div>
+            <div class="trust-stat">
+                <h3>98%</h3>
+                <p>Clientes satisfechos</p>
+            </div>
+            <div class="trust-divider"></div>
+            <div class="trust-stat">
+                <h3>2hrs</h3>
+                <p>Tiempo de entrega</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- CATEGORIES -->
+    <section class="categories">
+        <div class="container">
+            <div class="section-top">
+                <div>
+                    <span class="section-label">Categorías</span>
+                    <h2>Encuentra el detalle perfecto</h2>
+                </div>
+                <a href="#tienda">Ver todo &rarr;</a>
+            </div>
+            <div class="cat-grid fade-in">
+                <div class="cat-card" onclick="filterProducts('ramos')">
+                    <img src="https://images.unsplash.com/photo-1563241527-3004b7be0ffd?w=400&h=530&fit=crop" alt="Ramos">
+                    <div class="cat-card-overlay"></div>
+                    <span class="cat-count">12 productos</span>
+                    <div class="cat-card-label">
+                        <h3>Ramos</h3>
+                        <p>Desde $299 MXN</p>
+                    </div>
+                </div>
+                <div class="cat-card" onclick="filterProducts('arreglos')">
+                    <img src="https://images.unsplash.com/photo-1567696911980-2eed69a46042?w=400&h=530&fit=crop" alt="Arreglos Florales">
+                    <div class="cat-card-overlay"></div>
+                    <span class="cat-count">8 productos</span>
+                    <div class="cat-card-label">
+                        <h3>Arreglos Florales</h3>
+                        <p>Desde $450 MXN</p>
+                    </div>
+                </div>
+                <div class="cat-card" onclick="filterProducts('plantas')">
+                    <img src="https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?w=400&h=530&fit=crop" alt="Plantas">
+                    <div class="cat-card-overlay"></div>
+                    <span class="cat-count">6 productos</span>
+                    <div class="cat-card-label">
+                        <h3>Plantas</h3>
+                        <p>Desde $220 MXN</p>
+                    </div>
+                </div>
+                <div class="cat-card" onclick="filterProducts('gifts')">
+                    <img src="https://images.unsplash.com/photo-1549488344-cbb6c34cf08b?w=400&h=530&fit=crop" alt="Regalos">
+                    <div class="cat-card-overlay"></div>
+                    <span class="cat-count">5 productos</span>
+                    <div class="cat-card-label">
+                        <h3>Regalos & Combos</h3>
+                        <p>Desde $550 MXN</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section class="products" id="tienda">
+        <div class="container">
+            <div class="section-header-center fade-in">
+                <span class="section-label">Lo que todos piden</span>
+                <h2>Nuestros más vendidos</h2>
+                <p>Seleccionados por nuestros clientes como sus favoritos</p>
+            </div>
+            <div class="filter-tabs" id="filterTabs">
+                <button class="filter-tab active" onclick="filterProducts('todos')">Todos</button>
+                <button class="filter-tab" onclick="filterProducts('ramos')">Ramos</button>
+                <button class="filter-tab" onclick="filterProducts('arreglos')">Arreglos</button>
+                <button class="filter-tab" onclick="filterProducts('plantas')">Plantas</button>
+                <button class="filter-tab" onclick="filterProducts('gifts')">Regalos</button>
+            </div>
+            <div class="products-grid" id="productsGrid"></div>
+        </div>
+    </section>
+
+    <!-- URGENCY CTA -->
+    <section class="urgency-cta">
+        <div class="urgency-cta-inner">
+            <h2>Pedidos de hoy con <span>entrega express</span></h2>
+            <p>Ordena antes de las 2:00 PM y recibe tu arreglo HOY en cualquier punto de CDMX</p>
+            <div class="countdown" id="countdown">
+                <div class="countdown-item"><span class="num" id="countHrs">--</span><span class="label">Horas</span></div>
+                <span class="countdown-sep">:</span>
+                <div class="countdown-item"><span class="num" id="countMin">--</span><span class="label">Min</span></div>
+                <span class="countdown-sep">:</span>
+                <div class="countdown-item"><span class="num" id="countSec">--</span><span class="label">Seg</span></div>
+            </div>
+            <a href="#tienda" class="btn btn-fill">Ordenar ahora</a>
+        </div>
+    </section>
+
+    <!-- DELIVERY -->
+    <section class="delivery" id="como-funciona">
+        <div class="container">
+            <div class="section-header-center fade-in">
+                <span class="section-label">Por qué elegirnos</span>
+                <h2>La experiencia Botanica Studio</h2>
+            </div>
+            <div class="delivery-grid fade-in">
+                <div class="delivery-card">
+                    <div class="delivery-icon">
+                        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    </div>
+                    <h3>Entrega Express</h3>
+                    <p>Recibe en <strong>2-4 horas</strong>. Pedidos antes de las 2pm llegan el mismo día.</p>
+                </div>
+                <div class="delivery-card">
+                    <div class="delivery-icon">
+                        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <h3>Garantía de Frescura</h3>
+                    <p>Si tus flores no llegan perfectas, <strong>te reponemos sin costo</strong>. Sin preguntas.</p>
+                </div>
+                <div class="delivery-card">
+                    <div class="delivery-icon">
+                        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+                    </div>
+                    <h3>Atención Personal</h3>
+                    <p>Te asesoramos por WhatsApp para crear el <strong>arreglo perfecto</strong> para la ocasión.</p>
+                </div>
+                <div class="delivery-card">
+                    <div class="delivery-icon">
+                        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                    </div>
+                    <h3>Pago Flexible</h3>
+                    <p>Tarjeta, transferencia, OXXO o <strong>efectivo contra entrega</strong>. Tú eliges.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="how-it-works">
+        <div class="container">
+            <div class="section-header-center fade-in">
+                <span class="section-label">Súper fácil</span>
+                <h2>Tu pedido en 3 simples pasos</h2>
+            </div>
+            <div class="steps-grid fade-in">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Elige tu favorito</h3>
+                    <p>Explora el catálogo o escríbenos por WhatsApp y te armamos algo personalizado.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Dinos a dónde va</h3>
+                    <p>Dirección, fecha y horario. Agrega una tarjeta con mensaje personal si quieres.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Nosotros lo llevamos</h3>
+                    <p>Lo preparamos con flores frescas del día y lo entregamos con cuidado en la puerta.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- OCCASIONS -->
+    <section class="occasions" id="ocasiones">
+        <div class="container">
+            <div class="section-header-center fade-in">
+                <span class="section-label">Para cada momento</span>
+                <h2>¿Cuál es la ocasión?</h2>
+                <p>Tenemos el arreglo ideal para lo que necesites expresar</p>
+            </div>
+            <div class="occasion-grid fade-in">
+                <div class="occasion-card">
+                    <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=500&h=300&fit=crop" alt="Cumpleaños">
+                    <div class="occasion-overlay">
+                        <h3>Cumpleaños</h3>
+                        <p>Sorprende con color y alegría</p>
+                    </div>
+                </div>
+                <div class="occasion-card">
+                    <img src="https://images.unsplash.com/photo-1494972308805-463bc619d34e?w=500&h=300&fit=crop" alt="Aniversario">
+                    <div class="occasion-overlay">
+                        <h3>Aniversario & Romance</h3>
+                        <p>Rosas y arreglos que enamoran</p>
+                    </div>
+                </div>
+                <div class="occasion-card">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=500&h=300&fit=crop" alt="Corporativo">
+                    <div class="occasion-overlay">
+                        <h3>Corporativo</h3>
+                        <p>Elegancia para oficinas y eventos</p>
+                    </div>
+                </div>
+                <div class="occasion-card">
+                    <img src="https://images.unsplash.com/photo-1455659817273-f96807779a8a?w=500&h=300&fit=crop" alt="Agradecimiento">
+                    <div class="occasion-overlay">
+                        <h3>Agradecimiento</h3>
+                        <p>Flores que dicen "gracias"</p>
+                    </div>
+                </div>
+                <div class="occasion-card">
+                    <img src="https://images.unsplash.com/photo-1508610048659-a06b669e3321?w=500&h=300&fit=crop" alt="Día de las Madres">
+                    <div class="occasion-overlay">
+                        <h3>Día de las Madres</h3>
+                        <p>Lo mejor para la mejor</p>
+                    </div>
+                </div>
+                <div class="occasion-card">
+                    <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=500&h=300&fit=crop" alt="Solo porque sí">
+                    <div class="occasion-overlay">
+                        <h3>Solo porque sí</h3>
+                        <p>Los mejores detalles no necesitan razón</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials" id="testimonios">
+        <div class="container">
+            <div class="section-header-center fade-in">
+                <span class="section-label">+350 reseñas verificadas</span>
+                <h2>Lo que dicen nuestros clientes</h2>
+            </div>
+            <div class="testimonials-grid fade-in">
+                <div class="testimonial">
+                    <div class="testimonial-top">
+                        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                        <div class="testimonial-verified">
+                            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            Verificada
+                        </div>
+                    </div>
+                    <blockquote>"Pedí un ramo para el cumpleaños de mi mamá y llegó HERMOSO. Las flores estaban super frescas, el empaque impecable y venía con una tarjeta preciosa. Ya es mi florería de confianza, llevo 4 pedidos."</blockquote>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">V</div>
+                        <div>
+                            <strong>Valentina R.</strong>
+                            <span>Polanco, CDMX &bull; hace 3 días</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-top">
+                        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                        <div class="testimonial-verified">
+                            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            Verificada
+                        </div>
+                    </div>
+                    <blockquote>"Necesitaba unas rosas urgentes para mi aniversario. Les escribí por WhatsApp, me respondieron al instante y en menos de 3 horas ya estaban en la puerta. Mi esposa quedó ENCANTADA. 10/10"</blockquote>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">D</div>
+                        <div>
+                            <strong>Daniel M.</strong>
+                            <span>Condesa, CDMX &bull; hace 1 semana</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-top">
+                        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                        <div class="testimonial-verified">
+                            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            Verificada
+                        </div>
+                    </div>
+                    <blockquote>"Compré el combo de flores + chocolates para sorprender a mi novia y fue un éxito total. La calidad de las flores es otro nivel comparado con otras florerías online. Súper recomendado."</blockquote>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">C</div>
+                        <div>
+                            <strong>Carlos L.</strong>
+                            <span>Roma Norte, CDMX &bull; hace 5 días</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INSTAGRAM -->
+    <section class="ig-section">
+        <div class="container">
+            <div class="ig-header fade-in">
+                <span class="section-label">Síguenos</span>
+                <h2 style="font-family: var(--serif); font-size: clamp(1.8rem, 3vw, 2.2rem); font-weight: 400;">Inspírate en nuestro Instagram</h2>
+                <a href="https://instagram.com/botanicastudio.mx" target="_blank" rel="noopener" class="ig-handle">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5"/>
+                        <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5"/>
+                        <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/>
+                    </svg>
+                    @botanicastudio.mx
+                </a>
+            </div>
+            <div class="ig-grid fade-in">
+                <a class="ig-item" href="https://instagram.com/botanicastudio.mx" target="_blank" rel="noopener">
+                    <img src="https://images.unsplash.com/photo-1487530811176-3780de880c2d?w=300&h=300&fit=crop" alt="Instagram post">
+                </a>
+                <a class="ig-item" href="https://instagram.com/botanicastudio.mx" target="_blank" rel="noopener">
+                    <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?w=300&h=300&fit=crop" alt="Instagram post">
+                </a>
+                <a class="ig-item" href="https://instagram.com/botanicastudio.mx" target="_blank" rel="noopener">
+                    <img src="https://images.unsplash.com/photo-1490750967868-88aa4f44baee?w=300&h=300&fit=crop" alt="Instagram post">
+                </a>
+                <a class="ig-item" href="https://instagram.com/botanicastudio.mx" target="_blank" rel="noopener">
+                    <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=300&h=300&fit=crop" alt="Instagram post">
+                </a>
+                <a class="ig-item" href="https://instagram.com/botanicastudio.mx" target="_blank" rel="noopener">
+                    <img src="https://images.unsplash.com/photo-1494972308805-463bc619d34e?w=300&h=300&fit=crop" alt="Instagram post">
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="final-cta">
+        <div class="final-cta-inner fade-in">
+            <h2>10% OFF en tu primer pedido</h2>
+            <p>Suscríbete y recibe tu código de descuento exclusivo + tips y ofertas semanales.</p>
+            <form class="final-cta-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='&#10003; Listo!'; this.querySelector('input').value='';">
+                <input type="email" placeholder="tu@correo.com" required>
+                <button type="submit">Quiero mi 10%</button>
+            </form>
+            <p class="cta-guarantee">Sin spam. Cancela cuando quieras. Solo cosas bonitas.</p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="#" class="logo">Botanica Studio</a>
+                <p>Florería en Ciudad de México. Arreglos florales artesanales, ramos y plantas con envío a domicilio el mismo día. Haz que cada momento cuente.</p>
+                <div class="footer-social">
+                    <a href="https://instagram.com/botanicastudio.mx" target="_blank" rel="noopener" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                    </a>
+                    <a href="#" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    </a>
+                    <a href="#" aria-label="TikTok">
+                        <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <h4>Tienda</h4>
+                <ul>
+                    <li><a href="#">Ramos</a></li>
+                    <li><a href="#">Arreglos Florales</a></li>
+                    <li><a href="#">Plantas</a></li>
+                    <li><a href="#">Regalos & Combos</a></li>
+                    <li><a href="#">Lo más vendido</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Información</h4>
+                <ul>
+                    <li><a href="#">Zonas de Envío</a></li>
+                    <li><a href="#">Preguntas Frecuentes</a></li>
+                    <li><a href="#">Términos y Condiciones</a></li>
+                    <li><a href="#">Aviso de Privacidad</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Contacto</h4>
+                <div class="footer-contact-item">
+                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                    <a href="https://wa.me/525554097367" target="_blank" rel="noopener">55 5409 7367</a>
+                </div>
+                <div class="footer-contact-item">
+                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    hola@botanicastudio.mx
+                </div>
+                <div class="footer-contact-item">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <rect x="2" y="2" width="20" height="20" rx="5" stroke="var(--accent)" stroke-width="1.5"/>
+                        <circle cx="12" cy="12" r="5" stroke="var(--accent)" stroke-width="1.5"/>
+                        <circle cx="17.5" cy="6.5" r="1.5" fill="var(--accent)"/>
+                    </svg>
+                    <a href="https://instagram.com/botanicastudio.mx" target="_blank" rel="noopener">@botanicastudio.mx</a>
+                </div>
+                <div class="footer-contact-item">
+                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    CDMX y Área Metropolitana
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Botanica Studio MX. Todos los derechos reservados.</p>
+            <div class="footer-payments">
+                <span class="pay-icon">VISA</span>
+                <span class="pay-icon">MC</span>
+                <span class="pay-icon">AMEX</span>
+                <span class="pay-icon">OXXO</span>
+                <span class="pay-icon">SPEI</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WHATSAPP FLOAT -->
+    <a href="https://wa.me/525554097367?text=Hola%20%F0%9F%91%8B%20Me%20interesa%20un%20arreglo%20floral" class="wa-float" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span>Escríbenos</span>
+    </a>
+
+    <!-- CART SIDEBAR -->
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Mi carrito (<span id="cartItemCount">0</span>)</h3>
+            <button class="cart-close" onclick="toggleCart()">
+                <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+        </div>
+        <div class="cart-free-shipping" id="cartShippingBar">Te faltan <strong>$599</strong> para envío GRATIS</div>
+        <div class="cart-items" id="cartItems">
+            <div class="cart-empty" id="cartEmpty">
+                <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">&#127801;</div>
+                <p>Tu carrito está vacío</p>
+                <a href="#tienda" class="btn btn-outline" style="margin-top: 1rem; font-size: 0.8rem;" onclick="toggleCart()">Ver productos</a>
+            </div>
+        </div>
+        <div class="cart-footer" id="cartFooter" style="display: none;">
+            <div class="cart-total"><span>Subtotal</span><span id="cartSubtotal">$0</span></div>
+            <div class="cart-total"><span>Envío</span><span id="cartShippingCost">$99</span></div>
+            <div class="cart-total final"><span>Total</span><span id="cartTotal">$0 MXN</span></div>
+            <a href="#" class="btn btn-fill" onclick="checkout(event)">Pagar ahora &bull; <span id="cartTotalBtn">$0</span></a>
+            <a href="#" class="btn btn-wa" onclick="checkoutWA(event)" style="font-size: 0.82rem;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Pedir por WhatsApp
+            </a>
+        </div>
+    </div>
+
+    <!-- MercadoPago SDK -->
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
+
+    <script>
+    // ══════════════════════════════════════════════
+    // CONFIGURACIÓN — Pon aquí tu Public Key de MercadoPago
+    // La obtienes en: mercadopago.com.mx/developers/panel/app
+    // ══════════════════════════════════════════════
+    const MP_PUBLIC_KEY = 'TU_PUBLIC_KEY_AQUI';  // Reemplaza con tu clave
+    const API_URL = '';  // Dejar vacío si el backend está en el mismo dominio (Vercel)
+
+    // ── PRODUCTS DATA ──
+    const products = [
+        { id:1, name:"Ramo Atardecer", cat:"ramos", desc:"Rosas, claveles y follaje en tonos cálidos. El favorito de nuestros clientes.", price:450, oldPrice:null, img:"https://images.unsplash.com/photo-1487530811176-3780de880c2d?w=400&h=400&fit=crop", badge:"popular", badgeText:"Más vendido", rating:4.9, reviews:127, stock:null },
+        { id:2, name:"Box Elegance Premium", cat:"arreglos", desc:"Rosas, lisianthus y eucalipto en caja redonda de lujo. Incluye tarjeta.", price:890, oldPrice:1100, img:"https://images.unsplash.com/photo-1567696911980-2eed69a46042?w=400&h=400&fit=crop", badge:"sale", badgeText:"-19%", rating:4.8, reviews:89, stock:3 },
+        { id:3, name:"Ramo Silvestre", cat:"ramos", desc:"Flores de campo con lavanda y margaritas. Fresco y natural.", price:350, oldPrice:null, img:"https://images.unsplash.com/photo-1563241527-3004b7be0ffd?w=400&h=400&fit=crop", badge:null, badgeText:null, rating:4.7, reviews:64, stock:null },
+        { id:4, name:"Monstera Deliciosa", cat:"plantas", desc:"La reina tropical en maceta de cerámica artesanal. Purifica el aire.", price:520, oldPrice:null, img:"https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?w=400&h=400&fit=crop", badge:null, badgeText:null, rating:4.9, reviews:43, stock:null },
+        { id:5, name:"50 Rosas Rojas Premium", cat:"ramos", desc:"50 rosas de tallo largo. El clásico que nunca falla. Impacto garantizado.", price:1200, oldPrice:null, img:"https://images.unsplash.com/photo-1494972308805-463bc619d34e?w=400&h=400&fit=crop", badge:"popular", badgeText:"Best Seller", rating:5.0, reviews:203, stock:null },
+        { id:6, name:"Box de Tulipanes", cat:"arreglos", desc:"20 tulipanes holandeses en caja de madera con listón de seda.", price:750, oldPrice:null, img:"https://images.unsplash.com/photo-1561181286-d3fee7d55364?w=400&h=400&fit=crop", badge:"new", badgeText:"Nuevo", rating:4.8, reviews:31, stock:5 },
+        { id:7, name:"Combo Sorpresa", cat:"gifts", desc:"Ramo premium + chocolates artesanales + tarjeta personalizada.", price:680, oldPrice:null, img:"https://images.unsplash.com/photo-1549488344-cbb6c34cf08b?w=400&h=400&fit=crop", badge:null, badgeText:null, rating:4.9, reviews:76, stock:null },
+        { id:8, name:"Snake Plant", cat:"plantas", desc:"Sansevieria en maceta minimal. Prácticamente indestructible.", price:320, oldPrice:null, img:"https://images.unsplash.com/photo-1593691509543-c55fb32d8de5?w=400&h=400&fit=crop", badge:null, badgeText:null, rating:4.7, reviews:38, stock:null },
+        { id:9, name:"Arreglo Corporativo", cat:"arreglos", desc:"Lirios, rosas blancas y follaje fino. Elegancia para la oficina.", price:650, oldPrice:null, img:"https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=400&h=400&fit=crop", badge:null, badgeText:null, rating:4.8, reviews:52, stock:null },
+        { id:10, name:"Combo Aniversario VIP", cat:"gifts", desc:"Arreglo de rosas + vino tinto + vela aromática + chocolates.", price:1450, oldPrice:1700, img:"https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&h=400&fit=crop", badge:"sale", badgeText:"-15%", rating:5.0, reviews:94, stock:2 },
+        { id:11, name:"Mini Suculentas Set x6", cat:"plantas", desc:"6 suculentas variadas en macetitas de barro artesanal mexicano.", price:380, oldPrice:null, img:"https://images.unsplash.com/photo-1508022713622-df2d8fb7b4cd?w=400&h=400&fit=crop", badge:null, badgeText:null, rating:4.6, reviews:29, stock:null },
+        { id:12, name:"Ramo Girasoles", cat:"ramos", desc:"Girasoles, gerberas y alstroemeria. Pura alegría en cada pétalo.", price:420, oldPrice:null, img:"https://images.unsplash.com/photo-1490750967868-88aa4f44baee?w=400&h=400&fit=crop", badge:"new", badgeText:"Nuevo", rating:4.8, reviews:47, stock:null },
+    ];
+
+    let cart = [];
+    const FREE_SHIPPING = 599;
+    const SHIPPING = 99;
+    const WA = '525554097367';
+
+    // ── RENDER PRODUCTS ──
+    function renderProducts(filter = 'todos') {
+        const grid = document.getElementById('productsGrid');
+        const filtered = filter === 'todos' ? products : products.filter(p => p.cat === filter);
+        grid.innerHTML = '';
+
+        filtered.forEach(p => {
+            const viewers = Math.floor(Math.random() * 12) + 3;
+            const card = document.createElement('div');
+            card.className = 'product-card fade-in visible';
+            card.innerHTML = `
+                <div class="product-img">
+                    ${p.badge ? `<span class="product-badge badge-${p.badge}">${p.badgeText}</span>` : ''}
+                    <button class="product-wishlist" onclick="event.stopPropagation(); this.classList.toggle('liked');" aria-label="Favorito">
+                        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+                    </button>
+                    <div class="product-viewers"><span class="eye">&#128065;</span> ${viewers} viendo ahora</div>
+                    <img src="${p.img}" alt="${p.name}" loading="lazy">
+                </div>
+                <div class="product-body">
+                    <div class="product-cat">${p.cat === 'gifts' ? 'Regalos' : p.cat}</div>
+                    <h3>${p.name}</h3>
+                    <p class="product-desc">${p.desc}</p>
+                    <div class="product-rating">
+                        <span class="stars">${'&#9733;'.repeat(Math.round(p.rating))}</span>
+                        <span class="rating-count">${p.rating} (${p.reviews})</span>
+                    </div>
+                    <div class="product-bottom">
+                        <div class="product-price">
+                            $${p.price.toLocaleString()}
+                            ${p.oldPrice ? `<span class="old">$${p.oldPrice.toLocaleString()}</span><span class="save">Ahorras $${(p.oldPrice - p.price).toLocaleString()}</span>` : ''}
+                        </div>
+                        <button class="btn-cart" onclick="addToCart(${p.id})">
+                            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                            Agregar
+                        </button>
+                    </div>
+                    ${p.stock ? `<div class="stock-warning">&#9888; Solo quedan ${p.stock} disponibles</div>` : ''}
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+    }
+
+    function filterProducts(cat) {
+        document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+        const tabs = document.querySelectorAll('.filter-tab');
+        const catMap = { todos: 0, ramos: 1, arreglos: 2, plantas: 3, gifts: 4 };
+        if (catMap[cat] !== undefined) tabs[catMap[cat]].classList.add('active');
+        renderProducts(cat);
+        document.getElementById('tienda').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // ── CART ──
+    function addToCart(id) {
+        const existing = cart.find(i => i.id === id);
+        if (existing) { existing.qty++; } else {
+            const product = products.find(p => p.id === id);
+            cart.push({ ...product, qty: 1 });
+        }
+        updateCart();
+        toggleCart(true);
+    }
+
+    function changeQty(id, delta) {
+        const item = cart.find(i => i.id === id);
+        if (!item) return;
+        item.qty += delta;
+        if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
+        updateCart();
+    }
+
+    function removeFromCart(id) {
+        cart = cart.filter(i => i.id !== id);
+        updateCart();
+    }
+
+    function updateCart() {
+        const totalItems = cart.reduce((s, i) => s + i.qty, 0);
+        const subtotal = cart.reduce((s, i) => s + (i.price * i.qty), 0);
+        const shipping = subtotal >= FREE_SHIPPING ? 0 : SHIPPING;
+        const total = subtotal + shipping;
+
+        const badge = document.getElementById('cartBadge');
+        badge.textContent = totalItems;
+        badge.style.animation = 'none'; badge.offsetHeight; badge.style.animation = 'pulse 0.3s ease';
+
+        document.getElementById('cartItemCount').textContent = totalItems;
+
+        // Shipping bar
+        const shippingBar = document.getElementById('cartShippingBar');
+        if (subtotal >= FREE_SHIPPING) {
+            shippingBar.innerHTML = '&#10003; <strong>Envío GRATIS</strong> aplicado a tu pedido';
+            shippingBar.style.background = 'var(--green-light)';
+            shippingBar.style.color = 'var(--green)';
+        } else {
+            const remaining = FREE_SHIPPING - subtotal;
+            shippingBar.innerHTML = `Te faltan <strong>$${remaining}</strong> para envío GRATIS`;
+            shippingBar.style.background = 'var(--accent-light)';
+            shippingBar.style.color = 'var(--accent-dark)';
+        }
+
+        const itemsEl = document.getElementById('cartItems');
+        const emptyEl = document.getElementById('cartEmpty');
+        const footerEl = document.getElementById('cartFooter');
+
+        if (cart.length === 0) {
+            emptyEl.style.display = 'block';
+            footerEl.style.display = 'none';
+            itemsEl.querySelectorAll('.cart-item').forEach(e => e.remove());
+            return;
+        }
+
+        emptyEl.style.display = 'none';
+        footerEl.style.display = 'block';
+        itemsEl.querySelectorAll('.cart-item').forEach(e => e.remove());
+
+        cart.forEach(item => {
+            const el = document.createElement('div');
+            el.className = 'cart-item';
+            el.innerHTML = `
+                <div class="cart-item-img"><img src="${item.img}" alt="${item.name}"></div>
+                <div class="cart-item-info">
+                    <h4>${item.name}</h4>
+                    <p>$${(item.price * item.qty).toLocaleString()} MXN</p>
+                </div>
+                <div class="cart-item-actions">
+                    <div class="cart-item-qty">
+                        <button class="qty-btn" onclick="changeQty(${item.id}, -1)">&minus;</button>
+                        <span>${item.qty}</span>
+                        <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
+                    </div>
+                    <button class="cart-item-remove" onclick="removeFromCart(${item.id})">Eliminar</button>
+                </div>
+            `;
+            itemsEl.appendChild(el);
+        });
+
+        document.getElementById('cartSubtotal').textContent = `$${subtotal.toLocaleString()}`;
+        document.getElementById('cartShippingCost').textContent = shipping === 0 ? 'GRATIS' : `$${shipping}`;
+        document.getElementById('cartTotal').textContent = `$${total.toLocaleString()} MXN`;
+        document.getElementById('cartTotalBtn').textContent = `$${total.toLocaleString()}`;
+    }
+
+    function toggleCart(forceOpen) {
+        const overlay = document.getElementById('cartOverlay');
+        const sidebar = document.getElementById('cartSidebar');
+        if (forceOpen === true) {
+            overlay.classList.add('open'); sidebar.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        } else {
+            overlay.classList.toggle('open'); sidebar.classList.toggle('open');
+            document.body.style.overflow = sidebar.classList.contains('open') ? 'hidden' : '';
+        }
+    }
+
+    async function checkout(e) {
+        e.preventDefault();
+        const btn = e.target.closest('.btn') || e.target;
+        const originalText = btn.innerHTML;
+        btn.innerHTML = 'Procesando...';
+        btn.style.pointerEvents = 'none';
+        btn.style.opacity = '0.7';
+
+        try {
+            const response = await fetch(`${API_URL}/api/create-preference`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    items: cart.map(item => ({
+                        id: item.id,
+                        name: item.name,
+                        description: item.desc,
+                        qty: item.qty,
+                        price: item.price,
+                    })),
+                }),
+            });
+
+            const data = await response.json();
+
+            if (data.init_point) {
+                window.location.href = data.init_point;
+            } else {
+                throw new Error('No init_point received');
+            }
+        } catch (error) {
+            console.error('Payment error:', error);
+            alert('Hubo un error al procesar el pago. Intenta de nuevo o pide por WhatsApp.');
+            btn.innerHTML = originalText;
+            btn.style.pointerEvents = '';
+            btn.style.opacity = '';
+        }
+    }
+
+    function checkoutWA(e) {
+        e.preventDefault();
+        let msg = 'Hola! Me gustaría hacer este pedido:\n\n';
+        cart.forEach(i => { msg += `• ${i.name} x${i.qty} — $${(i.price * i.qty).toLocaleString()}\n`; });
+        const subtotal = cart.reduce((s, i) => s + (i.price * i.qty), 0);
+        const shipping = subtotal >= FREE_SHIPPING ? 0 : SHIPPING;
+        msg += `\nSubtotal: $${subtotal.toLocaleString()}\nEnvío: ${shipping === 0 ? 'GRATIS' : '$' + shipping}\nTotal: $${(subtotal + shipping).toLocaleString()} MXN`;
+        window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    // ── COUNTDOWN ──
+    function updateCountdown() {
+        const now = new Date();
+        const cutoff = new Date(now);
+        cutoff.setHours(14, 0, 0, 0);
+        if (now > cutoff) cutoff.setDate(cutoff.getDate() + 1);
+        const diff = cutoff - now;
+        const hrs = Math.floor(diff / 3600000);
+        const min = Math.floor((diff % 3600000) / 60000);
+        const sec = Math.floor((diff % 60000) / 1000);
+        document.getElementById('countHrs').textContent = String(hrs).padStart(2, '0');
+        document.getElementById('countMin').textContent = String(min).padStart(2, '0');
+        document.getElementById('countSec').textContent = String(sec).padStart(2, '0');
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // ── LIVE VIEWERS ──
+    setInterval(() => {
+        const el = document.getElementById('liveViewers');
+        if (el) el.textContent = Math.floor(Math.random() * 8) + 8;
+    }, 5000);
+
+    // ── MOBILE MENU ──
+    document.getElementById('menuBtn').addEventListener('click', () => {
+        document.getElementById('navLinks').classList.toggle('active');
+    });
+
+    // ── SCROLL ANIMATIONS ──
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // ── INIT ──
+    renderProducts();
+    </script>
+
+</body>
+</html>

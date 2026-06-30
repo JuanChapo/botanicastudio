@@ -1,0 +1,24 @@
+CÓMO AGREGAR FOTOS DE TUS PRODUCTOS
+=====================================
+
+1. Pon tus fotos aquí en esta carpeta
+2. Renómbralas sin espacios ni acentos, ejemplo:
+   - ramo-rosas-rojas.jpg
+   - arreglo-tulipanes.jpg
+   - monstera-grande.jpg
+
+3. Tamaños recomendados:
+   - Productos: 600x600 px
+   - Categorías: 400x530 px
+   - Hero (portada): 600x800 px
+
+4. Formato: JPG o WebP
+
+5. Después ve al código (index.html) y cambia la URL
+   de la imagen vieja por: /images/tu-foto.jpg
+
+TIPS PARA BUENAS FOTOS:
+- Fondo claro o blanco
+- Luz natural (cerca de una ventana)
+- Toma la foto desde arriba o de frente
+- Que se vea el arreglo completo
