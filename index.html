@@ -65,10 +65,10 @@
             --gold: #C6A664;
             --serif: 'Playfair Display', Georgia, serif;
             --sans: 'Inter', -apple-system, sans-serif;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
-            --shadow-md: 0 4px 20px rgba(0,0,0,0.06);
-            --shadow-lg: 0 12px 40px rgba(0,0,0,0.08);
-            --radius: 16px;
+            --shadow-sm: 0 1px 3px rgba(90,55,62,0.05);
+            --shadow-md: 0 6px 26px rgba(90,55,62,0.07);
+            --shadow-lg: 0 18px 50px rgba(90,55,62,0.11);
+            --radius: 20px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -86,7 +86,7 @@
 
         /* ═══ URGENCY BAR ═══ */
         .urgency-bar {
-            background: linear-gradient(90deg, #1A1A1A 0%, #2D2D2D 100%);
+            background: linear-gradient(90deg, #3B2A2F 0%, #523A41 100%);
             color: white;
             text-align: center;
             padding: 0.65rem 1rem;
@@ -122,7 +122,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(253, 252, 250, 0.96);
+            background: rgba(255, 252, 252, 0.90);
             backdrop-filter: blur(24px);
             border-bottom: 1px solid var(--border);
         }
@@ -288,10 +288,11 @@
 
         .hero h1 {
             font-family: var(--serif);
-            font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+            font-size: clamp(2.6rem, 5vw, 4.1rem);
             font-weight: 400;
-            line-height: 1.15;
-            margin-bottom: 1.2rem;
+            line-height: 1.08;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.4rem;
         }
 
         .hero h1 em {
@@ -340,7 +341,7 @@
         .btn-fill:hover {
             background: var(--accent-dark);
             transform: translateY(-1px);
-            box-shadow: 0 6px 24px rgba(196, 145, 123, 0.35);
+            box-shadow: 0 8px 26px rgba(163, 90, 102, 0.30);
         }
 
         .btn-dark {
@@ -356,6 +357,20 @@
         .btn-wa {
             background: #25D366;
             color: white;
+        }
+
+        /* Variante para el hero: el verde de WhatsApp junto al rosa se veía
+           estridente. El botón flotante sigue verde, que es el que la gente
+           reconoce; aquí basta el ícono. */
+        .btn-wa-soft {
+            background: transparent;
+            color: var(--accent-dark);
+            border: 1px solid var(--accent);
+        }
+
+        .btn-wa-soft:hover {
+            background: var(--accent-light);
+            transform: translateY(-1px);
         }
 
         .btn-wa:hover {
@@ -652,7 +667,7 @@
         }
 
         .filter-tab:hover { border-color: var(--accent); color: var(--accent-dark); }
-        .filter-tab.active { background: var(--text); color: white; border-color: var(--text); }
+        .filter-tab.active { background: var(--accent); color: white; border-color: var(--accent); }
 
         .products-grid {
             display: grid;
@@ -664,12 +679,13 @@
             background: var(--white);
             border-radius: var(--radius);
             overflow: hidden;
-            border: 1px solid var(--border);
-            transition: all 0.3s;
+            border: 1px solid transparent;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.35s cubic-bezier(.2,.7,.3,1), box-shadow 0.35s;
         }
 
         .product-card:hover {
-            transform: translateY(-3px);
+            transform: translateY(-6px);
             box-shadow: var(--shadow-lg);
         }
 
@@ -705,24 +721,6 @@
         .badge-new { background: var(--green); color: white; }
         .badge-sale { background: var(--red); color: white; }
         .badge-limited { background: var(--gold); color: white; }
-
-        .product-viewers {
-            position: absolute;
-            bottom: 0.8rem;
-            left: 0.8rem;
-            background: rgba(0,0,0,0.6);
-            color: white;
-            padding: 0.25rem 0.6rem;
-            border-radius: 100px;
-            font-size: 0.65rem;
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-            backdrop-filter: blur(8px);
-            z-index: 1;
-        }
-
-        .product-viewers .eye { font-size: 0.7rem; }
 
         .product-wishlist {
             position: absolute;
@@ -797,8 +795,10 @@
         }
 
         .product-price {
-            font-size: 1.1rem;
-            font-weight: 700;
+            font-family: var(--serif);
+            font-size: 1.4rem;
+            font-weight: 500;
+            letter-spacing: -0.01em;
             color: var(--text);
         }
 
@@ -820,7 +820,7 @@
         .btn-cart {
             padding: 0.55rem 1rem;
             border-radius: 100px;
-            background: var(--text);
+            background: var(--accent);
             color: white;
             border: none;
             font-family: var(--sans);
@@ -1712,7 +1712,7 @@
                     Elegir mi arreglo
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
-                <a href="https://wa.me/525554097367?text=Hola%20%F0%9F%91%8B%20Me%20gustar%C3%ADa%20un%20arreglo%20floral%20personalizado" class="btn btn-wa" target="_blank" rel="noopener">
+                <a href="https://wa.me/525554097367?text=Hola%20%F0%9F%91%8B%20Me%20gustar%C3%ADa%20un%20arreglo%20floral%20personalizado" class="btn btn-wa-soft" target="_blank" rel="noopener">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                     Pedir personalizado
                 </a>
@@ -1738,10 +1738,10 @@
                 <img src="/images/hero/principal.jpg" alt="Ramo en tonos rosa envuelto en papel, listo para regalar">
             </div>
             <div class="hero-img">
-                <img src="/images/hero/tulipanes.jpg" alt="Arreglo de tulipanes rosas en jarrón de vidrio">
+                <img src="/images/hero/tulipanes.jpg" alt="Rosas en tono blush">
             </div>
             <div class="hero-img">
-                <img src="/images/hero/girasoles.jpg" alt="Ramo de girasoles frescos sostenido en mano">
+                <img src="/images/hero/girasoles.jpg" alt="Rosas color marfil">
             </div>
         </div>
     </section>
@@ -1792,7 +1792,7 @@
                     </div>
                 </div>
                 <div class="cat-card" onclick="filterProducts('arreglos')">
-                    <img loading="lazy" src="/images/categorias/arreglos.jpg" alt="Categoría Arreglos Florales — rosas premium en caja de regalo">
+                    <img loading="lazy" src="/images/categorias/arreglos.jpg" alt="Categoría Arreglos Florales — peonías rosas sobre fondo claro">
                     <div class="cat-card-overlay"></div>
                     <span class="cat-count">8 productos</span>
                     <div class="cat-card-label">
@@ -1801,7 +1801,7 @@
                     </div>
                 </div>
                 <div class="cat-card" onclick="filterProducts('plantas')">
-                    <img loading="lazy" src="/images/categorias/plantas.jpg" alt="Categoría Plantas — hoja de monstera deliciosa">
+                    <img loading="lazy" src="/images/categorias/plantas.jpg" alt="Categoría Plantas — planta verde en maceta blanca minimalista">
                     <div class="cat-card-overlay"></div>
                     <span class="cat-count">6 productos</span>
                     <div class="cat-card-label">
@@ -2233,7 +2233,6 @@
         grid.innerHTML = '';
 
         filtered.forEach(p => {
-            const viewers = Math.floor(Math.random() * 12) + 3;
             const card = document.createElement('div');
             card.className = 'product-card fade-in visible';
             card.innerHTML = `
@@ -2242,7 +2241,6 @@
                     <button class="product-wishlist" onclick="event.stopPropagation(); this.classList.toggle('liked');" aria-label="Favorito">
                         <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
                     </button>
-                    <div class="product-viewers"><span class="eye">&#128065;</span> ${viewers} viendo ahora</div>
                     <img src="${p.img}" alt="${p.name}" loading="lazy">
                 </div>
                 <div class="product-body">
