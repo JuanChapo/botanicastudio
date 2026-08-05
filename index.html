@@ -45,6 +45,17 @@
     }
     </script>
 
+    <script>
+    // Decide la intro ANTES del primer pintado. Si algo aquí truena,
+    // .intro se queda en display:none y la página carga normal.
+    try {
+        if (!sessionStorage.getItem('bs_intro') &&
+            !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.documentElement.classList.add('intro-pending');
+        }
+    } catch (e) {}
+    </script>
+
     <style>
         :root {
             /* Paleta rosa palo / rose gold.
@@ -1796,9 +1807,161 @@
             .logo:hover .logo-mark { animation: none !important; }
             .fade-in { opacity: 1 !important; transform: none !important; transition: none !important; }
         }
+
+        /* ═══════════════════════════════════════════════════
+           INTRO — las flores que florecen al entrar
+           Reglas que NO se negocian:
+           · Oculta por defecto. Sólo el script la enciende.
+             Si el JS falla, nadie se queda viendo una pantalla muerta.
+           · Se salta con cualquier clic, tecla o scroll.
+           · Una vez por sesión (sessionStorage). Repetirla en cada
+             navegación es la forma más rápida de perder un cliente.
+           · Nunca aparece si el sistema pide menos movimiento.
+           ═══════════════════════════════════════════════════ */
+
+        .intro { display: none; }
+        .intro-pending body { overflow: hidden; }
+
+        .intro-pending .intro {
+            display: flex;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1.4rem;
+            background: radial-gradient(120% 90% at 50% 100%, var(--accent-light) 0%, var(--cream) 45%, var(--bg) 100%);
+            cursor: pointer;
+        }
+
+        .intro.out {
+            animation: intro-leave 0.72s cubic-bezier(.6,.02,.3,1) forwards;
+        }
+
+        @keyframes intro-leave {
+            to { opacity: 0; transform: translateY(-3%); visibility: hidden; }
+        }
+
+        .intro-art svg { width: min(46vw, 230px); height: auto; overflow: visible; }
+
+        /* Los tallos crecen desde el suelo */
+        .intro-pending .i-stem {
+            stroke-dasharray: 130;
+            stroke-dashoffset: 130;
+            animation: i-draw 0.85s cubic-bezier(.5,.04,.3,1) forwards;
+        }
+        .intro-pending .i-stem:nth-of-type(2) { animation-delay: 0.10s; }
+        .intro-pending .i-stem:nth-of-type(3) { animation-delay: 0.18s; }
+
+        .intro-pending .i-leaf {
+            stroke-dasharray: 70;
+            stroke-dashoffset: 70;
+            animation: i-draw 0.6s cubic-bezier(.5,.04,.3,1) 0.42s forwards;
+        }
+        .intro-pending .i-leaf:nth-of-type(2) { animation-delay: 0.54s; }
+
+        @keyframes i-draw { to { stroke-dashoffset: 0; } }
+
+        /* Y arriba, abren las flores */
+        .intro-pending .i-flower {
+            opacity: 0;
+            transform-box: fill-box;
+            transform-origin: center;
+            animation: i-bloom 0.66s cubic-bezier(.3,1.5,.5,1) var(--d) forwards;
+        }
+
+        @keyframes i-bloom {
+            from { opacity: 0; scale: 0.2; rotate: -25deg; }
+            to   { opacity: 1; scale: 1;   rotate: 0deg; }
+        }
+
+        .intro-word {
+            font-family: var(--serif);
+            font-size: clamp(1.5rem, 4.6vw, 2.3rem);
+            color: var(--text);
+            letter-spacing: 0.18em;
+            opacity: 0;
+            animation: i-word 0.8s ease-out 1.15s forwards;
+        }
+
+        @keyframes i-word {
+            from { opacity: 0; letter-spacing: 0.34em; }
+            to   { opacity: 1; letter-spacing: 0.10em; }
+        }
+
+        .intro-skip {
+            font-size: 0.66rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--text-light);
+            opacity: 0;
+            animation: i-skip 0.6s ease-out 1.7s forwards;
+        }
+
+        @keyframes i-skip { to { opacity: 0.7; } }
+
+        @media (prefers-reduced-motion: reduce) {
+            .intro { display: none !important; }
+        }
     </style>
 </head>
 <body>
+
+    <!-- ═══ INTRO ═══
+         Sólo se muestra si el script del <head> la enciende. Si el JS
+         falla, este bloque queda display:none y nadie se queda atrapado
+         viendo una pantalla que nunca se va. -->
+    <div class="intro" id="intro" role="presentation" aria-hidden="true">
+        <div class="intro-art">
+            <svg viewBox="0 0 220 200" aria-hidden="true">
+                <g fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round">
+                    <path class="i-stem" d="M110 196 C108 160 106 130 110 104"/>
+                    <path class="i-stem" d="M110 196 C86 168 70 146 62 122"/>
+                    <path class="i-stem" d="M110 196 C134 168 150 148 160 126"/>
+                </g>
+                <g fill="none" stroke="var(--green)" stroke-width="2.2" stroke-linecap="round">
+                    <path class="i-leaf" d="M109 158 C92 156 82 146 80 132 C97 133 108 143 109 158 Z"/>
+                    <path class="i-leaf" d="M111 140 C128 138 138 128 140 114 C123 115 112 125 111 140 Z"/>
+                </g>
+                <g class="i-blooms">
+                    <g class="i-flower" style="--d:.62s" transform="translate(110 96)">
+                        <g fill="var(--accent)">
+                            <ellipse cx="0" cy="-13" rx="8.4" ry="12"/>
+                            <ellipse cx="12" cy="-4" rx="8.4" ry="12" transform="rotate(72 12 -4)"/>
+                            <ellipse cx="8" cy="11" rx="8.4" ry="12" transform="rotate(144 8 11)"/>
+                            <ellipse cx="-8" cy="11" rx="8.4" ry="12" transform="rotate(216 -8 11)"/>
+                            <ellipse cx="-12" cy="-4" rx="8.4" ry="12" transform="rotate(288 -12 -4)"/>
+                        </g>
+                        <circle r="7" fill="var(--gold)"/>
+                    </g>
+                    <g class="i-flower" style="--d:.78s" transform="translate(62 114) scale(.72)">
+                        <g fill="var(--accent-dark)">
+                            <ellipse cx="0" cy="-13" rx="8.4" ry="12"/>
+                            <ellipse cx="12" cy="-4" rx="8.4" ry="12" transform="rotate(72 12 -4)"/>
+                            <ellipse cx="8" cy="11" rx="8.4" ry="12" transform="rotate(144 8 11)"/>
+                            <ellipse cx="-8" cy="11" rx="8.4" ry="12" transform="rotate(216 -8 11)"/>
+                            <ellipse cx="-12" cy="-4" rx="8.4" ry="12" transform="rotate(288 -12 -4)"/>
+                        </g>
+                        <circle r="6.4" fill="var(--gold)"/>
+                    </g>
+                    <g class="i-flower" style="--d:.9s" transform="translate(160 118) scale(.66)">
+                        <g fill="var(--accent)">
+                            <ellipse cx="0" cy="-13" rx="8.4" ry="12"/>
+                            <ellipse cx="12" cy="-4" rx="8.4" ry="12" transform="rotate(72 12 -4)"/>
+                            <ellipse cx="8" cy="11" rx="8.4" ry="12" transform="rotate(144 8 11)"/>
+                            <ellipse cx="-8" cy="11" rx="8.4" ry="12" transform="rotate(216 -8 11)"/>
+                            <ellipse cx="-12" cy="-4" rx="8.4" ry="12" transform="rotate(288 -12 -4)"/>
+                        </g>
+                        <circle r="6.4" fill="var(--gold)"/>
+                    </g>
+                </g>
+            </svg>
+        </div>
+        <p class="intro-word">Botanica Studio</p>
+        <span class="intro-skip">toca para entrar</span>
+    </div>
+
 
     <!-- URGENCY BAR -->
     <div class="urgency-bar">
@@ -2625,6 +2788,32 @@
         form.querySelector('button').textContent = '✓ Te escribimos';
         form.querySelector('input').value = '';
     }
+
+    // ── INTRO ──
+    (function () {
+        const root = document.documentElement;
+        const intro = document.getElementById('intro');
+        if (!intro || !root.classList.contains('intro-pending')) return;
+
+        let cerrada = false;
+        function cerrar() {
+            if (cerrada) return;
+            cerrada = true;
+            try { sessionStorage.setItem('bs_intro', '1'); } catch (e) {}
+            intro.classList.add('out');
+            root.classList.remove('intro-pending');
+            setTimeout(function () { intro.remove(); }, 800);
+        }
+
+        // Se va sola…
+        setTimeout(cerrar, 2400);
+        // …o antes, si el usuario ya quiere entrar.
+        ['click', 'keydown', 'wheel', 'touchstart'].forEach(function (ev) {
+            window.addEventListener(ev, cerrar, { once: true, passive: true });
+        });
+        // Red de seguridad: pase lo que pase, a los 4.5s no queda nada encima.
+        setTimeout(cerrar, 4500);
+    })();
 
     // ── ANIMACIONES DE ENTRADA ──
     // Se activan sólo aquí. Si este script no corre, la página se ve
