@@ -5,12 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Botanica Studio — Florería CDMX | Envío a Domicilio Mismo Día</title>
     <meta name="description" content="Florería premium en CDMX. Ramos, arreglos florales y plantas con envío a domicilio el mismo día. Más de 2,500 clientes felices.">
+    <link rel="canonical" href="https://botanicastudio.mx/">
+
+    <!-- Icono de pestaña -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+    <!-- Tarjeta de previsualización (WhatsApp, Instagram, Facebook) -->
     <meta property="og:title" content="Botanica Studio — Florería CDMX">
     <meta property="og:description" content="Arreglos florales únicos con envío el mismo día en CDMX. Sorprende a quien más quieres.">
     <meta property="og:type" content="website">
+    <meta property="og:url" content="https://botanicastudio.mx/">
+    <meta property="og:locale" content="es_MX">
+    <meta property="og:site_name" content="Botanica Studio">
+    <meta property="og:image" content="https://botanicastudio.mx/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Botanica Studio — ramos, arreglos florales y plantas con envío el mismo día en CDMX">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://botanicastudio.mx/og-image.jpg">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Datos estructurados para Google. Sólo datos verificables:
+         NO metas aggregateRating aquí mientras las reseñas del sitio
+         sean inventadas — Google penaliza las reseñas falsas. -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Florist",
+      "name": "Botanica Studio",
+      "url": "https://botanicastudio.mx/",
+      "image": "https://botanicastudio.mx/og-image.jpg",
+      "telephone": "+525554097367",
+      "priceRange": "$$",
+      "areaServed": { "@type": "City", "name": "Ciudad de México" },
+      "sameAs": ["https://www.instagram.com/botanicastudio.mx"]
+    }
+    </script>
+
     <style>
         :root {
             --bg: #FDFCFA;
@@ -1692,13 +1726,13 @@
         <div class="hero-visual">
             <div class="hero-img">
                 <div class="live-badge"><span class="live-dot"></span> <span id="liveViewers">12</span> personas viendo</div>
-                <img src="https://images.unsplash.com/photo-1487530811176-3780de880c2d?w=600&h=800&fit=crop" alt="Ramo de rosas premium">
+                <img src="/images/hero/principal.jpg" alt="Ramo de rosas premium con eucalipto y flores de temporada">
             </div>
             <div class="hero-img">
-                <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?w=400&h=400&fit=crop" alt="Arreglo floral elegante">
+                <img src="/images/hero/tulipanes.jpg" alt="Arreglo de tulipanes rosas en jarrón de vidrio">
             </div>
             <div class="hero-img">
-                <img src="https://images.unsplash.com/photo-1601884928885-92a922f7962f?w=400&h=400&fit=crop" alt="Flores de temporada">
+                <img src="/images/hero/girasoles.jpg" alt="Ramo de girasoles frescos sostenido en mano">
             </div>
         </div>
     </section>
@@ -1740,7 +1774,7 @@
             </div>
             <div class="cat-grid fade-in">
                 <div class="cat-card" onclick="filterProducts('ramos')">
-                    <img loading="lazy" src="https://images.unsplash.com/photo-1563241527-3004b7be0ffd?w=400&h=530&fit=crop" alt="Ramos">
+                    <img loading="lazy" src="/images/categorias/ramos.jpg" alt="Categoría Ramos — ramo de rosas en tonos durazno">
                     <div class="cat-card-overlay"></div>
                     <span class="cat-count">12 productos</span>
                     <div class="cat-card-label">
@@ -1749,7 +1783,7 @@
                     </div>
                 </div>
                 <div class="cat-card" onclick="filterProducts('arreglos')">
-                    <img loading="lazy" src="https://images.unsplash.com/photo-1567696911980-2eed69a46042?w=400&h=530&fit=crop" alt="Arreglos Florales">
+                    <img loading="lazy" src="/images/categorias/arreglos.jpg" alt="Categoría Arreglos Florales — rosas premium en caja de regalo">
                     <div class="cat-card-overlay"></div>
                     <span class="cat-count">8 productos</span>
                     <div class="cat-card-label">
@@ -1758,7 +1792,7 @@
                     </div>
                 </div>
                 <div class="cat-card" onclick="filterProducts('plantas')">
-                    <img loading="lazy" src="https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?w=400&h=530&fit=crop" alt="Plantas">
+                    <img loading="lazy" src="/images/categorias/plantas.jpg" alt="Categoría Plantas — hoja de monstera deliciosa">
                     <div class="cat-card-overlay"></div>
                     <span class="cat-count">6 productos</span>
                     <div class="cat-card-label">
@@ -1767,7 +1801,7 @@
                     </div>
                 </div>
                 <div class="cat-card" onclick="filterProducts('gifts')">
-                    <img loading="lazy" src="https://images.unsplash.com/photo-1549488344-cbb6c34cf08b?w=400&h=530&fit=crop" alt="Regalos">
+                    <img loading="lazy" src="/images/categorias/regalos.jpg" alt="Categoría Regalos y Combos — caja de chocolates con flores">
                     <div class="cat-card-overlay"></div>
                     <span class="cat-count">5 productos</span>
                     <div class="cat-card-label">
@@ -1891,42 +1925,42 @@
             </div>
             <div class="occasion-grid fade-in">
                 <div class="occasion-card">
-                    <img loading="lazy" src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=500&h=300&fit=crop" alt="Cumpleaños">
+                    <img loading="lazy" src="/images/ocasiones/cumpleanos.jpg" alt="Flores para cumpleaños — ramo colorido de flores silvestres">
                     <div class="occasion-overlay">
                         <h3>Cumpleaños</h3>
                         <p>Sorprende con color y alegría</p>
                     </div>
                 </div>
                 <div class="occasion-card">
-                    <img loading="lazy" src="https://images.unsplash.com/photo-1494972308805-463bc619d34e?w=500&h=300&fit=crop" alt="Aniversario">
+                    <img loading="lazy" src="/images/ocasiones/aniversario.jpg" alt="Flores para aniversario — rosas rojas de tallo largo">
                     <div class="occasion-overlay">
                         <h3>Aniversario & Romance</h3>
                         <p>Rosas y arreglos que enamoran</p>
                     </div>
                 </div>
                 <div class="occasion-card">
-                    <img loading="lazy" src="https://images.unsplash.com/photo-1631407779166-86952be9dbd7?w=500&h=300&fit=crop" alt="Corporativo">
+                    <img loading="lazy" src="/images/ocasiones/corporativo.jpg" alt="Arreglo corporativo — lirios blancos elegantes">
                     <div class="occasion-overlay">
                         <h3>Corporativo</h3>
                         <p>Elegancia para oficinas y eventos</p>
                     </div>
                 </div>
                 <div class="occasion-card">
-                    <img loading="lazy" src="https://images.unsplash.com/photo-1455659817273-f96807779a8a?w=500&h=300&fit=crop" alt="Agradecimiento">
+                    <img loading="lazy" src="/images/ocasiones/agradecimiento.jpg" alt="Flores de agradecimiento — girasoles amarillos">
                     <div class="occasion-overlay">
                         <h3>Agradecimiento</h3>
                         <p>Flores que dicen "gracias"</p>
                     </div>
                 </div>
                 <div class="occasion-card">
-                    <img loading="lazy" src="https://images.unsplash.com/photo-1508610048659-a06b669e3321?w=500&h=300&fit=crop" alt="Día de las Madres">
+                    <img loading="lazy" src="/images/ocasiones/dia-de-las-madres.jpg" alt="Flores para el Día de las Madres — rosas de jardín en tono rosa">
                     <div class="occasion-overlay">
                         <h3>Día de las Madres</h3>
                         <p>Lo mejor para la mejor</p>
                     </div>
                 </div>
                 <div class="occasion-card">
-                    <img loading="lazy" src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=500&h=300&fit=crop" alt="Solo porque sí">
+                    <img loading="lazy" src="/images/ocasiones/solo-porque-si.jpg" alt="Flores solo porque sí — ramo primaveral en tonos rosa">
                     <div class="occasion-overlay">
                         <h3>Solo porque sí</h3>
                         <p>Los mejores detalles no necesitan razón</p>
@@ -2016,19 +2050,19 @@
             </div>
             <div class="ig-grid fade-in">
                 <a class="ig-item" href="https://instagram.com/botanicastudio.mx" target="_blank" rel="noopener">
-                    <img loading="lazy" src="https://images.unsplash.com/photo-1487530811176-3780de880c2d?w=300&h=300&fit=crop" alt="Instagram post">
+                    <img loading="lazy" src="/images/instagram/01.jpg" alt="Publicación de Instagram: ramo de rosas premium">
                 </a>
                 <a class="ig-item" href="https://instagram.com/botanicastudio.mx" target="_blank" rel="noopener">
-                    <img loading="lazy" src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?w=300&h=300&fit=crop" alt="Instagram post">
+                    <img loading="lazy" src="/images/instagram/02.jpg" alt="Publicación de Instagram: tulipanes rosas">
                 </a>
                 <a class="ig-item" href="https://instagram.com/botanicastudio.mx" target="_blank" rel="noopener">
-                    <img loading="lazy" src="https://images.unsplash.com/photo-1601884928885-92a922f7962f?w=300&h=300&fit=crop" alt="Instagram post">
+                    <img loading="lazy" src="/images/instagram/03.jpg" alt="Publicación de Instagram: ramo de girasoles">
                 </a>
                 <a class="ig-item" href="https://instagram.com/botanicastudio.mx" target="_blank" rel="noopener">
-                    <img loading="lazy" src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=300&h=300&fit=crop" alt="Instagram post">
+                    <img loading="lazy" src="/images/instagram/04.jpg" alt="Publicación de Instagram: ramo primaveral en tonos rosa">
                 </a>
                 <a class="ig-item" href="https://instagram.com/botanicastudio.mx" target="_blank" rel="noopener">
-                    <img loading="lazy" src="https://images.unsplash.com/photo-1494972308805-463bc619d34e?w=300&h=300&fit=crop" alt="Instagram post">
+                    <img loading="lazy" src="/images/instagram/05.jpg" alt="Publicación de Instagram: rosas rojas de tallo largo">
                 </a>
             </div>
         </div>
@@ -2038,9 +2072,9 @@
     <section class="final-cta">
         <div class="final-cta-inner fade-in">
             <h2>10% OFF en tu primer pedido</h2>
-            <p>Suscríbete y recibe tu código de descuento exclusivo + tips y ofertas semanales.</p>
-            <form class="final-cta-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='&#10003; Listo!'; this.querySelector('input').value='';">
-                <input type="email" placeholder="tu@correo.com" required>
+            <p>Déjanos tu correo y te mandamos tu código de descuento por WhatsApp.</p>
+            <form class="final-cta-form" onsubmit="suscribir(event)">
+                <input type="email" name="email" placeholder="tu@correo.com" required>
                 <button type="submit">Quiero mi 10%</button>
             </form>
             <p class="cta-guarantee">Sin spam. Cancela cuando quieras. Solo cosas bonitas.</p>
@@ -2164,18 +2198,18 @@
     // api/_catalog.js. Si cambias un precio aquí, cámbialo allá también y corre:
     //   node scripts/check-precios.js
     const products = [
-        { id:1, name:"Ramo Atardecer", cat:"ramos", desc:"Rosas, claveles y follaje en tonos cálidos. El favorito de nuestros clientes.", price:450, oldPrice:null, img:"https://images.unsplash.com/photo-1487530811176-3780de880c2d?w=400&h=400&fit=crop", badge:"popular", badgeText:"Más vendido", rating:4.9, reviews:127, stock:null },
-        { id:2, name:"Box Elegance Premium", cat:"arreglos", desc:"Rosas, lisianthus y eucalipto en caja redonda de lujo. Incluye tarjeta.", price:890, oldPrice:1100, img:"https://images.unsplash.com/photo-1567696911980-2eed69a46042?w=400&h=400&fit=crop", badge:"sale", badgeText:"-19%", rating:4.8, reviews:89, stock:3 },
-        { id:3, name:"Ramo Silvestre", cat:"ramos", desc:"Flores de campo con lavanda y margaritas. Fresco y natural.", price:350, oldPrice:null, img:"https://images.unsplash.com/photo-1563241527-3004b7be0ffd?w=400&h=400&fit=crop", badge:null, badgeText:null, rating:4.7, reviews:64, stock:null },
-        { id:4, name:"Monstera Deliciosa", cat:"plantas", desc:"La reina tropical en maceta de cerámica artesanal. Purifica el aire.", price:520, oldPrice:null, img:"https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?w=400&h=400&fit=crop", badge:null, badgeText:null, rating:4.9, reviews:43, stock:null },
-        { id:5, name:"50 Rosas Rojas Premium", cat:"ramos", desc:"50 rosas de tallo largo. El clásico que nunca falla. Impacto garantizado.", price:1200, oldPrice:null, img:"https://images.unsplash.com/photo-1494972308805-463bc619d34e?w=400&h=400&fit=crop", badge:"popular", badgeText:"Best Seller", rating:5.0, reviews:203, stock:null },
-        { id:6, name:"Box de Tulipanes", cat:"arreglos", desc:"20 tulipanes holandeses en caja de madera con listón de seda.", price:750, oldPrice:null, img:"https://images.unsplash.com/photo-1561181286-d3fee7d55364?w=400&h=400&fit=crop", badge:"new", badgeText:"Nuevo", rating:4.8, reviews:31, stock:5 },
-        { id:7, name:"Combo Sorpresa", cat:"gifts", desc:"Ramo premium + chocolates artesanales + tarjeta personalizada.", price:680, oldPrice:null, img:"https://images.unsplash.com/photo-1549488344-cbb6c34cf08b?w=400&h=400&fit=crop", badge:null, badgeText:null, rating:4.9, reviews:76, stock:null },
-        { id:8, name:"Snake Plant", cat:"plantas", desc:"Sansevieria en maceta minimal. Prácticamente indestructible.", price:320, oldPrice:null, img:"https://images.unsplash.com/photo-1593691509543-c55fb32d8de5?w=400&h=400&fit=crop", badge:null, badgeText:null, rating:4.7, reviews:38, stock:null },
-        { id:9, name:"Arreglo Corporativo", cat:"arreglos", desc:"Lirios, rosas blancas y follaje fino. Elegancia para la oficina.", price:650, oldPrice:null, img:"https://images.unsplash.com/photo-1631407779166-86952be9dbd7?w=400&h=400&fit=crop", badge:null, badgeText:null, rating:4.8, reviews:52, stock:null },
-        { id:10, name:"Combo Aniversario VIP", cat:"gifts", desc:"Arreglo de rosas + vino tinto + vela aromática + chocolates.", price:1450, oldPrice:1700, img:"https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&h=400&fit=crop", badge:"sale", badgeText:"-15%", rating:5.0, reviews:94, stock:2 },
-        { id:11, name:"Mini Suculentas Set x6", cat:"plantas", desc:"6 suculentas variadas en macetitas de barro artesanal mexicano.", price:380, oldPrice:null, img:"https://images.unsplash.com/photo-1508022713622-df2d8fb7b4cd?w=400&h=400&fit=crop", badge:null, badgeText:null, rating:4.6, reviews:29, stock:null },
-        { id:12, name:"Ramo Girasoles", cat:"ramos", desc:"Girasoles, gerberas y alstroemeria. Pura alegría en cada pétalo.", price:420, oldPrice:null, img:"https://images.unsplash.com/photo-1601884928885-92a922f7962f?w=400&h=400&fit=crop", badge:"new", badgeText:"Nuevo", rating:4.8, reviews:47, stock:null },
+        { id:1, name:"Ramo Atardecer", cat:"ramos", desc:"Rosas, claveles y follaje en tonos cálidos. El favorito de nuestros clientes.", price:450, oldPrice:null, img:"/images/productos/ramo-atardecer.jpg", badge:"popular", badgeText:"Más vendido", rating:4.9, reviews:127, stock:null },
+        { id:2, name:"Box Elegance Premium", cat:"arreglos", desc:"Rosas, lisianthus y eucalipto en caja redonda de lujo. Incluye tarjeta.", price:890, oldPrice:1100, img:"/images/productos/box-elegance-premium.jpg", badge:"sale", badgeText:"-19%", rating:4.8, reviews:89, stock:3 },
+        { id:3, name:"Ramo Silvestre", cat:"ramos", desc:"Flores de campo con lavanda y margaritas. Fresco y natural.", price:350, oldPrice:null, img:"/images/productos/ramo-silvestre.jpg", badge:null, badgeText:null, rating:4.7, reviews:64, stock:null },
+        { id:4, name:"Monstera Deliciosa", cat:"plantas", desc:"La reina tropical en maceta de cerámica artesanal. Purifica el aire.", price:520, oldPrice:null, img:"/images/productos/monstera-deliciosa.jpg", badge:null, badgeText:null, rating:4.9, reviews:43, stock:null },
+        { id:5, name:"50 Rosas Rojas Premium", cat:"ramos", desc:"50 rosas de tallo largo. El clásico que nunca falla. Impacto garantizado.", price:1200, oldPrice:null, img:"/images/productos/50-rosas-rojas.jpg", badge:"popular", badgeText:"Best Seller", rating:5.0, reviews:203, stock:null },
+        { id:6, name:"Box de Tulipanes", cat:"arreglos", desc:"20 tulipanes holandeses en caja de madera con listón de seda.", price:750, oldPrice:null, img:"/images/productos/box-tulipanes.jpg", badge:"new", badgeText:"Nuevo", rating:4.8, reviews:31, stock:5 },
+        { id:7, name:"Combo Sorpresa", cat:"gifts", desc:"Ramo premium + chocolates artesanales + tarjeta personalizada.", price:680, oldPrice:null, img:"/images/productos/combo-sorpresa.jpg", badge:null, badgeText:null, rating:4.9, reviews:76, stock:null },
+        { id:8, name:"Snake Plant", cat:"plantas", desc:"Sansevieria en maceta minimal. Prácticamente indestructible.", price:320, oldPrice:null, img:"/images/productos/snake-plant.jpg", badge:null, badgeText:null, rating:4.7, reviews:38, stock:null },
+        { id:9, name:"Arreglo Corporativo", cat:"arreglos", desc:"Lirios, rosas blancas y follaje fino. Elegancia para la oficina.", price:650, oldPrice:null, img:"/images/productos/arreglo-corporativo.jpg", badge:null, badgeText:null, rating:4.8, reviews:52, stock:null },
+        { id:10, name:"Combo Aniversario VIP", cat:"gifts", desc:"Arreglo de rosas + vino tinto + vela aromática + chocolates.", price:1450, oldPrice:1700, img:"/images/productos/combo-aniversario-vip.jpg", badge:"sale", badgeText:"-15%", rating:5.0, reviews:94, stock:2 },
+        { id:11, name:"Mini Suculentas Set x6", cat:"plantas", desc:"6 suculentas variadas en macetitas de barro artesanal mexicano.", price:380, oldPrice:null, img:"/images/productos/mini-suculentas.jpg", badge:null, badgeText:null, rating:4.6, reviews:29, stock:null },
+        { id:12, name:"Ramo Girasoles", cat:"ramos", desc:"Girasoles, gerberas y alstroemeria. Pura alegría en cada pétalo.", price:420, oldPrice:null, img:"/images/productos/ramo-girasoles.jpg", badge:"new", badgeText:"Nuevo", rating:4.8, reviews:47, stock:null },
     ];
 
     let cart = [];
@@ -2393,6 +2427,23 @@
         const shipping = subtotal >= FREE_SHIPPING ? 0 : SHIPPING;
         msg += `\nSubtotal: $${subtotal.toLocaleString()}\nEnvío: ${shipping === 0 ? 'GRATIS' : '$' + shipping}\nTotal: $${(subtotal + shipping).toLocaleString()} MXN`;
         window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    // ── NEWSLETTER ──
+    // Antes este formulario sólo decía "Listo!" y tiraba el correo a la basura:
+    // el cliente nunca recibía su 10% y tú nunca te enterabas del lead.
+    // Mientras no haya lista de correos, lo mandamos por WhatsApp, que sí llega.
+    function suscribir(e) {
+        e.preventDefault();
+        const form = e.target;
+        const email = form.querySelector('input[name="email"]').value.trim();
+        if (!email) return;
+
+        const msg = `Hola! Quiero mi 10% de descuento en mi primer pedido.\nMi correo es: ${email}`;
+        window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`, '_blank');
+
+        form.querySelector('button').textContent = '✓ Te escribimos';
+        form.querySelector('input').value = '';
     }
 
     // ── COUNTDOWN ──
