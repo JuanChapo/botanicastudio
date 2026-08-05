@@ -28,7 +28,7 @@ export const CATALOG = {
 
 // Envío — también autoritativo, por la misma razón.
 export const SHIPPING_COST = 99;
-export const FREE_SHIPPING_FROM = 599;
+export const FREE_SHIPPING_FROM = 899;
 
 // Máximo de piezas por producto en un pedido (evita cantidades absurdas
 // tipo qty = 99999 o qty negativa que reduzca el total).

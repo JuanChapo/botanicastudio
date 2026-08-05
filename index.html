@@ -69,6 +69,8 @@
             --shadow-md: 0 6px 26px rgba(90,55,62,0.07);
             --shadow-lg: 0 18px 50px rgba(90,55,62,0.11);
             --radius: 20px;
+            --leaf: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M12 22c0-6 3-11 9-13-1 7-4 11-9 13Z'/%3E%3Cpath fill='%23000' d='M12 22C6 20 3 15 3 9c6 2 9 7 9 13Z' opacity='.55'/%3E%3C/svg%3E");
+
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -1647,13 +1649,160 @@
             .delivery-grid { grid-template-columns: 1fr; }
             .footer-grid { grid-template-columns: 1fr; }
         }
+
+        /* ═══════════════════════════════════════════════════
+           MARCA Y ANIMACIONES BOTÁNICAS
+           Todo lo de aquí se apaga si el sistema pide menos
+           movimiento — ver el bloque prefers-reduced-motion
+           al final. Eso no es opcional: hay gente a la que
+           las animaciones le provocan mareo.
+           ═══════════════════════════════════════════════════ */
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+        }
+
+        .logo-mark {
+            width: 30px;
+            height: 30px;
+            flex: none;
+            color: var(--accent);
+            overflow: visible;
+        }
+
+        .footer-brand .logo-mark { color: var(--accent-light); }
+
+        /* El tallo y las hojas se dibujan solos.
+           Regla importante: el estado BASE es el visible. La animación
+           solo lo trae a escena. Si el navegador no la corre (o la
+           bloquea por accesibilidad), el logo se ve igual de bien. */
+        .anim .lm-stem, .lm-leaf {
+            stroke-dasharray: 70;
+            stroke-dashoffset: 0;
+            animation: lm-draw 1.1s cubic-bezier(.6,.05,.3,1) both;
+        }
+        .anim .lm-leaf:nth-of-type(2) { animation-delay: 0.20s; }
+        .anim .lm-leaf:nth-of-type(3) { animation-delay: 0.34s; }
+
+        @keyframes lm-draw {
+            from { stroke-dashoffset: 70; }
+            to   { stroke-dashoffset: 0; }
+        }
+
+        /* Los pétalos aparecen uno por uno.
+           Sólo animamos opacidad: si tocáramos transform aquí, se
+           borrarían los rotate() del SVG y la flor se desarma. */
+        .anim .lm-bloom ellipse, .lm-core {
+            opacity: 1;
+            animation: lm-pop 0.5s ease-out both;
+        }
+        .anim .lm-bloom ellipse:nth-child(1) { animation-delay: 0.42s; }
+        .anim .lm-bloom ellipse:nth-child(2) { animation-delay: 0.50s; }
+        .anim .lm-bloom ellipse:nth-child(3) { animation-delay: 0.58s; }
+        .anim .lm-bloom ellipse:nth-child(4) { animation-delay: 0.66s; }
+        .anim .lm-bloom ellipse:nth-child(5) { animation-delay: 0.74s; }
+        .anim .lm-core { animation-delay: 0.84s; }
+
+        @keyframes lm-pop {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        /* Al pasar el cursor, la flor se mece como con aire */
+        .logo:hover .logo-mark { animation: lm-sway 2.4s ease-in-out infinite; }
+
+        @keyframes lm-sway {
+            0%, 100% { transform: rotate(0deg); }
+            30%      { transform: rotate(-5deg); }
+            70%      { transform: rotate(4deg); }
+        }
+
+        /* ── Título del hero ── */
+        .hero-title em {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Subrayado hecho a mano que se traza solo */
+        .hero-title .ink {
+            position: absolute;
+            left: 0;
+            bottom: -0.12em;
+            width: 100%;
+            height: 0.32em;
+            color: var(--accent);
+            opacity: 0.55;
+            overflow: visible;
+        }
+
+        .anim .hero-title .ink path {
+            stroke-dasharray: 320;
+            stroke-dashoffset: 0;
+            animation: ink-draw 1.3s cubic-bezier(.62,.04,.3,1) 0.75s both;
+        }
+
+        @keyframes ink-draw {
+            from { stroke-dashoffset: 320; }
+            to   { stroke-dashoffset: 0; }
+        }
+
+        /* El titular entra de abajo, con calma */
+        .anim .hero-title,
+        .anim .hero-desc,
+        .anim .hero-actions {
+            animation: rise 0.9s cubic-bezier(.22,.7,.3,1) both;
+        }
+        .anim .hero-title   { animation-delay: 0.05s; }
+        .anim .hero-desc    { animation-delay: 0.20s; }
+        .anim .hero-actions { animation-delay: 0.32s; }
+
+        @keyframes rise {
+            from { opacity: 0; transform: translateY(18px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── Hojita antes de cada etiqueta de sección ── */
+        .section-label::before {
+            content: "";
+            display: inline-block;
+            width: 0.85em;
+            height: 0.85em;
+            margin-right: 0.5em;
+            vertical-align: -0.1em;
+            background: currentColor;
+            -webkit-mask: var(--leaf) center/contain no-repeat;
+            mask: var(--leaf) center/contain no-repeat;
+        }
+
+        /* ── Las secciones suben un poco al aparecer ── */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(26px);
+            transition: opacity 0.75s cubic-bezier(.22,.7,.3,1),
+                        transform 0.75s cubic-bezier(.22,.7,.3,1);
+        }
+        .fade-in.visible { opacity: 1; transform: none; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .lm-stem, .lm-leaf, .lm-bloom ellipse, .lm-core,
+            .hero-title .ink path, .hero-title, .hero-desc, .hero-actions {
+                animation: none !important;
+                opacity: 1 !important;
+                stroke-dashoffset: 0 !important;
+                transform: none !important;
+            }
+            .logo:hover .logo-mark { animation: none !important; }
+            .fade-in { opacity: 1 !important; transform: none !important; transition: none !important; }
+        }
     </style>
 </head>
 <body>
 
     <!-- URGENCY BAR -->
     <div class="urgency-bar">
-        <strong>ENVÍO GRATIS</strong> en CDMX en compras +$599
+        <strong>ENVÍO GRATIS</strong> en CDMX en compras +$899
         <span class="separator hide-mobile">|</span>
         <span class="hide-mobile">Pedí antes de las <strong class="timer" id="cutoffTime">2:00 PM</strong> y recibe <strong>HOY</strong></span>
     </div>
@@ -1661,7 +1810,21 @@
     <!-- NAV -->
     <nav>
         <div class="nav-inner">
-            <a href="#" class="logo">Botanica Studio</a>
+            <a href="#" class="logo"><svg class="logo-mark" viewBox="0 0 44 44" aria-hidden="true" focusable="false">
+                    <g class="lm-leaves" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+                        <path class="lm-stem" d="M22 40 V24"/>
+                        <path class="lm-leaf" d="M22 34 C15 34 11 30 11 25 C18 25 22 29 22 34 Z"/>
+                        <path class="lm-leaf" d="M22 30 C29 30 33 26 33 21 C26 21 22 25 22 30 Z"/>
+                    </g>
+                    <g class="lm-bloom" fill="currentColor">
+                        <ellipse cx="22" cy="10" rx="4.1" ry="5.6"/>
+                        <ellipse cx="29" cy="15" rx="4.1" ry="5.6" transform="rotate(72 29 15)"/>
+                        <ellipse cx="26" cy="23" rx="4.1" ry="5.6" transform="rotate(144 26 23)"/>
+                        <ellipse cx="18" cy="23" rx="4.1" ry="5.6" transform="rotate(216 18 23)"/>
+                        <ellipse cx="15" cy="15" rx="4.1" ry="5.6" transform="rotate(288 15 15)"/>
+                    </g>
+                    <circle class="lm-core" cx="22" cy="16" r="3.4" fill="var(--gold)"/>
+                </svg><span class="logo-text">Botanica Studio</span></a>
             <ul class="nav-center" id="navLinks">
                 <li><a href="#tienda">Tienda</a></li>
                 <li><a href="#ocasiones">Ocasiones</a></li>
@@ -1705,7 +1868,7 @@
                 </div>
                 <p><strong>2,500+ clientes</strong> ya confían en nosotros</p>
             </div>
-            <h1>Haz que cada momento sea <em>inolvidable</em></h1>
+            <h1 class="hero-title">Haz que cada momento sea <em>inolvidable<svg class="ink" viewBox="0 0 300 18" preserveAspectRatio="none" aria-hidden="true"><path d="M4 12 C60 4, 120 3, 172 8 C214 12, 258 13, 296 7" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/></svg></em></h1>
             <p class="hero-desc">Arreglos florales artesanales con flores frescas del día. Entrega el mismo día en CDMX y área metropolitana. Sorprende a quien más quieres.</p>
             <div class="hero-actions">
                 <a href="#tienda" class="btn btn-fill">
@@ -2094,7 +2257,21 @@
     <footer>
         <div class="footer-grid">
             <div class="footer-brand">
-                <a href="#" class="logo">Botanica Studio</a>
+                <a href="#" class="logo"><svg class="logo-mark" viewBox="0 0 44 44" aria-hidden="true" focusable="false">
+                    <g class="lm-leaves" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+                        <path class="lm-stem" d="M22 40 V24"/>
+                        <path class="lm-leaf" d="M22 34 C15 34 11 30 11 25 C18 25 22 29 22 34 Z"/>
+                        <path class="lm-leaf" d="M22 30 C29 30 33 26 33 21 C26 21 22 25 22 30 Z"/>
+                    </g>
+                    <g class="lm-bloom" fill="currentColor">
+                        <ellipse cx="22" cy="10" rx="4.1" ry="5.6"/>
+                        <ellipse cx="29" cy="15" rx="4.1" ry="5.6" transform="rotate(72 29 15)"/>
+                        <ellipse cx="26" cy="23" rx="4.1" ry="5.6" transform="rotate(144 26 23)"/>
+                        <ellipse cx="18" cy="23" rx="4.1" ry="5.6" transform="rotate(216 18 23)"/>
+                        <ellipse cx="15" cy="15" rx="4.1" ry="5.6" transform="rotate(288 15 15)"/>
+                    </g>
+                    <circle class="lm-core" cx="22" cy="16" r="3.4" fill="var(--gold)"/>
+                </svg><span class="logo-text">Botanica Studio</span></a>
                 <p>Florería en Ciudad de México. Arreglos florales artesanales, ramos y plantas con envío a domicilio el mismo día. Haz que cada momento cuente.</p>
                 <div class="footer-social">
                     <a href="https://instagram.com/botanicastudio.mx" target="_blank" rel="noopener" aria-label="Instagram">
@@ -2132,10 +2309,6 @@
                 <div class="footer-contact-item">
                     <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
                     <a href="https://wa.me/525554097367" target="_blank" rel="noopener">55 5409 7367</a>
-                </div>
-                <div class="footer-contact-item">
-                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                    hola@botanicastudio.mx
                 </div>
                 <div class="footer-contact-item">
                     <svg viewBox="0 0 24 24" fill="none">
@@ -2178,7 +2351,7 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </button>
         </div>
-        <div class="cart-free-shipping" id="cartShippingBar">Te faltan <strong>$599</strong> para envío GRATIS</div>
+        <div class="cart-free-shipping" id="cartShippingBar">Te faltan <strong>$899</strong> para envío GRATIS</div>
         <div class="cart-items" id="cartItems">
             <div class="cart-empty" id="cartEmpty">
                 <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">&#127801;</div>
@@ -2222,7 +2395,7 @@
     ];
 
     let cart = [];
-    const FREE_SHIPPING = 599;
+    const FREE_SHIPPING = 899;
     const SHIPPING = 99;
     const WA = '525554097367';
 
@@ -2451,6 +2624,13 @@
 
         form.querySelector('button').textContent = '✓ Te escribimos';
         form.querySelector('input').value = '';
+    }
+
+    // ── ANIMACIONES DE ENTRADA ──
+    // Se activan sólo aquí. Si este script no corre, la página se ve
+    // completa igual: nada depende de que una animación termine.
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('anim');
     }
 
     // ── COUNTDOWN ──
