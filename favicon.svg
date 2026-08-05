@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#6B8F71"/>
-  <g fill="#FDFCFA">
+  <rect width="64" height="64" rx="14" fill="#A35A66"/>
+  <g fill="#FBF4F3">
     <!-- Cinco pétalos, formas grandes y separadas para que se distingan a 16px -->
     <ellipse cx="32" cy="17" rx="7.5" ry="10"/>
     <ellipse cx="45" cy="26" rx="7.5" ry="10" transform="rotate(72 45 26)"/>
@@ -9,5 +9,5 @@
     <ellipse cx="19" cy="26" rx="7.5" ry="10" transform="rotate(288 19 26)"/>
   </g>
   <!-- Centro -->
-  <circle cx="32" cy="29" r="7" fill="#D4A853"/>
+  <circle cx="32" cy="29" r="7" fill="#C6A664"/>
 </svg>

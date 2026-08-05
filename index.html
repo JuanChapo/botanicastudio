@@ -47,19 +47,22 @@
 
     <style>
         :root {
-            --bg: #FDFCFA;
-            --text: #1A1A1A;
-            --text-light: #7A7A7A;
-            --accent: #C4917B;
-            --accent-dark: #A67460;
-            --accent-light: #F5EDE8;
-            --green: #6B8F71;
-            --green-light: #EDF2ED;
-            --red: #D4545E;
-            --border: #EBEBEB;
+            /* Paleta rosa palo / rose gold.
+               Los tonos de texto y acento cumplen contraste AA (4.5:1)
+               sobre fondo claro — comprobado, no cambiar a ojo. */
+            --bg: #FFFCFC;
+            --text: #2B2226;
+            --text-light: #7D6E73;
+            --accent: #A35A66;
+            --accent-dark: #8A4A55;
+            --accent-light: #F8EDEF;
+            --green: #8AA090;
+            --green-light: #EFF3EF;
+            --red: #C75B68;
+            --border: #F0E7E9;
             --white: #FFFFFF;
-            --cream: #F8F5F1;
-            --gold: #D4A853;
+            --cream: #FBF4F3;
+            --gold: #C6A664;
             --serif: 'Playfair Display', Georgia, serif;
             --sans: 'Inter', -apple-system, sans-serif;
             --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
@@ -505,11 +508,12 @@
         }
 
         .section-label {
-            font-size: 0.72rem;
-            letter-spacing: 0.15em;
+            font-size: 0.68rem;
+            letter-spacing: 0.26em;
             text-transform: uppercase;
-            color: var(--accent-dark);
-            margin-bottom: 0.4rem;
+            font-weight: 500;
+            color: var(--accent);
+            margin-bottom: 0.85rem;
             display: block;
         }
 
@@ -557,7 +561,10 @@
         .cat-card-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(transparent 40%, rgba(0,0,0,0.6));
+            /* El degradado tiene que ser lo bastante oscuro para que el texto
+               blanco se lea también sobre fotos claras (la de Regalos es casi
+               blanca). Si aclaras esto, revisa las cuatro tarjetas. */
+            background: linear-gradient(transparent 28%, rgba(30,22,25,0.45) 58%, rgba(30,22,25,0.82));
         }
 
         .cat-card-label {
@@ -1059,7 +1066,9 @@
         .occasion-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(transparent, rgba(0,0,0,0.65));
+            /* Mismo criterio que .cat-card-overlay: varias fotos de ocasión
+               son muy claras y el texto blanco desaparecía encima. */
+            background: linear-gradient(transparent 22%, rgba(30,22,25,0.48) 55%, rgba(30,22,25,0.85));
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
@@ -1726,7 +1735,7 @@
         <div class="hero-visual">
             <div class="hero-img">
                 <div class="live-badge"><span class="live-dot"></span> <span id="liveViewers">12</span> personas viendo</div>
-                <img src="/images/hero/principal.jpg" alt="Ramo de rosas premium con eucalipto y flores de temporada">
+                <img src="/images/hero/principal.jpg" alt="Ramo en tonos rosa envuelto en papel, listo para regalar">
             </div>
             <div class="hero-img">
                 <img src="/images/hero/tulipanes.jpg" alt="Arreglo de tulipanes rosas en jarrón de vidrio">
@@ -1801,7 +1810,7 @@
                     </div>
                 </div>
                 <div class="cat-card" onclick="filterProducts('gifts')">
-                    <img loading="lazy" src="/images/categorias/regalos.jpg" alt="Categoría Regalos y Combos — caja de chocolates con flores">
+                    <img loading="lazy" src="/images/categorias/regalos.jpg" alt="Categoría Regalos y Combos — regalo envuelto en tonos blush con listón">
                     <div class="cat-card-overlay"></div>
                     <span class="cat-count">5 productos</span>
                     <div class="cat-card-label">
@@ -2050,19 +2059,19 @@
             </div>
             <div class="ig-grid fade-in">
                 <a class="ig-item" href="https://instagram.com/botanicastudio.mx" target="_blank" rel="noopener">
-                    <img loading="lazy" src="/images/instagram/01.jpg" alt="Publicación de Instagram: ramo de rosas premium">
+                    <img loading="lazy" src="/images/instagram/01.jpg" alt="Publicación de Instagram: Peonías rosas en tonos pastel">
                 </a>
                 <a class="ig-item" href="https://instagram.com/botanicastudio.mx" target="_blank" rel="noopener">
-                    <img loading="lazy" src="/images/instagram/02.jpg" alt="Publicación de Instagram: tulipanes rosas">
+                    <img loading="lazy" src="/images/instagram/02.jpg" alt="Publicación de Instagram: Rosas color crema y blush">
                 </a>
                 <a class="ig-item" href="https://instagram.com/botanicastudio.mx" target="_blank" rel="noopener">
-                    <img loading="lazy" src="/images/instagram/03.jpg" alt="Publicación de Instagram: ramo de girasoles">
+                    <img loading="lazy" src="/images/instagram/03.jpg" alt="Publicación de Instagram: Rama floral delicada sobre fondo claro">
                 </a>
                 <a class="ig-item" href="https://instagram.com/botanicastudio.mx" target="_blank" rel="noopener">
-                    <img loading="lazy" src="/images/instagram/04.jpg" alt="Publicación de Instagram: ramo primaveral en tonos rosa">
+                    <img loading="lazy" src="/images/instagram/04.jpg" alt="Publicación de Instagram: Peonías color marfil">
                 </a>
                 <a class="ig-item" href="https://instagram.com/botanicastudio.mx" target="_blank" rel="noopener">
-                    <img loading="lazy" src="/images/instagram/05.jpg" alt="Publicación de Instagram: rosas rojas de tallo largo">
+                    <img loading="lazy" src="/images/instagram/05.jpg" alt="Publicación de Instagram: Rosas en tono rosa viejo">
                 </a>
             </div>
         </div>
