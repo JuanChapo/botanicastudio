@@ -20,11 +20,17 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { items, payer } = req.body || {};
+    const { items, entrega } = req.body || {};
 
     if (!Array.isArray(items) || items.length === 0) {
       return res.status(400).json({ error: 'No items provided' });
     }
+
+    // ── Datos de entrega ─────────────────────────────────────────
+    // Se validan aquí y no sólo en el navegador: sin esto podríamos
+    // cobrar un pedido que después no sabemos a dónde llevar.
+    const d = sanitizarEntrega(entrega);
+    if (d.error) return res.status(400).json({ error: d.error });
 
     // ── Re-precio del lado del servidor ──────────────────────────
     // Del carrito que manda el navegador SÓLO confiamos en `id` y `qty`.
@@ -60,8 +66,28 @@ export default async function handler(req, res) {
     const result = await preference.create({
       body: {
         items: lineItems,
-        payer: payer || {},
+        payer: {
+          name: d.compraNombre,
+          email: d.compraEmail || undefined,
+          phone: { area_code: '', number: d.compraTel },
+        },
         shipments: { cost: shippingCost, mode: 'not_specified' },
+        // Los datos de entrega viajan con la preferencia. Así el
+        // webhook los recupera al confirmarse el pago y no dependemos
+        // de que el navegador nos los vuelva a mandar.
+        metadata: {
+          recibe_nombre: d.recibeNombre,
+          recibe_tel: d.recibeTel,
+          direccion: d.direccion,
+          referencias: d.referencias,
+          mapa: d.mapa,
+          fecha: d.fecha,
+          franja: d.franja,
+          dedicatoria: d.dedicatoria,
+          compra_nombre: d.compraNombre,
+          compra_tel: d.compraTel,
+          compra_email: d.compraEmail,
+        },
         back_urls: {
           success: `${SITE_URL}/gracias`,
           failure: `${SITE_URL}/error`,
@@ -80,4 +106,59 @@ export default async function handler(req, res) {
     console.error('MercadoPago error:', error?.message, error?.cause ?? error);
     return res.status(500).json({ error: 'Error creating payment preference' });
   }
+}
+
+// ── Validación de los datos de entrega ─────────────────────────────
+// Todo lo que llega del navegador se recorta y se revisa. Un pedido sin
+// dirección o sin teléfono es un pedido que no se puede entregar, así
+// que se rechaza antes de cobrarle a nadie.
+
+const FRANJAS = ['9-13', '13-17', '17-21'];
+
+function limpiar(v, max) {
+  if (typeof v !== 'string') return '';
+  // Fuera saltos de línea y caracteres de control; recorta al límite.
+  return v.replace(/[\u0000-\u001F\u007F]/g, ' ').trim().slice(0, max);
+}
+
+function telValido(t) {
+  return /^\d{10}$/.test(t.replace(/\D/g, '')) ? t.replace(/\D/g, '') : '';
+}
+
+function sanitizarEntrega(e) {
+  if (!e || typeof e !== 'object') return { error: 'Faltan los datos de entrega' };
+
+  const recibeNombre = limpiar(e.recibeNombre, 80);
+  const recibeTel    = telValido(limpiar(e.recibeTel, 20));
+  const direccion    = limpiar(e.direccion, 220);
+  const compraNombre = limpiar(e.compraNombre, 80);
+  const compraTel    = telValido(limpiar(e.compraTel, 20));
+  const compraEmail  = limpiar(e.compraEmail, 120);
+  const fecha        = limpiar(e.fecha, 10);
+  const franja       = limpiar(e.franja, 10);
+
+  if (recibeNombre.length < 2) return { error: 'Falta el nombre de quien recibe' };
+  if (!recibeTel)              return { error: 'El teléfono de quien recibe debe tener 10 dígitos' };
+  if (direccion.length < 10)   return { error: 'La dirección está incompleta' };
+  if (compraNombre.length < 2) return { error: 'Falta tu nombre' };
+  if (!compraTel)              return { error: 'Tu teléfono debe tener 10 dígitos' };
+  if (compraEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(compraEmail)) {
+    return { error: 'El correo no parece válido' };
+  }
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(fecha)) return { error: 'Falta la fecha de entrega' };
+  if (!FRANJAS.includes(franja))          return { error: 'Falta el horario de entrega' };
+
+  // La fecha debe ser de hoy en adelante y dentro de los próximos 60 días.
+  // Se compara en horario de CDMX, no en el del servidor (que corre en UTC).
+  const hoyCDMX = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Mexico_City' });
+  if (fecha < hoyCDMX) return { error: 'La fecha de entrega ya pasó' };
+  const tope = new Date(Date.now() + 60 * 864e5).toLocaleDateString('en-CA', { timeZone: 'America/Mexico_City' });
+  if (fecha > tope)    return { error: 'La fecha de entrega es demasiado lejana' };
+
+  return {
+    recibeNombre, recibeTel, direccion, compraNombre, compraTel, compraEmail, fecha, franja,
+    referencias: limpiar(e.referencias, 220),
+    dedicatoria: limpiar(e.dedicatoria, 300),
+    mapa:        limpiar(e.mapa, 120),
+  };
 }

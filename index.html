@@ -1924,6 +1924,155 @@
         @media (prefers-reduced-motion: reduce) {
             .intro { display: none !important; }
         }
+
+        /* ═══ PANEL DE DATOS DE ENTREGA ═══ */
+
+        .entrega-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(43, 34, 38, 0.42);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+            z-index: 1400;
+        }
+        .entrega-overlay.open { opacity: 1; visibility: visible; }
+
+        .entrega-panel {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: min(100%, 470px);
+            height: 100%;
+            background: var(--white);
+            z-index: 1401;
+            display: flex;
+            flex-direction: column;
+            transform: translateX(100%);
+            transition: transform 0.38s cubic-bezier(.22,.7,.3,1);
+            box-shadow: var(--shadow-lg);
+        }
+        .entrega-panel.open { transform: none; }
+
+        .entrega-head {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 1.5rem 1.5rem 1.1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .entrega-head h3 { font-family: var(--serif); font-size: 1.35rem; font-weight: 500; }
+        .entrega-head p { font-size: 0.8rem; color: var(--text-light); margin-top: 0.2rem; }
+
+        .entrega-close {
+            background: none; border: none; cursor: pointer;
+            color: var(--text-light); padding: 0.2rem; flex: none;
+        }
+        .entrega-close svg { width: 22px; height: 22px; }
+
+        .entrega-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.3rem 1.5rem 1.6rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .ent-grupo { border: none; display: flex; flex-direction: column; gap: 0.85rem; }
+
+        .ent-grupo legend {
+            font-size: 0.68rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 0.55rem;
+        }
+
+        .ent-campo { display: flex; flex-direction: column; gap: 0.35rem; }
+        .ent-campo > span { font-size: 0.82rem; font-weight: 500; }
+        .ent-campo > span b { color: var(--accent); font-weight: 500; }
+
+        .ent-campo input,
+        .ent-campo select,
+        .ent-campo textarea {
+            font-family: var(--sans);
+            font-size: 0.92rem;
+            color: var(--text);
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 0.72rem 0.85rem;
+            width: 100%;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .ent-campo textarea { resize: vertical; min-height: 76px; }
+
+        .ent-campo input:focus,
+        .ent-campo select:focus,
+        .ent-campo textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-light);
+        }
+
+        /* El campo que falta se marca en rojo, no sólo con un mensaje arriba */
+        .ent-campo input.mal,
+        .ent-campo select.mal,
+        .ent-campo textarea.mal {
+            border-color: var(--red);
+            box-shadow: 0 0 0 3px rgba(199, 91, 104, 0.12);
+        }
+
+        .ent-ayuda { font-size: 0.74rem; color: var(--text-light); font-style: normal; line-height: 1.45; }
+
+        .ent-fila { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
+
+        .ent-mapa {
+            height: 190px;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .ent-error {
+            background: rgba(199, 91, 104, 0.09);
+            border: 1px solid rgba(199, 91, 104, 0.3);
+            color: #8E3A44;
+            font-size: 0.84rem;
+            padding: 0.75rem 0.9rem;
+            border-radius: 12px;
+        }
+
+        .entrega-foot {
+            border-top: 1px solid var(--border);
+            padding: 1.1rem 1.5rem 1.3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+            background: var(--white);
+        }
+
+        .ent-total { display: flex; justify-content: space-between; align-items: baseline; }
+        .ent-total span { font-size: 0.85rem; color: var(--text-light); }
+        .ent-total strong { font-family: var(--serif); font-size: 1.4rem; font-weight: 500; }
+
+        .ent-continuar { justify-content: center; width: 100%; }
+
+        .ent-wa {
+            background: none; border: none; cursor: pointer;
+            font-family: var(--sans); font-size: 0.8rem;
+            color: var(--text-light); text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+        .ent-wa:hover { color: var(--accent-dark); }
+
+        @media (max-width: 480px) {
+            .ent-fila { grid-template-columns: 1fr; }
+            .entrega-head, .entrega-body, .entrega-foot { padding-left: 1.1rem; padding-right: 1.1rem; }
+        }
     </style>
 </head>
 <body>
@@ -2546,6 +2695,111 @@
         </div>
     </footer>
 
+
+    <!-- ═══ DATOS DE ENTREGA ═══
+         Paso entre el carrito y el pago. Antes se podía pagar sin decir
+         a dónde llevar las flores. -->
+    <div class="entrega-overlay" id="entregaOverlay" onclick="cerrarEntrega()"></div>
+    <div class="entrega-panel" id="entregaPanel" role="dialog" aria-modal="true" aria-labelledby="entregaTitulo">
+        <div class="entrega-head">
+            <div>
+                <h3 id="entregaTitulo">Datos de entrega</h3>
+                <p>Para que las flores lleguen a tiempo y al lugar correcto.</p>
+            </div>
+            <button class="entrega-close" onclick="cerrarEntrega()" aria-label="Cerrar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+            </button>
+        </div>
+
+        <form class="entrega-body" id="entregaForm" novalidate>
+
+            <fieldset class="ent-grupo">
+                <legend>¿Quién recibe?</legend>
+                <label class="ent-campo">
+                    <span>Nombre de quien recibe <b>*</b></span>
+                    <input type="text" name="recibeNombre" autocomplete="name" maxlength="80" required>
+                </label>
+                <label class="ent-campo">
+                    <span>Su teléfono <b>*</b></span>
+                    <input type="tel" name="recibeTel" inputmode="numeric" placeholder="10 dígitos" maxlength="20" required>
+                    <em class="ent-ayuda">El repartidor le marca si no encuentra el domicilio.</em>
+                </label>
+            </fieldset>
+
+            <fieldset class="ent-grupo">
+                <legend>¿A dónde la llevamos?</legend>
+                <label class="ent-campo">
+                    <span>Dirección completa <b>*</b></span>
+                    <input type="text" name="direccion" id="entregaDireccion" autocomplete="off"
+                           placeholder="Calle, número, colonia, alcaldía, CP" maxlength="220" required>
+                    <em class="ent-ayuda" id="entregaMapaAyuda">Escribe la dirección completa.</em>
+                </label>
+                <div class="ent-mapa" id="entregaMapa" hidden></div>
+                <label class="ent-campo">
+                    <span>Referencias</span>
+                    <input type="text" name="referencias" maxlength="220"
+                           placeholder="Portón negro, entre Ámsterdam y Michoacán, depto 3">
+                    <em class="ent-ayuda">Lo que le dirías a un taxista. Esto evita entregas fallidas.</em>
+                </label>
+            </fieldset>
+
+            <fieldset class="ent-grupo">
+                <legend>¿Cuándo?</legend>
+                <div class="ent-fila">
+                    <label class="ent-campo">
+                        <span>Fecha <b>*</b></span>
+                        <input type="date" name="fecha" id="entregaFecha" required>
+                    </label>
+                    <label class="ent-campo">
+                        <span>Horario <b>*</b></span>
+                        <select name="franja" required>
+                            <option value="">Elige…</option>
+                            <option value="9-13">Mañana · 9:00 a 13:00</option>
+                            <option value="13-17">Tarde · 13:00 a 17:00</option>
+                            <option value="17-21">Noche · 17:00 a 21:00</option>
+                        </select>
+                    </label>
+                </div>
+            </fieldset>
+
+            <fieldset class="ent-grupo">
+                <legend>Mensaje para la tarjeta</legend>
+                <label class="ent-campo">
+                    <textarea name="dedicatoria" rows="3" maxlength="300"
+                              placeholder="Va escrito a mano en la tarjeta que acompaña el arreglo."></textarea>
+                </label>
+            </fieldset>
+
+            <fieldset class="ent-grupo">
+                <legend>Tus datos</legend>
+                <div class="ent-fila">
+                    <label class="ent-campo">
+                        <span>Tu nombre <b>*</b></span>
+                        <input type="text" name="compraNombre" autocomplete="name" maxlength="80" required>
+                    </label>
+                    <label class="ent-campo">
+                        <span>Tu teléfono <b>*</b></span>
+                        <input type="tel" name="compraTel" inputmode="numeric" placeholder="10 dígitos" maxlength="20" required>
+                    </label>
+                </div>
+                <label class="ent-campo">
+                    <span>Tu correo</span>
+                    <input type="email" name="compraEmail" autocomplete="email" maxlength="120" placeholder="Para mandarte el comprobante">
+                </label>
+            </fieldset>
+
+            <p class="ent-error" id="entregaError" role="alert" hidden></p>
+        </form>
+
+        <div class="entrega-foot">
+            <div class="ent-total"><span>Total a pagar</span><strong id="entregaTotal">$0 MXN</strong></div>
+            <button class="btn btn-fill ent-continuar" id="entregaSubmit" onclick="enviarEntrega(event)">
+                Continuar al pago
+            </button>
+            <button class="ent-wa" onclick="checkoutWA(event)">o mándanos el pedido por WhatsApp</button>
+        </div>
+    </div>
+
     <!-- WHATSAPP FLOAT -->
     <a href="https://wa.me/525554097367?text=Hola%20%F0%9F%91%8B%20Me%20interesa%20un%20arreglo%20floral" class="wa-float" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
@@ -2763,49 +3017,175 @@
         }
     }
 
-    async function checkout(e) {
+    // ══════════════════════════════════════════════════════════
+    // CHECKOUT — ahora pasa por los datos de entrega
+    // Antes iba directo a MercadoPago y se podía pagar sin decir
+    // a dónde llevar las flores.
+    // ══════════════════════════════════════════════════════════
+
+    function checkout(e) {
+        if (e) e.preventDefault();
+        if (cart.length === 0) return;
+        abrirEntrega();
+    }
+
+    function abrirEntrega() {
+        const panel = document.getElementById('entregaPanel');
+        const overlay = document.getElementById('entregaOverlay');
+
+        // Fecha mínima = hoy en CDMX (no la del reloj del visitante,
+        // que puede estar en otro huso).
+        const hoy = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Mexico_City' });
+        const fecha = document.getElementById('entregaFecha');
+        fecha.min = hoy;
+        if (!fecha.value) fecha.value = hoy;
+
+        document.getElementById('entregaTotal').textContent =
+            document.getElementById('cartTotal').textContent;
+
+        toggleCart(false);
+        overlay.classList.add('open');
+        panel.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        cargarMapa();
+        setTimeout(function () { panel.querySelector('input').focus(); }, 320);
+    }
+
+    function cerrarEntrega() {
+        document.getElementById('entregaOverlay').classList.remove('open');
+        document.getElementById('entregaPanel').classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', function (ev) {
+        if (ev.key === 'Escape') cerrarEntrega();
+    });
+
+    // ── Validación en el navegador ──
+    // El servidor vuelve a validar todo. Esto es sólo para que el
+    // cliente vea el error al instante y no después de un viaje de red.
+    function validarEntrega(d) {
+        const soloDigitos = function (t) { return (t || '').replace(/\D/g, ''); };
+        if (d.recibeNombre.length < 2)          return ['recibeNombre', 'Falta el nombre de quien recibe'];
+        if (soloDigitos(d.recibeTel).length !== 10) return ['recibeTel', 'El teléfono de quien recibe debe tener 10 dígitos'];
+        if (d.direccion.length < 10)            return ['direccion', 'Escribe la dirección completa: calle, número, colonia y CP'];
+        if (!d.fecha)                           return ['fecha', 'Elige la fecha de entrega'];
+        if (!d.franja)                          return ['franja', 'Elige el horario de entrega'];
+        if (d.compraNombre.length < 2)          return ['compraNombre', 'Falta tu nombre'];
+        if (soloDigitos(d.compraTel).length !== 10) return ['compraTel', 'Tu teléfono debe tener 10 dígitos'];
+        if (d.compraEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(d.compraEmail))
+            return ['compraEmail', 'Revisa tu correo'];
+        return null;
+    }
+
+    async function enviarEntrega(e) {
         e.preventDefault();
-        const btn = e.target.closest('.btn') || e.target;
-        const originalText = btn.innerHTML;
-        btn.innerHTML = 'Procesando...';
-        btn.style.pointerEvents = 'none';
-        btn.style.opacity = '0.7';
+        const form = document.getElementById('entregaForm');
+        const btn = document.getElementById('entregaSubmit');
+        const cajaError = document.getElementById('entregaError');
+
+        form.querySelectorAll('.mal').forEach(function (el) { el.classList.remove('mal'); });
+        cajaError.hidden = true;
+
+        const fd = new FormData(form);
+        const entrega = {};
+        fd.forEach(function (v, k) { entrega[k] = String(v).trim(); });
+        entrega.mapa = form.dataset.mapa || '';
+
+        const falla = validarEntrega(entrega);
+        if (falla) {
+            const campo = form.querySelector('[name="' + falla[0] + '"]');
+            if (campo) { campo.classList.add('mal'); campo.focus(); }
+            cajaError.textContent = falla[1];
+            cajaError.hidden = false;
+            cajaError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            return;
+        }
+
+        const textoOriginal = btn.textContent;
+        btn.textContent = 'Procesando…';
+        btn.disabled = true;
 
         try {
-            const response = await fetch(`${API_URL}/api/create-preference`, {
+            const res = await fetch(`${API_URL}/api/create-preference`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    items: cart.map(item => ({
-                        id: item.id,
-                        name: item.name,
-                        description: item.desc,
-                        qty: item.qty,
-                        price: item.price,
-                    })),
+                    items: cart.map(function (i) { return { id: i.id, qty: i.qty }; }),
+                    entrega: entrega,
                 }),
             });
 
-            const data = await response.json();
-
-            if (data.init_point) {
-                window.location.href = data.init_point;
-                return;
-            }
-            throw new Error(data.error || 'No init_point received');
+            const data = await res.json();
+            if (data.init_point) { window.location.href = data.init_point; return; }
+            throw new Error(data.error || 'Sin init_point');
         } catch (error) {
             console.error('Payment error:', error);
-            btn.innerHTML = originalText;
-            btn.style.pointerEvents = '';
-            btn.style.opacity = '';
+            btn.textContent = textoOriginal;
+            btn.disabled = false;
+            cajaError.textContent = 'No pudimos abrir el pago. Intenta de nuevo, o mándanos el pedido por WhatsApp con el botón de abajo.';
+            cajaError.hidden = false;
+        }
+    }
 
-            // Si el pago en línea falla, no dejamos al cliente en un callejón
-            // sin salida: le ofrecemos cerrar el pedido por WhatsApp.
-            const irAWhatsApp = confirm(
-                'No pudimos abrir el pago en línea en este momento.\n\n' +
-                '¿Quieres mandarnos tu pedido por WhatsApp? Te contestamos enseguida.'
-            );
-            if (irAWhatsApp) checkoutWA(e);
+    // ── Google Maps (opcional) ──
+    // Si no hay clave configurada, la dirección se escribe a mano y todo
+    // lo demás funciona igual. El mapa es una ayuda, no un requisito.
+    let mapaCargado = false;
+    async function cargarMapa() {
+        if (mapaCargado) return;
+        mapaCargado = true;
+        try {
+            const r = await fetch(`${API_URL}/api/config`);
+            const { mapsKey } = await r.json();
+            if (!mapsKey) return;
+
+            window.initEntregaMapa = function () {
+                const input = document.getElementById('entregaDireccion');
+                const cajaMapa = document.getElementById('entregaMapa');
+                const form = document.getElementById('entregaForm');
+                const cdmx = { lat: 19.4326, lng: -99.1332 };
+
+                cajaMapa.hidden = false;
+                const mapa = new google.maps.Map(cajaMapa, {
+                    center: cdmx, zoom: 11, mapTypeControl: false,
+                    streetViewControl: false, fullscreenControl: false,
+                });
+                const pin = new google.maps.Marker({ map: mapa, draggable: true });
+
+                function fijar(lat, lng) {
+                    form.dataset.mapa = lat.toFixed(6) + ',' + lng.toFixed(6);
+                }
+
+                const auto = new google.maps.places.Autocomplete(input, {
+                    componentRestrictions: { country: 'mx' },
+                    fields: ['formatted_address', 'geometry'],
+                });
+                auto.addListener('place_changed', function () {
+                    const p = auto.getPlace();
+                    if (!p.geometry) return;
+                    mapa.setCenter(p.geometry.location);
+                    mapa.setZoom(17);
+                    pin.setPosition(p.geometry.location);
+                    fijar(p.geometry.location.lat(), p.geometry.location.lng());
+                });
+                pin.addListener('dragend', function () {
+                    const pos = pin.getPosition();
+                    fijar(pos.lat(), pos.lng());
+                });
+
+                document.getElementById('entregaMapaAyuda').textContent =
+                    'Empieza a escribir y elige tu dirección. Puedes arrastrar el pin para ajustar el punto exacto.';
+            };
+
+            const s = document.createElement('script');
+            s.src = 'https://maps.googleapis.com/maps/api/js?key=' +
+                    encodeURIComponent(mapsKey) + '&libraries=places&language=es&region=MX&callback=initEntregaMapa';
+            s.async = true;
+            s.onerror = function () { console.warn('Google Maps no cargó; la dirección se escribe a mano.'); };
+            document.head.appendChild(s);
+        } catch (err) {
+            console.warn('Sin mapa:', err);
         }
     }
 
