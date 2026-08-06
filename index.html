@@ -2126,6 +2126,12 @@
         .intro-mariposas { position: absolute; inset: 0; pointer-events: none; }
 
         .mariposa {
+            /* --x/--y se definen AQUÍ, no en el atributo style, para que la
+               media query de abajo pueda cambiarlas. Un custom property
+               puesto en línea no se puede sobrescribir desde una media
+               query sin !important. */
+            --x: var(--xd);
+            --y: var(--yd);
             position: absolute;
             top: 50%; left: 50%;
             width: clamp(34px, 6vw, 54px);
@@ -2167,9 +2173,29 @@
         }
 
         @media (max-width: 560px) {
-            /* En pantallas chicas sólo dos esquinas: si no, tapan el ramo */
+            /* Sólo dos esquinas en diagonal: con las cuatro, el ramo se ahoga */
             .esq-sd, .esq-ii { display: none; }
-            .mariposa { --x: calc(var(--x) * 0.55); --y: calc(var(--y) * 0.7); }
+            .esq { width: clamp(104px, 34vw, 150px); }
+
+            /* Las mariposas usan sus coordenadas de móvil.
+               OJO: aquí antes decía --x: calc(var(--x) * .55), que es una
+               variable refiriéndose a sí misma. Eso es inválido en CSS: la
+               variable se anula, translate se queda sin valor y las tres
+               mariposas se apilaban en el centro, encima del ramo. */
+            .mariposa {
+                --x: var(--xm);
+                --y: var(--ym);
+                width: clamp(28px, 9vw, 40px);
+            }
+
+            .intro-art svg { width: min(62vw, 240px); }
+            .intro.on, .intro-pending .intro { gap: 1.1rem; }
+        }
+
+        /* Pantallas muy angostas: el ramo y la marca mandan */
+        @media (max-width: 380px) {
+            .esq { width: 96px; }
+            .intro-art svg { width: 58vw; }
         }
     </style>
 </head>
@@ -2263,7 +2289,7 @@
             </svg></div>
         </div>
         <div class="intro-mariposas" aria-hidden="true">
-            <svg class="mariposa m1" style="--d:1.25s; --x:-30vw; --y:-16vh; --r:-12deg" viewBox="0 0 60 52" aria-hidden="true">
+            <svg class="mariposa m1" style="--d:1.25s; --xd:-30vw; --yd:-16vh; --xm:-31vw; --ym:-20vh; --r:-12deg" viewBox="0 0 60 52" aria-hidden="true">
                 <g class="ala-izq">
                     <path d="M29 26 C18 6 2 8 6 22 C8 30 18 32 29 26 Z" fill="#E6BCC3" stroke="#A35A66" stroke-width="1.2" stroke-linejoin="round"/>
                     <path d="M29 27 C19 40 6 44 8 34 C10 28 20 24 29 27 Z" fill="#D9AEB6" stroke="#A35A66" stroke-width="1.2" stroke-linejoin="round"/>
@@ -2276,7 +2302,7 @@
                 <path d="M30 17 C27 11 24 9 22 9 M30 17 C33 11 36 9 38 9"
                       fill="none" stroke="#8A4A55" stroke-width="1.1" stroke-linecap="round"/>
             </svg>
-            <svg class="mariposa m2" style="--d:1.5s; --x:28vw; --y:-22vh; --r:14deg" viewBox="0 0 60 52" aria-hidden="true">
+            <svg class="mariposa m2" style="--d:1.5s; --xd:28vw; --yd:-22vh; --xm:30vw; --ym:-27vh; --r:14deg" viewBox="0 0 60 52" aria-hidden="true">
                 <g class="ala-izq">
                     <path d="M29 26 C18 6 2 8 6 22 C8 30 18 32 29 26 Z" fill="#E6BCC3" stroke="#A35A66" stroke-width="1.2" stroke-linejoin="round"/>
                     <path d="M29 27 C19 40 6 44 8 34 C10 28 20 24 29 27 Z" fill="#D9AEB6" stroke="#A35A66" stroke-width="1.2" stroke-linejoin="round"/>
@@ -2289,7 +2315,7 @@
                 <path d="M30 17 C27 11 24 9 22 9 M30 17 C33 11 36 9 38 9"
                       fill="none" stroke="#8A4A55" stroke-width="1.1" stroke-linecap="round"/>
             </svg>
-            <svg class="mariposa m3" style="--d:1.72s; --x:22vw; --y:14vh; --r:-8deg" viewBox="0 0 60 52" aria-hidden="true">
+            <svg class="mariposa m3" style="--d:1.72s; --xd:22vw; --yd:14vh; --xm:30vw; --ym:2vh; --r:-8deg" viewBox="0 0 60 52" aria-hidden="true">
                 <g class="ala-izq">
                     <path d="M29 26 C18 6 2 8 6 22 C8 30 18 32 29 26 Z" fill="#E6BCC3" stroke="#A35A66" stroke-width="1.2" stroke-linejoin="round"/>
                     <path d="M29 27 C19 40 6 44 8 34 C10 28 20 24 29 27 Z" fill="#D9AEB6" stroke="#A35A66" stroke-width="1.2" stroke-linejoin="round"/>
@@ -3288,13 +3314,26 @@
 
         // Fecha mínima = hoy en CDMX (no la del reloj del visitante,
         // que puede estar en otro huso).
-        const hoy = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Mexico_City' });
+        const hoy = hoyCDMX();
         const fecha = document.getElementById('entregaFecha');
         fecha.min = hoy;
-        if (!fecha.value) fecha.value = hoy;
+        // Si la pestaña quedó abierta de un día para otro, la fecha vieja
+        // se sustituye en lugar de quedarse ofreciendo el día de ayer.
+        if (!fecha.value || fecha.value < hoy) fecha.value = hoy;
 
         document.getElementById('entregaTotal').textContent =
             document.getElementById('cartTotal').textContent;
+
+        // Si alguien escribe una fecha pasada a mano, se corrige sola.
+        fecha.onchange = function () {
+            const min = hoyCDMX();
+            if (fecha.value && fecha.value < min) {
+                fecha.value = min;
+                const caja = document.getElementById('entregaError');
+                caja.textContent = 'Esa fecha ya pasó. La ajustamos a hoy.';
+                caja.hidden = false;
+            }
+        };
 
         toggleCart(false);
         overlay.classList.add('open');
@@ -3317,12 +3356,18 @@
     // ── Validación en el navegador ──
     // El servidor vuelve a validar todo. Esto es sólo para que el
     // cliente vea el error al instante y no después de un viaje de red.
+    function hoyCDMX() {
+        return new Date().toLocaleDateString('en-CA', { timeZone: 'America/Mexico_City' });
+    }
+
     function validarEntrega(d) {
         const soloDigitos = function (t) { return (t || '').replace(/\D/g, ''); };
         if (d.recibeNombre.length < 2)          return ['recibeNombre', 'Falta el nombre de quien recibe'];
         if (soloDigitos(d.recibeTel).length !== 10) return ['recibeTel', 'El teléfono de quien recibe debe tener 10 dígitos'];
         if (d.direccion.length < 10)            return ['direccion', 'Escribe la dirección completa: calle, número, colonia y CP'];
         if (!d.fecha)                           return ['fecha', 'Elige la fecha de entrega'];
+        // Las fechas en formato AAAA-MM-DD se comparan bien como texto.
+        if (d.fecha < hoyCDMX())                return ['fecha', 'Esa fecha ya pasó. Elige hoy o un día posterior.'];
         if (!d.franja)                          return ['franja', 'Elige el horario de entrega'];
         if (d.compraNombre.length < 2)          return ['compraNombre', 'Falta tu nombre'];
         if (soloDigitos(d.compraTel).length !== 10) return ['compraTel', 'Tu teléfono debe tener 10 dígitos'];
