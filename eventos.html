@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bodas, XV años y eventos — Botanica Studio</title>
+    <meta name="description" content="Flores para bodas, XV años y eventos corporativos en CDMX. Paquetes de referencia y cotización a la medida.">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="canonical" href="https://botanicastudio.mx/eventos">
+    <meta property="og:title" content="Bodas, XV años y eventos — Botanica Studio">
+    <meta property="og:description" content="Flores para bodas, XV años y eventos corporativos en CDMX.">
+    <meta property="og:image" content="https://botanicastudio.mx/og-image.jpg">
+    <meta property="og:url" content="https://botanicastudio.mx/eventos">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg:#FFFCFC; --text:#2B2226; --text-light:#7D6E73;
+            --accent:#A35A66; --accent-dark:#8A4A55; --accent-light:#F8EDEF;
+            --green:#8AA090; --border:#F0E7E9; --cream:#FBF4F3; --gold:#C6A664;
+            --serif:'Playfair Display',Georgia,serif; --sans:'Inter',-apple-system,sans-serif;
+            --shadow:0 6px 26px rgba(90,55,62,.07);
+        }
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased}
+        img{display:block;max-width:100%}
+
+        .barra{border-bottom:1px solid var(--border);background:rgba(255,252,252,.92);
+               backdrop-filter:blur(20px);position:sticky;top:0;z-index:10}
+        .barra-in{max-width:1040px;margin:0 auto;padding:1rem 1.5rem;display:flex;
+                  align-items:center;justify-content:space-between;gap:1rem}
+        .barra a.marca{display:inline-flex;align-items:center;gap:.55rem;text-decoration:none;
+                       color:var(--text);font-family:var(--serif);font-size:1.25rem}
+        .barra svg{width:26px;height:26px;color:var(--accent)}
+        .barra .tienda{font-size:.85rem;color:var(--accent-dark);text-decoration:none}
+
+        .cabecera{max-width:1040px;margin:0 auto;padding:4rem 1.5rem 2.4rem;text-align:center}
+        .eyebrow{font-size:.68rem;letter-spacing:.26em;text-transform:uppercase;
+                 color:var(--accent);font-weight:500;display:block;margin-bottom:.9rem}
+        h1{font-family:var(--serif);font-size:clamp(2.1rem,5.4vw,3.3rem);font-weight:400;
+           line-height:1.1;letter-spacing:-.02em;margin-bottom:1rem}
+        h1 em{font-style:italic;color:var(--accent-dark)}
+        .cabecera p{max-width:560px;margin:0 auto;color:var(--text-light);font-weight:300}
+
+        main{max-width:1040px;margin:0 auto;padding:0 1.5rem 4rem}
+
+        .ev{padding:3rem 0;border-top:1px solid var(--border)}
+        .ev-cab{display:grid;grid-template-columns:minmax(0,340px) 1fr;gap:2.2rem;
+                align-items:center;margin-bottom:2.2rem}
+        .ev-cab img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:20px;box-shadow:var(--shadow)}
+        .ev-cab h2{font-family:var(--serif);font-size:1.9rem;font-weight:500;margin-bottom:.5rem}
+        .ev-cab p{color:var(--text-light);font-weight:300;margin-bottom:1.2rem}
+
+        .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.6rem;
+             border-radius:100px;background:var(--accent);color:#fff;text-decoration:none;
+             font-size:.86rem;font-weight:500;transition:background .25s,transform .25s}
+        .btn:hover{background:var(--accent-dark);transform:translateY(-1px)}
+
+        .pk-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.1rem}
+        .pk{background:#fff;border:1px solid var(--border);border-radius:20px;
+            padding:1.5rem 1.4rem;box-shadow:var(--shadow)}
+        .pk h3{font-family:var(--serif);font-size:1.2rem;font-weight:500;margin-bottom:.3rem}
+        .pk-desde{font-size:.9rem;color:var(--text-light);margin-bottom:1rem}
+        .pk-desde b{font-family:var(--serif);font-size:1.35rem;color:var(--text);font-weight:500}
+        .pk ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+        .pk li{font-size:.88rem;font-weight:300;padding-left:1.3rem;position:relative;color:#3D3237}
+        .pk li::before{content:"";position:absolute;left:0;top:.62em;width:7px;height:7px;
+                       border-radius:50%;background:var(--accent-light);
+                       box-shadow:0 0 0 1.5px var(--accent)}
+
+        .nota{background:var(--accent-light);border-left:3px solid var(--accent);
+              padding:1rem 1.2rem;border-radius:0 12px 12px 0;margin:2.4rem 0 0;font-size:.9rem}
+
+        .cierre{text-align:center;padding:3.5rem 1.5rem;background:var(--cream);
+                border-top:1px solid var(--border)}
+        .cierre h2{font-family:var(--serif);font-size:1.7rem;font-weight:500;margin-bottom:.6rem}
+        .cierre p{color:var(--text-light);font-weight:300;margin-bottom:1.4rem}
+
+        footer{border-top:1px solid var(--border)}
+        footer div{max-width:1040px;margin:0 auto;padding:1.6rem 1.5rem;
+                   font-size:.82rem;color:var(--text-light)}
+        footer a{color:var(--accent-dark)}
+
+        @media (max-width:720px){
+            .ev-cab{grid-template-columns:1fr;gap:1.3rem}
+        }
+    </style>
+</head>
+<body>
+    <div class="barra"><div class="barra-in">
+        <a class="marca" href="/">
+            <svg viewBox="0 0 44 44" aria-hidden="true">
+                <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+                    <path d="M22 40 V24"/>
+                    <path d="M22 34 C15 34 11 30 11 25 C18 25 22 29 22 34 Z"/>
+                    <path d="M22 30 C29 30 33 26 33 21 C26 21 22 25 22 30 Z"/>
+                </g>
+                <g fill="currentColor">
+                    <ellipse cx="22" cy="10" rx="4.1" ry="5.6"/>
+                    <ellipse cx="29" cy="15" rx="4.1" ry="5.6" transform="rotate(72 29 15)"/>
+                    <ellipse cx="26" cy="23" rx="4.1" ry="5.6" transform="rotate(144 26 23)"/>
+                    <ellipse cx="18" cy="23" rx="4.1" ry="5.6" transform="rotate(216 18 23)"/>
+                    <ellipse cx="15" cy="15" rx="4.1" ry="5.6" transform="rotate(288 15 15)"/>
+                </g>
+                <circle cx="22" cy="16" r="3.4" fill="var(--gold)"/>
+            </svg>
+            Botanica Studio
+        </a>
+        <a class="tienda" href="/#tienda">Ir a la tienda &rarr;</a>
+    </div></div>
+
+    <header class="cabecera">
+        <span class="eyebrow">Bodas &middot; XV años &middot; Corporativo</span>
+        <h1>Flores para el día que <em>no se repite</em></h1>
+        <p>Cada evento se cotiza a la medida. Estos paquetes son una referencia para que
+        te des una idea de lo que incluye cada nivel.</p>
+    </header>
+
+    <main>
+        <section class="ev" id="bodas">
+            <div class="ev-cab">
+                <img src="/images/productos/box-elegance-premium.jpg" alt="Arreglo de rosas premium en caja para boda" loading="lazy">
+                <div>
+                    <h2>Bodas</h2>
+                    <p>Del ramo de la novia al montaje completo del salón. Trabajamos con la flor de temporada, que es la que llega más fresca y rinde mejor el presupuesto.</p>
+                    <a class="btn" href="https://wa.me/525554097367?text=Hola%21%20Me%20interesa%20cotizar%20flores%20para%20bodas." target="_blank" rel="noopener">
+                        Pedir cotización de bodas
+                    </a>
+                </div>
+            </div>
+            <div class="pk-grid">
+                <article class="pk">
+                    <h3>Esencial</h3>
+                    <p class="pk-desde">Desde <b>$&mdash;&mdash;&mdash;</b> MXN</p>
+                    <ul>
+                        <li>Ramo de novia</li>
+                        <li>Boutonnière para el novio</li>
+                        <li>6 centros de mesa</li>
+                        <li>Entrega la mañana del evento</li>
+                    </ul>
+                </article>
+                <article class="pk">
+                    <h3>Clásico</h3>
+                    <p class="pk-desde">Desde <b>$&mdash;&mdash;&mdash;</b> MXN</p>
+                    <ul>
+                        <li>Todo lo del paquete Esencial</li>
+                        <li>12 centros de mesa</li>
+                        <li>Arreglo para el altar o arco</li>
+                        <li>Camino de pétalos</li>
+                        <li>Ramos para damas de honor</li>
+                    </ul>
+                </article>
+                <article class="pk">
+                    <h3>Completo</h3>
+                    <p class="pk-desde">Desde <b>$&mdash;&mdash;&mdash;</b> MXN</p>
+                    <ul>
+                        <li>Todo lo del paquete Clásico</li>
+                        <li>Montaje y desmontaje en el lugar</li>
+                        <li>Decoración de mesa principal</li>
+                        <li>Arreglos de recepción y bienvenida</li>
+                        <li>Visita previa al salón</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <section class="ev" id="xv">
+            <div class="ev-cab">
+                <img src="/images/ocasiones/cumpleanos.jpg" alt="Ramo colorido de flores para celebración de XV años" loading="lazy">
+                <div>
+                    <h2>XV años</h2>
+                    <p>El detalle que más sale en las fotos. Cuidamos que los colores combinen con el vestido y con el salón.</p>
+                    <a class="btn" href="https://wa.me/525554097367?text=Hola%21%20Me%20interesa%20cotizar%20flores%20para%20xv%20a%C3%B1os." target="_blank" rel="noopener">
+                        Pedir cotización de xv años
+                    </a>
+                </div>
+            </div>
+            <div class="pk-grid">
+                <article class="pk">
+                    <h3>Esencial</h3>
+                    <p class="pk-desde">Desde <b>$&mdash;&mdash;&mdash;</b> MXN</p>
+                    <ul>
+                        <li>Ramo de la quinceañera</li>
+                        <li>6 centros de mesa</li>
+                        <li>Arreglo para la mesa principal</li>
+                    </ul>
+                </article>
+                <article class="pk">
+                    <h3>Clásico</h3>
+                    <p class="pk-desde">Desde <b>$&mdash;&mdash;&mdash;</b> MXN</p>
+                    <ul>
+                        <li>Todo lo del paquete Esencial</li>
+                        <li>12 centros de mesa</li>
+                        <li>Decoración de la silla de honor</li>
+                        <li>Arreglo para el vals</li>
+                    </ul>
+                </article>
+                <article class="pk">
+                    <h3>Completo</h3>
+                    <p class="pk-desde">Desde <b>$&mdash;&mdash;&mdash;</b> MXN</p>
+                    <ul>
+                        <li>Todo lo del paquete Clásico</li>
+                        <li>Arco o backdrop floral para fotos</li>
+                        <li>Montaje en el lugar</li>
+                        <li>Arreglos de recepción</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <section class="ev" id="corporativo">
+            <div class="ev-cab">
+                <img src="/images/productos/arreglo-corporativo.jpg" alt="Arreglo corporativo de lirios blancos" loading="lazy">
+                <div>
+                    <h2>Corporativo</h2>
+                    <p>Recepciones, oficinas y eventos de empresa. Con factura y entregas programadas.</p>
+                    <a class="btn" href="https://wa.me/525554097367?text=Hola%21%20Me%20interesa%20cotizar%20flores%20para%20corporativo." target="_blank" rel="noopener">
+                        Pedir cotización de corporativo
+                    </a>
+                </div>
+            </div>
+            <div class="pk-grid">
+                <article class="pk">
+                    <h3>Recepción semanal</h3>
+                    <p class="pk-desde">Desde <b>$&mdash;&mdash;&mdash;</b> MXN</p>
+                    <ul>
+                        <li>Un arreglo nuevo cada semana</li>
+                        <li>Retiramos el anterior</li>
+                        <li>Día y hora fijos</li>
+                        <li>Facturación mensual</li>
+                    </ul>
+                </article>
+                <article class="pk">
+                    <h3>Evento o apertura</h3>
+                    <p class="pk-desde">Desde <b>$&mdash;&mdash;&mdash;</b> MXN</p>
+                    <ul>
+                        <li>Arreglos de bienvenida</li>
+                        <li>Centros para mesas de coctel</li>
+                        <li>Montaje el día del evento</li>
+                    </ul>
+                </article>
+                <article class="pk">
+                    <h3>Regalo institucional</h3>
+                    <p class="pk-desde">Desde <b>$&mdash;&mdash;&mdash;</b> MXN</p>
+                    <ul>
+                        <li>Arreglos para clientes o equipo</li>
+                        <li>Tarjeta con tu logotipo</li>
+                        <li>Entregas a varias direcciones</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <div class="nota">
+            <strong>Sobre los precios:</strong> el costo final depende de la flor de temporada,
+            del número de invitados y del lugar del evento. Escríbenos con tu fecha y presupuesto
+            y te mandamos una propuesta concreta, sin compromiso.
+        </div>
+    </main>
+
+    <div class="cierre">
+        <h2>¿Tienes fecha?</h2>
+        <p>Cuéntanos qué estás imaginando y lo aterrizamos juntos.</p>
+        <a class="btn" href="https://wa.me/525554097367?text=Hola!%20Quiero%20cotizar%20flores%20para%20mi%20evento."
+           target="_blank" rel="noopener">Escríbenos por WhatsApp</a>
+    </div>
+
+    <footer><div>
+        Botanica Studio &middot; Ciudad de México &middot;
+        <a href="https://wa.me/525554097367" target="_blank" rel="noopener">WhatsApp 55 5409 7367</a> &middot;
+        <a href="/">Volver a la tienda</a>
+    </div></footer>
+</body>
+</html>

@@ -33,6 +33,10 @@
       "destination": "/aviso-privacidad.html"
     },
     {
+      "source": "/eventos",
+      "destination": "/eventos.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
