@@ -65,11 +65,26 @@ export default async function handler(req, res) {
     console.log('Pago', payment.id, '→', payment.status, '· $', payment.transaction_amount);
 
     if (payment.status === 'approved') {
-      // TODO (Fase 3): aquí va el aviso del pedido — email al cliente,
-      // notificación a la floristería, alta en la hoja de pedidos.
-      // Ojo: MercadoPago puede mandar la misma notificación más de una vez,
-      // así que guarda payment.id y descarta los repetidos.
-      console.log('PEDIDO PAGADO:', payment.id, payment.payer?.email);
+      // Los datos de entrega viajan en la metadata de la preferencia.
+      // OJO: no pude comprobar con un pago real que MercadoPago los
+      // propague hasta aquí — con el primer pedido de verdad, revisa
+      // estos logs. Si salieran vacíos, hay que leerlos consultando la
+      // preferencia con payment.order?.id en lugar de la metadata.
+      const m = payment.metadata || {};
+
+      console.log('═══ PEDIDO PAGADO ═══');
+      console.log('  pago:       ', payment.id, '·', `$${payment.transaction_amount}`);
+      console.log('  recibe:     ', m.recibe_nombre || '(sin dato)', '·', m.recibe_tel || '');
+      console.log('  dirección:  ', m.direccion || '(sin dato)');
+      console.log('  referencias:', m.referencias || '—');
+      console.log('  mapa:       ', m.mapa ? `https://maps.google.com/?q=${m.mapa}` : '—');
+      console.log('  entrega:    ', m.fecha || '(sin dato)', '·', m.franja || '');
+      console.log('  tarjeta:    ', m.dedicatoria || '—');
+      console.log('  compra:     ', m.compra_nombre || '', '·', m.compra_tel || '', '·', m.compra_email || '');
+
+      // Pendiente: MercadoPago puede repetir la misma notificación, así que
+      // cuando esto se guarde en una base de datos hay que descartar los
+      // payment.id ya vistos.
     }
   } catch (error) {
     console.error('No se pudo consultar el pago', dataId, error?.message);
