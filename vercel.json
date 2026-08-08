@@ -37,6 +37,10 @@
       "destination": "/eventos.html"
     },
     {
+      "source": "/panel",
+      "destination": "/admin.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
