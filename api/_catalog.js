@@ -12,18 +12,18 @@
 // Corre `node scripts/check-precios.js` para verificar que coinciden.
 
 export const CATALOG = {
-  1:  { name: 'Ramo Atardecer',          price: 450  },
-  2:  { name: 'Box Elegance Premium',    price: 890  },
-  3:  { name: 'Ramo Silvestre',          price: 350  },
-  4:  { name: 'Monstera Deliciosa',      price: 520  },
-  5:  { name: '50 Rosas Rojas Premium',  price: 1200 },
-  6:  { name: 'Box de Tulipanes',        price: 750  },
-  7:  { name: 'Combo Sorpresa',          price: 680  },
-  8:  { name: 'Snake Plant',             price: 320  },
-  9:  { name: 'Arreglo Corporativo',     price: 650  },
-  10: { name: 'Combo Aniversario VIP',   price: 1450 },
-  11: { name: 'Mini Suculentas Set x6',  price: 380  },
-  12: { name: 'Ramo Girasoles',          price: 420  },
+  1:  { name: 'Ramo Atardecer',          price: 549  },
+  2:  { name: 'Box Elegance Premium',    price: 1499 },
+  3:  { name: 'Ramo Silvestre',          price: 399  },
+  4:  { name: 'Monstera Deliciosa',      price: 549  },
+  5:  { name: '50 Rosas Rojas Premium',  price: 1499 },
+  6:  { name: 'Box de Tulipanes',        price: 1399 },
+  7:  { name: 'Combo Sorpresa',          price: 899  },
+  8:  { name: 'Snake Plant',             price: 479  },
+  9:  { name: 'Arreglo Corporativo',     price: 799  },
+  10: { name: 'Combo Aniversario VIP',   price: 1989 },
+  11: { name: 'Mini Suculentas Set x6',  price: 499  },
+  12: { name: 'Ramo Girasoles',          price: 499  },
 };
 
 // Envío — también autoritativo, por la misma razón.
