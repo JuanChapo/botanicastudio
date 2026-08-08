@@ -1,5 +1,6 @@
 import crypto from 'node:crypto';
 import { MercadoPagoConfig, Payment } from 'mercadopago';
+import { avisarPedido } from './_telegram.js';
 
 const ACCESS_TOKEN = process.env.MP_ACCESS_TOKEN || process.env.MERCADOPAGO_ACCESS_TOKEN;
 // Secreto de la firma. Se saca en: MercadoPago → Tus integraciones → tu app
@@ -81,6 +82,11 @@ export default async function handler(req, res) {
       console.log('  entrega:    ', m.fecha || '(sin dato)', '·', m.franja || '');
       console.log('  tarjeta:    ', m.dedicatoria || '—');
       console.log('  compra:     ', m.compra_nombre || '', '·', m.compra_tel || '', '·', m.compra_email || '');
+
+      // El aviso va después de registrar el pago, y su fallo no se propaga:
+      // si Telegram está caído, el cobro ya ocurrió y no debe verse afectado.
+      const avisado = await avisarPedido(payment);
+      console.log(avisado ? 'Aviso enviado por Telegram' : 'Sin aviso por Telegram');
 
       // Pendiente: MercadoPago puede repetir la misma notificación, así que
       // cuando esto se guarde en una base de datos hay que descartar los
