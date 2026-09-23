@@ -5,33 +5,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Botanica Studio — Florería CDMX | Envío a Domicilio Mismo Día</title>
     <meta name="description" content="Florería premium en CDMX. Ramos, arreglos florales y plantas con envío a domicilio el mismo día. Más de 2,500 clientes felices.">
+    <link rel="canonical" href="https://botanicastudio.mx/">
+
+    <!-- Icono de pestaña -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+    <!-- Tarjeta de previsualización (WhatsApp, Instagram, Facebook) -->
     <meta property="og:title" content="Botanica Studio — Florería CDMX">
     <meta property="og:description" content="Arreglos florales únicos con envío el mismo día en CDMX. Sorprende a quien más quieres.">
     <meta property="og:type" content="website">
+    <meta property="og:url" content="https://botanicastudio.mx/">
+    <meta property="og:locale" content="es_MX">
+    <meta property="og:site_name" content="Botanica Studio">
+    <meta property="og:image" content="https://botanicastudio.mx/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Botanica Studio — ramos, arreglos florales y plantas con envío el mismo día en CDMX">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://botanicastudio.mx/og-image.jpg">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Datos estructurados para Google. Sólo datos verificables:
+         NO metas aggregateRating aquí mientras las reseñas del sitio
+         sean inventadas — Google penaliza las reseñas falsas. -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Florist",
+      "name": "Botanica Studio",
+      "url": "https://botanicastudio.mx/",
+      "image": "https://botanicastudio.mx/og-image.jpg",
+      "telephone": "+525554097367",
+      "priceRange": "$$",
+      "areaServed": { "@type": "City", "name": "Ciudad de México" },
+      "sameAs": ["https://www.instagram.com/botanicastudio.mx"]
+    }
+    </script>
+
+    <script>
+    // Decide la intro ANTES del primer pintado. Si algo aquí truena,
+    // .intro se queda en display:none y la página carga normal.
+    try {
+        if (!sessionStorage.getItem('bs_intro') &&
+            !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.documentElement.classList.add('intro-pending');
+        }
+    } catch (e) {}
+    </script>
+
     <style>
         :root {
-            --bg: #FDFCFA;
-            --text: #1A1A1A;
-            --text-light: #7A7A7A;
-            --accent: #C4917B;
-            --accent-dark: #A67460;
-            --accent-light: #F5EDE8;
-            --green: #6B8F71;
-            --green-light: #EDF2ED;
-            --red: #D4545E;
-            --border: #EBEBEB;
+            /* Paleta rosa palo / rose gold.
+               Los tonos de texto y acento cumplen contraste AA (4.5:1)
+               sobre fondo claro — comprobado, no cambiar a ojo. */
+            --bg: #FFFCFC;
+            --text: #2B2226;
+            --text-light: #7D6E73;
+            --accent: #A35A66;
+            --accent-dark: #8A4A55;
+            --accent-light: #F8EDEF;
+            --green: #8AA090;
+            --green-light: #EFF3EF;
+            --red: #C75B68;
+            --border: #F0E7E9;
             --white: #FFFFFF;
-            --cream: #F8F5F1;
-            --gold: #D4A853;
+            --cream: #FBF4F3;
+            --gold: #C6A664;
             --serif: 'Playfair Display', Georgia, serif;
             --sans: 'Inter', -apple-system, sans-serif;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
-            --shadow-md: 0 4px 20px rgba(0,0,0,0.06);
-            --shadow-lg: 0 12px 40px rgba(0,0,0,0.08);
-            --radius: 16px;
+            --shadow-sm: 0 1px 3px rgba(90,55,62,0.05);
+            --shadow-md: 0 6px 26px rgba(90,55,62,0.07);
+            --shadow-lg: 0 18px 50px rgba(90,55,62,0.11);
+            --radius: 20px;
+            --leaf: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M12 22c0-6 3-11 9-13-1 7-4 11-9 13Z'/%3E%3Cpath fill='%23000' d='M12 22C6 20 3 15 3 9c6 2 9 7 9 13Z' opacity='.55'/%3E%3C/svg%3E");
+
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -49,7 +99,7 @@
 
         /* ═══ URGENCY BAR ═══ */
         .urgency-bar {
-            background: linear-gradient(90deg, #1A1A1A 0%, #2D2D2D 100%);
+            background: linear-gradient(90deg, #3B2A2F 0%, #523A41 100%);
             color: white;
             text-align: center;
             padding: 0.65rem 1rem;
@@ -85,7 +135,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(253, 252, 250, 0.96);
+            background: rgba(255, 252, 252, 0.90);
             backdrop-filter: blur(24px);
             border-bottom: 1px solid var(--border);
         }
@@ -251,10 +301,11 @@
 
         .hero h1 {
             font-family: var(--serif);
-            font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+            font-size: clamp(2.6rem, 5vw, 4.1rem);
             font-weight: 400;
-            line-height: 1.15;
-            margin-bottom: 1.2rem;
+            line-height: 1.08;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.4rem;
         }
 
         .hero h1 em {
@@ -303,7 +354,7 @@
         .btn-fill:hover {
             background: var(--accent-dark);
             transform: translateY(-1px);
-            box-shadow: 0 6px 24px rgba(196, 145, 123, 0.35);
+            box-shadow: 0 8px 26px rgba(163, 90, 102, 0.30);
         }
 
         .btn-dark {
@@ -319,6 +370,20 @@
         .btn-wa {
             background: #25D366;
             color: white;
+        }
+
+        /* Variante para el hero: el verde de WhatsApp junto al rosa se veía
+           estridente. El botón flotante sigue verde, que es el que la gente
+           reconoce; aquí basta el ícono. */
+        .btn-wa-soft {
+            background: transparent;
+            color: var(--accent-dark);
+            border: 1px solid var(--accent);
+        }
+
+        .btn-wa-soft:hover {
+            background: var(--accent-light);
+            transform: translateY(-1px);
         }
 
         .btn-wa:hover {
@@ -471,11 +536,12 @@
         }
 
         .section-label {
-            font-size: 0.72rem;
-            letter-spacing: 0.15em;
+            font-size: 0.68rem;
+            letter-spacing: 0.26em;
             text-transform: uppercase;
-            color: var(--accent-dark);
-            margin-bottom: 0.4rem;
+            font-weight: 500;
+            color: var(--accent);
+            margin-bottom: 0.85rem;
             display: block;
         }
 
@@ -523,7 +589,10 @@
         .cat-card-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(transparent 40%, rgba(0,0,0,0.6));
+            /* El degradado tiene que ser lo bastante oscuro para que el texto
+               blanco se lea también sobre fotos claras (la de Regalos es casi
+               blanca). Si aclaras esto, revisa las cuatro tarjetas. */
+            background: linear-gradient(transparent 28%, rgba(30,22,25,0.45) 58%, rgba(30,22,25,0.82));
         }
 
         .cat-card-label {
@@ -611,7 +680,7 @@
         }
 
         .filter-tab:hover { border-color: var(--accent); color: var(--accent-dark); }
-        .filter-tab.active { background: var(--text); color: white; border-color: var(--text); }
+        .filter-tab.active { background: var(--accent); color: white; border-color: var(--accent); }
 
         .products-grid {
             display: grid;
@@ -623,12 +692,13 @@
             background: var(--white);
             border-radius: var(--radius);
             overflow: hidden;
-            border: 1px solid var(--border);
-            transition: all 0.3s;
+            border: 1px solid transparent;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.35s cubic-bezier(.2,.7,.3,1), box-shadow 0.35s;
         }
 
         .product-card:hover {
-            transform: translateY(-3px);
+            transform: translateY(-6px);
             box-shadow: var(--shadow-lg);
         }
 
@@ -664,24 +734,6 @@
         .badge-new { background: var(--green); color: white; }
         .badge-sale { background: var(--red); color: white; }
         .badge-limited { background: var(--gold); color: white; }
-
-        .product-viewers {
-            position: absolute;
-            bottom: 0.8rem;
-            left: 0.8rem;
-            background: rgba(0,0,0,0.6);
-            color: white;
-            padding: 0.25rem 0.6rem;
-            border-radius: 100px;
-            font-size: 0.65rem;
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-            backdrop-filter: blur(8px);
-            z-index: 1;
-        }
-
-        .product-viewers .eye { font-size: 0.7rem; }
 
         .product-wishlist {
             position: absolute;
@@ -756,8 +808,10 @@
         }
 
         .product-price {
-            font-size: 1.1rem;
-            font-weight: 700;
+            font-family: var(--serif);
+            font-size: 1.4rem;
+            font-weight: 500;
+            letter-spacing: -0.01em;
             color: var(--text);
         }
 
@@ -779,7 +833,7 @@
         .btn-cart {
             padding: 0.55rem 1rem;
             border-radius: 100px;
-            background: var(--text);
+            background: var(--accent);
             color: white;
             border: none;
             font-family: var(--sans);
@@ -1025,7 +1079,9 @@
         .occasion-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(transparent, rgba(0,0,0,0.65));
+            /* Mismo criterio que .cat-card-overlay: varias fotos de ocasión
+               son muy claras y el texto blanco desaparecía encima. */
+            background: linear-gradient(transparent 22%, rgba(30,22,25,0.48) 55%, rgba(30,22,25,0.85));
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
@@ -1604,24 +1660,783 @@
             .delivery-grid { grid-template-columns: 1fr; }
             .footer-grid { grid-template-columns: 1fr; }
         }
+
+        /* ═══════════════════════════════════════════════════
+           MARCA Y ANIMACIONES BOTÁNICAS
+           Todo lo de aquí se apaga si el sistema pide menos
+           movimiento — ver el bloque prefers-reduced-motion
+           al final. Eso no es opcional: hay gente a la que
+           las animaciones le provocan mareo.
+           ═══════════════════════════════════════════════════ */
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+        }
+
+        .logo-mark {
+            width: 30px;
+            height: 30px;
+            flex: none;
+            color: var(--accent);
+            overflow: visible;
+        }
+
+        .footer-brand .logo-mark { color: var(--accent-light); }
+
+        /* El tallo y las hojas se dibujan solos.
+           Regla importante: el estado BASE es el visible. La animación
+           solo lo trae a escena. Si el navegador no la corre (o la
+           bloquea por accesibilidad), el logo se ve igual de bien. */
+        .anim .lm-stem, .lm-leaf {
+            stroke-dasharray: 70;
+            stroke-dashoffset: 0;
+            animation: lm-draw 1.1s cubic-bezier(.6,.05,.3,1) both;
+        }
+        .anim .lm-leaf:nth-of-type(2) { animation-delay: 0.20s; }
+        .anim .lm-leaf:nth-of-type(3) { animation-delay: 0.34s; }
+
+        @keyframes lm-draw {
+            from { stroke-dashoffset: 70; }
+            to   { stroke-dashoffset: 0; }
+        }
+
+        /* Los pétalos aparecen uno por uno.
+           Sólo animamos opacidad: si tocáramos transform aquí, se
+           borrarían los rotate() del SVG y la flor se desarma. */
+        .anim .lm-bloom ellipse, .lm-core {
+            opacity: 1;
+            animation: lm-pop 0.5s ease-out both;
+        }
+        .anim .lm-bloom ellipse:nth-child(1) { animation-delay: 0.42s; }
+        .anim .lm-bloom ellipse:nth-child(2) { animation-delay: 0.50s; }
+        .anim .lm-bloom ellipse:nth-child(3) { animation-delay: 0.58s; }
+        .anim .lm-bloom ellipse:nth-child(4) { animation-delay: 0.66s; }
+        .anim .lm-bloom ellipse:nth-child(5) { animation-delay: 0.74s; }
+        .anim .lm-core { animation-delay: 0.84s; }
+
+        @keyframes lm-pop {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        /* Al pasar el cursor, la flor se mece como con aire */
+        .logo:hover .logo-mark { animation: lm-sway 2.4s ease-in-out infinite; }
+
+        @keyframes lm-sway {
+            0%, 100% { transform: rotate(0deg); }
+            30%      { transform: rotate(-5deg); }
+            70%      { transform: rotate(4deg); }
+        }
+
+        /* ── Título del hero ── */
+        .hero-title em {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Subrayado hecho a mano que se traza solo */
+        .hero-title .ink {
+            position: absolute;
+            left: 0;
+            bottom: -0.12em;
+            width: 100%;
+            height: 0.32em;
+            color: var(--accent);
+            opacity: 0.55;
+            overflow: visible;
+        }
+
+        .anim .hero-title .ink path {
+            stroke-dasharray: 320;
+            stroke-dashoffset: 0;
+            animation: ink-draw 1.3s cubic-bezier(.62,.04,.3,1) 0.75s both;
+        }
+
+        @keyframes ink-draw {
+            from { stroke-dashoffset: 320; }
+            to   { stroke-dashoffset: 0; }
+        }
+
+        /* El titular entra de abajo, con calma */
+        .anim .hero-title,
+        .anim .hero-desc,
+        .anim .hero-actions {
+            animation: rise 0.9s cubic-bezier(.22,.7,.3,1) both;
+        }
+        .anim .hero-title   { animation-delay: 0.05s; }
+        .anim .hero-desc    { animation-delay: 0.20s; }
+        .anim .hero-actions { animation-delay: 0.32s; }
+
+        @keyframes rise {
+            from { opacity: 0; transform: translateY(18px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── Hojita antes de cada etiqueta de sección ── */
+        .section-label::before {
+            content: "";
+            display: inline-block;
+            width: 0.85em;
+            height: 0.85em;
+            margin-right: 0.5em;
+            vertical-align: -0.1em;
+            background: currentColor;
+            -webkit-mask: var(--leaf) center/contain no-repeat;
+            mask: var(--leaf) center/contain no-repeat;
+        }
+
+        /* ── Las secciones suben un poco al aparecer ── */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(26px);
+            transition: opacity 0.75s cubic-bezier(.22,.7,.3,1),
+                        transform 0.75s cubic-bezier(.22,.7,.3,1);
+        }
+        .fade-in.visible { opacity: 1; transform: none; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .lm-stem, .lm-leaf, .lm-bloom ellipse, .lm-core,
+            .hero-title .ink path, .hero-title, .hero-desc, .hero-actions {
+                animation: none !important;
+                opacity: 1 !important;
+                stroke-dashoffset: 0 !important;
+                transform: none !important;
+            }
+            .logo:hover .logo-mark { animation: none !important; }
+            .fade-in { opacity: 1 !important; transform: none !important; transition: none !important; }
+        }
+
+        /* ═══════════════════════════════════════════════════
+           INTRO — las flores que florecen al entrar
+           Reglas que NO se negocian:
+           · Oculta por defecto. Sólo el script la enciende.
+             Si el JS falla, nadie se queda viendo una pantalla muerta.
+           · Se salta con cualquier clic, tecla o scroll.
+           · Una vez por sesión (sessionStorage). Repetirla en cada
+             navegación es la forma más rápida de perder un cliente.
+           · Nunca aparece si el sistema pide menos movimiento.
+           ═══════════════════════════════════════════════════ */
+
+        .intro { display: none; }
+        .intro-pending body { overflow: hidden; }
+
+        .intro-pending .intro {
+            display: flex;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1.4rem;
+            background: radial-gradient(85% 70% at 50% 46%, #FFFDFC 0%, var(--accent-light) 55%, #F0DCE0 100%);
+            cursor: pointer;
+        }
+
+        .intro.out {
+            animation: intro-leave 0.72s cubic-bezier(.6,.02,.3,1) forwards;
+        }
+
+        @keyframes intro-leave {
+            to { opacity: 0; transform: translateY(-3%); visibility: hidden; }
+        }
+
+        .intro-art svg { width: min(56vw, 280px); height: auto; overflow: visible; }
+
+        /* Los tallos crecen desde el suelo */
+        .intro-pending .i-stem {
+            stroke-dasharray: 130;
+            stroke-dashoffset: 130;
+            animation: i-draw 0.85s cubic-bezier(.5,.04,.3,1) forwards;
+        }
+        .intro-pending .i-stem:nth-of-type(2) { animation-delay: 0.08s; }
+        .intro-pending .i-stem:nth-of-type(3) { animation-delay: 0.15s; }
+        .intro-pending .i-stem:nth-of-type(4) { animation-delay: 0.22s; }
+        .intro-pending .i-stem:nth-of-type(5) { animation-delay: 0.29s; }
+
+        .intro-pending .i-leaf {
+            stroke-dasharray: 90;
+            stroke-dashoffset: 90;
+            fill-opacity: 0;
+            animation: i-draw 0.62s cubic-bezier(.5,.04,.3,1) 0.42s forwards,
+                       i-fill 0.5s ease-out 0.78s forwards;
+        }
+        .intro-pending .i-leaf:nth-of-type(2) { animation-delay: 0.52s; }
+        .intro-pending .i-leaf:nth-of-type(3) { animation-delay: 0.60s; }
+
+        @keyframes i-draw { to { stroke-dashoffset: 0; } }
+        @keyframes i-fill { to { fill-opacity: 1; } }
+
+        .intro-pending .i-dust circle {
+            opacity: 0;
+            animation: i-dust 0.7s ease-out forwards;
+        }
+        .intro-pending .i-dust circle:nth-child(1) { animation-delay: 1.02s; }
+        .intro-pending .i-dust circle:nth-child(2) { animation-delay: 1.08s; }
+        .intro-pending .i-dust circle:nth-child(3) { animation-delay: 1.05s; }
+        .intro-pending .i-dust circle:nth-child(4) { animation-delay: 1.12s; }
+        .intro-pending .i-dust circle:nth-child(5) { animation-delay: 1.16s; }
+        .intro-pending .i-dust circle:nth-child(6) { animation-delay: 1.20s; }
+        .intro-pending .i-dust circle:nth-child(7) { animation-delay: 1.24s; }
+
+        @keyframes i-dust { to { opacity: 1; } }
+
+        /* Y arriba, abren las flores */
+        .intro-pending .i-flower {
+            opacity: 0;
+            transform-box: fill-box;
+            transform-origin: center;
+            animation: i-bloom 0.66s cubic-bezier(.3,1.5,.5,1) var(--d) forwards;
+        }
+
+        @keyframes i-bloom {
+            from { opacity: 0; scale: 0.2; rotate: -25deg; }
+            to   { opacity: 1; scale: 1;   rotate: 0deg; }
+        }
+
+        .intro-word {
+            font-family: var(--serif);
+            font-size: clamp(1.5rem, 4.6vw, 2.3rem);
+            color: var(--text);
+            letter-spacing: 0.18em;
+            opacity: 0;
+            animation: i-word 0.85s ease-out 1.34s forwards;
+        }
+
+        @keyframes i-word {
+            from { opacity: 0; letter-spacing: 0.34em; }
+            to   { opacity: 1; letter-spacing: 0.10em; }
+        }
+
+        .intro-skip {
+            font-size: 0.66rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--text-light);
+            opacity: 0;
+            animation: i-skip 0.6s ease-out 1.92s forwards;
+        }
+
+        @keyframes i-skip { to { opacity: 0.7; } }
+
+        @media (prefers-reduced-motion: reduce) {
+            .intro { display: none !important; }
+        }
+
+        /* ═══ PANEL DE DATOS DE ENTREGA ═══ */
+
+        .entrega-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(43, 34, 38, 0.42);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+            z-index: 1400;
+        }
+        .entrega-overlay.open { opacity: 1; visibility: visible; }
+
+        .entrega-panel {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: min(100%, 470px);
+            height: 100%;
+            background: var(--white);
+            z-index: 1401;
+            display: flex;
+            flex-direction: column;
+            transform: translateX(100%);
+            transition: transform 0.38s cubic-bezier(.22,.7,.3,1);
+            box-shadow: var(--shadow-lg);
+        }
+        .entrega-panel.open { transform: none; }
+
+        .entrega-head {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 1.5rem 1.5rem 1.1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .entrega-head h3 { font-family: var(--serif); font-size: 1.35rem; font-weight: 500; }
+        .entrega-head p { font-size: 0.8rem; color: var(--text-light); margin-top: 0.2rem; }
+
+        .entrega-close {
+            background: none; border: none; cursor: pointer;
+            color: var(--text-light); padding: 0.2rem; flex: none;
+        }
+        .entrega-close svg { width: 22px; height: 22px; }
+
+        .entrega-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.3rem 1.5rem 1.6rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .ent-grupo { border: none; display: flex; flex-direction: column; gap: 0.85rem; }
+
+        .ent-grupo legend {
+            font-size: 0.68rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 0.55rem;
+        }
+
+        .ent-campo { display: flex; flex-direction: column; gap: 0.35rem; }
+        .ent-campo > span { font-size: 0.82rem; font-weight: 500; }
+        .ent-campo > span b { color: var(--accent); font-weight: 500; }
+
+        .ent-campo input,
+        .ent-campo select,
+        .ent-campo textarea {
+            font-family: var(--sans);
+            font-size: 0.92rem;
+            color: var(--text);
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 0.72rem 0.85rem;
+            width: 100%;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .ent-campo textarea { resize: vertical; min-height: 76px; }
+
+        .ent-campo input:focus,
+        .ent-campo select:focus,
+        .ent-campo textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-light);
+        }
+
+        /* El campo que falta se marca en rojo, no sólo con un mensaje arriba */
+        .ent-campo input.mal,
+        .ent-campo select.mal,
+        .ent-campo textarea.mal {
+            border-color: var(--red);
+            box-shadow: 0 0 0 3px rgba(199, 91, 104, 0.12);
+        }
+
+        .ent-ayuda { font-size: 0.74rem; color: var(--text-light); font-style: normal; line-height: 1.45; }
+
+        .ent-fila { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
+
+        .ent-mapa {
+            height: 190px;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .ent-error {
+            background: rgba(199, 91, 104, 0.09);
+            border: 1px solid rgba(199, 91, 104, 0.3);
+            color: #8E3A44;
+            font-size: 0.84rem;
+            padding: 0.75rem 0.9rem;
+            border-radius: 12px;
+        }
+
+        .entrega-foot {
+            border-top: 1px solid var(--border);
+            padding: 1.1rem 1.5rem 1.3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+            background: var(--white);
+        }
+
+        .ent-total { display: flex; justify-content: space-between; align-items: baseline; }
+        .ent-total span { font-size: 0.85rem; color: var(--text-light); }
+        .ent-total strong { font-family: var(--serif); font-size: 1.4rem; font-weight: 500; }
+
+        .ent-continuar { justify-content: center; width: 100%; }
+
+        .ent-wa {
+            background: none; border: none; cursor: pointer;
+            font-family: var(--sans); font-size: 0.8rem;
+            color: var(--text-light); text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+        .ent-wa:hover { color: var(--accent-dark); }
+
+        @media (max-width: 480px) {
+            .ent-fila { grid-template-columns: 1fr; }
+            .entrega-head, .entrega-body, .entrega-foot { padding-left: 1.1rem; padding-right: 1.1rem; }
+        }
+
+        /* Primer elemento enfocable: deja saltar el menú con el teclado */
+        .saltar {
+            position: absolute;
+            left: -9999px;
+            top: 0;
+            z-index: 10000;
+            background: var(--accent);
+            color: #fff;
+            padding: 0.7rem 1.1rem;
+            border-radius: 0 0 12px 0;
+            font-size: 0.85rem;
+            text-decoration: none;
+        }
+        .saltar:focus { left: 0; }
+
+        /* ── Marco vegetal y mariposas de la intro ── */
+
+        .intro-marco { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+
+        .esq { position: absolute; width: clamp(130px, 26vw, 260px); aspect-ratio: 1; }
+        .esq .rama { width: 100%; height: 100%; }
+
+        .esq-si { top: -14px; left: -14px; }
+        .esq-sd { top: -14px; right: -14px; transform: scaleX(-1); }
+        .esq-ii { bottom: -14px; left: -14px; transform: scaleY(-1); }
+        .esq-id { bottom: -14px; right: -14px; transform: scale(-1); }
+
+        /* Las ramas se dibujan solas, igual que el ramo */
+        .intro-pending .r-tallo {
+            stroke-dasharray: 220; stroke-dashoffset: 220;
+            animation: i-draw 1.1s cubic-bezier(.5,.04,.3,1) forwards;
+        }
+        .intro-pending .r-hojas path {
+            opacity: 0; animation: i-pop .5s ease-out forwards;
+        }
+        .intro-pending .r-hojas path:nth-child(1) { animation-delay: .46s; }
+        .intro-pending .r-hojas path:nth-child(2) { animation-delay: .54s; }
+        .intro-pending .r-hojas path:nth-child(3) { animation-delay: .62s; }
+        .intro-pending .r-hojas path:nth-child(4) { animation-delay: .70s; }
+        .intro-pending .r-hojas path:nth-child(5) { animation-delay: .78s; }
+        .intro-pending .r-flores circle {
+            opacity: 0; animation: i-pop .5s ease-out .92s forwards;
+        }
+
+        /* Cada esquina entra un pelín después que la anterior */
+        .esq-sd .r-tallo { animation-delay: .10s; }
+        .esq-ii .r-tallo { animation-delay: .18s; }
+        .esq-id .r-tallo { animation-delay: .26s; }
+
+        .intro-mariposas { position: absolute; inset: 0; pointer-events: none; }
+
+        .mariposa {
+            /* --x/--y se definen AQUÍ, no en el atributo style, para que la
+               media query de abajo pueda cambiarlas. Un custom property
+               puesto en línea no se puede sobrescribir desde una media
+               query sin !important. */
+            --x: var(--xd);
+            --y: var(--yd);
+            position: absolute;
+            top: 50%; left: 50%;
+            width: clamp(34px, 6vw, 54px);
+            height: auto;
+            margin: -26px 0 0 -30px;
+            opacity: 0;
+            translate: var(--x) var(--y);
+            rotate: var(--r);
+        }
+
+        /* Aparecen y luego flotan sin parar, muy despacio */
+        .intro-pending .mariposa {
+            animation: mar-entra .9s ease-out var(--d) forwards,
+                       mar-flota 5.5s ease-in-out var(--d) infinite;
+        }
+
+        @keyframes mar-entra {
+            from { opacity: 0; scale: .5; }
+            to   { opacity: .95; scale: 1; }
+        }
+
+        @keyframes mar-flota {
+            0%, 100% { translate: var(--x) var(--y); }
+            50%      { translate: var(--x) calc(var(--y) - 16px); }
+        }
+
+        /* Y las alas aletean */
+        .intro-pending .ala-izq,
+        .intro-pending .ala-der {
+            transform-box: fill-box;
+            transform-origin: right center;
+            animation: aleteo 1.5s ease-in-out infinite;
+        }
+        .intro-pending .ala-der { transform-origin: left center; }
+
+        @keyframes aleteo {
+            0%, 100% { transform: scaleX(1); }
+            50%      { transform: scaleX(.62); }
+        }
+
+        @media (max-width: 560px) {
+            /* Sólo dos esquinas en diagonal: con las cuatro, el ramo se ahoga */
+            .esq-sd, .esq-ii { display: none; }
+            .esq { width: clamp(104px, 34vw, 150px); }
+
+            /* Las mariposas usan sus coordenadas de móvil.
+               OJO: aquí antes decía --x: calc(var(--x) * .55), que es una
+               variable refiriéndose a sí misma. Eso es inválido en CSS: la
+               variable se anula, translate se queda sin valor y las tres
+               mariposas se apilaban en el centro, encima del ramo. */
+            .mariposa {
+                --x: var(--xm);
+                --y: var(--ym);
+                width: clamp(28px, 9vw, 40px);
+            }
+
+            .intro-art svg { width: min(62vw, 240px); }
+            .intro.on, .intro-pending .intro { gap: 1.1rem; }
+        }
+
+        /* Pantallas muy angostas: el ramo y la marca mandan */
+        @media (max-width: 380px) {
+            .esq { width: 96px; }
+            .intro-art svg { width: 58vw; }
+        }
     </style>
 </head>
 <body>
 
+    <!-- ═══ INTRO ═══
+         Sólo se muestra si el script del <head> la enciende. Si el JS
+         falla, este bloque queda display:none y nadie se queda atrapado
+         viendo una pantalla que nunca se va. -->
+    <div class="intro" id="intro" role="presentation" aria-hidden="true">
+        <div class="intro-marco" aria-hidden="true">
+            <div class="esq esq-si"><svg class="rama" viewBox="0 0 160 160" aria-hidden="true">
+                <g fill="none" stroke="#7E9A84" stroke-width="1.7" stroke-linecap="round">
+                    <path class="r-tallo" d="M2 2 C34 16 58 40 74 72 C84 92 90 112 92 134"/>
+                    <path class="r-tallo" d="M2 2 C26 34 40 60 48 88"/>
+                </g>
+                <g class="r-hojas" fill="#CBD9CB" stroke="#7E9A84" stroke-width="1.2" stroke-linejoin="round">
+                    <path d="M30 22 C40 12 54 12 62 18 C54 30 40 32 30 22 Z"/>
+                    <path d="M46 44 C58 36 72 38 78 46 C68 56 54 56 46 44 Z"/>
+                    <path d="M28 52 C20 40 22 28 30 22 C38 32 38 46 28 52 Z"/>
+                    <path d="M66 76 C78 70 90 74 94 82 C84 90 72 88 66 76 Z"/>
+                    <path d="M44 88 C36 76 38 64 46 58 C54 68 54 82 44 88 Z"/>
+                </g>
+                <g class="r-flores">
+                    <circle cx="88" cy="104" r="6.5" fill="#E6BCC3"/>
+                    <circle cx="88" cy="104" r="2.6" fill="#C6A664"/>
+                    <circle cx="70" cy="60" r="5" fill="#D9AEB6"/>
+                    <circle cx="70" cy="60" r="2" fill="#C6A664"/>
+                    <circle cx="92" cy="128" r="4" fill="#E6BCC3"/>
+                </g>
+            </svg></div>
+            <div class="esq esq-sd"><svg class="rama" viewBox="0 0 160 160" aria-hidden="true">
+                <g fill="none" stroke="#7E9A84" stroke-width="1.7" stroke-linecap="round">
+                    <path class="r-tallo" d="M2 2 C34 16 58 40 74 72 C84 92 90 112 92 134"/>
+                    <path class="r-tallo" d="M2 2 C26 34 40 60 48 88"/>
+                </g>
+                <g class="r-hojas" fill="#CBD9CB" stroke="#7E9A84" stroke-width="1.2" stroke-linejoin="round">
+                    <path d="M30 22 C40 12 54 12 62 18 C54 30 40 32 30 22 Z"/>
+                    <path d="M46 44 C58 36 72 38 78 46 C68 56 54 56 46 44 Z"/>
+                    <path d="M28 52 C20 40 22 28 30 22 C38 32 38 46 28 52 Z"/>
+                    <path d="M66 76 C78 70 90 74 94 82 C84 90 72 88 66 76 Z"/>
+                    <path d="M44 88 C36 76 38 64 46 58 C54 68 54 82 44 88 Z"/>
+                </g>
+                <g class="r-flores">
+                    <circle cx="88" cy="104" r="6.5" fill="#E6BCC3"/>
+                    <circle cx="88" cy="104" r="2.6" fill="#C6A664"/>
+                    <circle cx="70" cy="60" r="5" fill="#D9AEB6"/>
+                    <circle cx="70" cy="60" r="2" fill="#C6A664"/>
+                    <circle cx="92" cy="128" r="4" fill="#E6BCC3"/>
+                </g>
+            </svg></div>
+            <div class="esq esq-ii"><svg class="rama" viewBox="0 0 160 160" aria-hidden="true">
+                <g fill="none" stroke="#7E9A84" stroke-width="1.7" stroke-linecap="round">
+                    <path class="r-tallo" d="M2 2 C34 16 58 40 74 72 C84 92 90 112 92 134"/>
+                    <path class="r-tallo" d="M2 2 C26 34 40 60 48 88"/>
+                </g>
+                <g class="r-hojas" fill="#CBD9CB" stroke="#7E9A84" stroke-width="1.2" stroke-linejoin="round">
+                    <path d="M30 22 C40 12 54 12 62 18 C54 30 40 32 30 22 Z"/>
+                    <path d="M46 44 C58 36 72 38 78 46 C68 56 54 56 46 44 Z"/>
+                    <path d="M28 52 C20 40 22 28 30 22 C38 32 38 46 28 52 Z"/>
+                    <path d="M66 76 C78 70 90 74 94 82 C84 90 72 88 66 76 Z"/>
+                    <path d="M44 88 C36 76 38 64 46 58 C54 68 54 82 44 88 Z"/>
+                </g>
+                <g class="r-flores">
+                    <circle cx="88" cy="104" r="6.5" fill="#E6BCC3"/>
+                    <circle cx="88" cy="104" r="2.6" fill="#C6A664"/>
+                    <circle cx="70" cy="60" r="5" fill="#D9AEB6"/>
+                    <circle cx="70" cy="60" r="2" fill="#C6A664"/>
+                    <circle cx="92" cy="128" r="4" fill="#E6BCC3"/>
+                </g>
+            </svg></div>
+            <div class="esq esq-id"><svg class="rama" viewBox="0 0 160 160" aria-hidden="true">
+                <g fill="none" stroke="#7E9A84" stroke-width="1.7" stroke-linecap="round">
+                    <path class="r-tallo" d="M2 2 C34 16 58 40 74 72 C84 92 90 112 92 134"/>
+                    <path class="r-tallo" d="M2 2 C26 34 40 60 48 88"/>
+                </g>
+                <g class="r-hojas" fill="#CBD9CB" stroke="#7E9A84" stroke-width="1.2" stroke-linejoin="round">
+                    <path d="M30 22 C40 12 54 12 62 18 C54 30 40 32 30 22 Z"/>
+                    <path d="M46 44 C58 36 72 38 78 46 C68 56 54 56 46 44 Z"/>
+                    <path d="M28 52 C20 40 22 28 30 22 C38 32 38 46 28 52 Z"/>
+                    <path d="M66 76 C78 70 90 74 94 82 C84 90 72 88 66 76 Z"/>
+                    <path d="M44 88 C36 76 38 64 46 58 C54 68 54 82 44 88 Z"/>
+                </g>
+                <g class="r-flores">
+                    <circle cx="88" cy="104" r="6.5" fill="#E6BCC3"/>
+                    <circle cx="88" cy="104" r="2.6" fill="#C6A664"/>
+                    <circle cx="70" cy="60" r="5" fill="#D9AEB6"/>
+                    <circle cx="70" cy="60" r="2" fill="#C6A664"/>
+                    <circle cx="92" cy="128" r="4" fill="#E6BCC3"/>
+                </g>
+            </svg></div>
+        </div>
+        <div class="intro-mariposas" aria-hidden="true">
+            <svg class="mariposa m1" style="--d:1.25s; --xd:-30vw; --yd:-16vh; --xm:-31vw; --ym:-20vh; --r:-12deg" viewBox="0 0 60 52" aria-hidden="true">
+                <g class="ala-izq">
+                    <path d="M29 26 C18 6 2 8 6 22 C8 30 18 32 29 26 Z" fill="#E6BCC3" stroke="#A35A66" stroke-width="1.2" stroke-linejoin="round"/>
+                    <path d="M29 27 C19 40 6 44 8 34 C10 28 20 24 29 27 Z" fill="#D9AEB6" stroke="#A35A66" stroke-width="1.2" stroke-linejoin="round"/>
+                </g>
+                <g class="ala-der">
+                    <path d="M31 26 C42 6 58 8 54 22 C52 30 42 32 31 26 Z" fill="#E6BCC3" stroke="#A35A66" stroke-width="1.2" stroke-linejoin="round"/>
+                    <path d="M31 27 C41 40 54 44 52 34 C50 28 40 24 31 27 Z" fill="#D9AEB6" stroke="#A35A66" stroke-width="1.2" stroke-linejoin="round"/>
+                </g>
+                <path d="M30 16 L30 38" stroke="#8A4A55" stroke-width="2.2" stroke-linecap="round"/>
+                <path d="M30 17 C27 11 24 9 22 9 M30 17 C33 11 36 9 38 9"
+                      fill="none" stroke="#8A4A55" stroke-width="1.1" stroke-linecap="round"/>
+            </svg>
+            <svg class="mariposa m2" style="--d:1.5s; --xd:28vw; --yd:-22vh; --xm:30vw; --ym:-27vh; --r:14deg" viewBox="0 0 60 52" aria-hidden="true">
+                <g class="ala-izq">
+                    <path d="M29 26 C18 6 2 8 6 22 C8 30 18 32 29 26 Z" fill="#E6BCC3" stroke="#A35A66" stroke-width="1.2" stroke-linejoin="round"/>
+                    <path d="M29 27 C19 40 6 44 8 34 C10 28 20 24 29 27 Z" fill="#D9AEB6" stroke="#A35A66" stroke-width="1.2" stroke-linejoin="round"/>
+                </g>
+                <g class="ala-der">
+                    <path d="M31 26 C42 6 58 8 54 22 C52 30 42 32 31 26 Z" fill="#E6BCC3" stroke="#A35A66" stroke-width="1.2" stroke-linejoin="round"/>
+                    <path d="M31 27 C41 40 54 44 52 34 C50 28 40 24 31 27 Z" fill="#D9AEB6" stroke="#A35A66" stroke-width="1.2" stroke-linejoin="round"/>
+                </g>
+                <path d="M30 16 L30 38" stroke="#8A4A55" stroke-width="2.2" stroke-linecap="round"/>
+                <path d="M30 17 C27 11 24 9 22 9 M30 17 C33 11 36 9 38 9"
+                      fill="none" stroke="#8A4A55" stroke-width="1.1" stroke-linecap="round"/>
+            </svg>
+            <svg class="mariposa m3" style="--d:1.72s; --xd:22vw; --yd:14vh; --xm:30vw; --ym:2vh; --r:-8deg" viewBox="0 0 60 52" aria-hidden="true">
+                <g class="ala-izq">
+                    <path d="M29 26 C18 6 2 8 6 22 C8 30 18 32 29 26 Z" fill="#E6BCC3" stroke="#A35A66" stroke-width="1.2" stroke-linejoin="round"/>
+                    <path d="M29 27 C19 40 6 44 8 34 C10 28 20 24 29 27 Z" fill="#D9AEB6" stroke="#A35A66" stroke-width="1.2" stroke-linejoin="round"/>
+                </g>
+                <g class="ala-der">
+                    <path d="M31 26 C42 6 58 8 54 22 C52 30 42 32 31 26 Z" fill="#E6BCC3" stroke="#A35A66" stroke-width="1.2" stroke-linejoin="round"/>
+                    <path d="M31 27 C41 40 54 44 52 34 C50 28 40 24 31 27 Z" fill="#D9AEB6" stroke="#A35A66" stroke-width="1.2" stroke-linejoin="round"/>
+                </g>
+                <path d="M30 16 L30 38" stroke="#8A4A55" stroke-width="2.2" stroke-linecap="round"/>
+                <path d="M30 17 C27 11 24 9 22 9 M30 17 C33 11 36 9 38 9"
+                      fill="none" stroke="#8A4A55" stroke-width="1.1" stroke-linecap="round"/>
+            </svg>
+        </div>
+        <div class="intro-art">
+            <svg viewBox="0 0 240 230" aria-hidden="true">
+                <!-- Tallos: salen de un punto y se abren en abanico -->
+                <g class="i-stems" fill="none" stroke="#6E8A74" stroke-width="1.9" stroke-linecap="round">
+                    <path class="i-stem" d="M120 226 C118 186 116 152 120 118"/>
+                    <path class="i-stem" d="M120 226 C96 194 78 168 70 138"/>
+                    <path class="i-stem" d="M120 226 C144 194 162 170 170 142"/>
+                    <path class="i-stem" d="M120 226 C104 200 94 182 90 166"/>
+                    <path class="i-stem" d="M120 226 C136 202 146 186 151 172"/>
+                </g>
+
+                <!-- Follaje -->
+                <g class="i-foliage" fill="#CBD9CB" stroke="#6E8A74" stroke-width="1.4" stroke-linejoin="round">
+                    <path class="i-leaf" d="M118 176 C98 174 85 162 82 144 C104 146 117 158 118 176 Z"/>
+                    <path class="i-leaf" d="M122 158 C142 156 155 144 158 126 C136 128 123 140 122 158 Z"/>
+                    <path class="i-leaf" d="M118 200 C104 199 95 191 93 179 C108 180 117 188 118 200 Z"/>
+                </g>
+
+                <!-- Nube de gypsophila -->
+                <g class="i-dust" fill="#D9AEB6">
+                    <circle cx="86" cy="112" r="3.1"/><circle cx="96" cy="98" r="2.3"/>
+                    <circle cx="150" cy="112" r="3.1"/><circle cx="142" cy="96" r="2.3"/>
+                    <circle cx="120" cy="80" r="2.6"/><circle cx="106" cy="86" r="2"/>
+                    <circle cx="134" cy="84" r="2"/>
+                </g>
+
+                <!-- Peonía central: dos coronas de pétalos -->
+                <g class="i-flower i-peony" style="--d:.66s" transform="translate(120 108)">
+                    <g fill="#E6BCC3">
+                        <ellipse cx="0" cy="-20" rx="11" ry="16"/>
+                        <ellipse cx="19" cy="-6" rx="11" ry="16" transform="rotate(60 19 -6)"/>
+                        <ellipse cx="12" cy="17" rx="11" ry="16" transform="rotate(120 12 17)"/>
+                        <ellipse cx="-12" cy="17" rx="11" ry="16" transform="rotate(180 -12 17)"/>
+                        <ellipse cx="-19" cy="-6" rx="11" ry="16" transform="rotate(240 -19 -6)"/>
+                    </g>
+                    <g fill="var(--accent)" opacity=".92">
+                        <ellipse cx="0" cy="-11" rx="7.5" ry="11" transform="rotate(36 0 -11)"/>
+                        <ellipse cx="11" cy="4" rx="7.5" ry="11" transform="rotate(108 11 4)"/>
+                        <ellipse cx="-11" cy="4" rx="7.5" ry="11" transform="rotate(252 -11 4)"/>
+                        <ellipse cx="0" cy="12" rx="7.5" ry="11" transform="rotate(180 0 12)"/>
+                    </g>
+                    <circle r="6.2" fill="var(--gold)"/>
+                </g>
+
+                <!-- Rosa en espiral -->
+                <g class="i-flower i-rose" style="--d:.84s" transform="translate(70 134)">
+                    <circle r="15" fill="var(--accent-dark)"/>
+                    <path d="M0 -9 A9 9 0 1 1 -6.4 -6.4 A6.4 6.4 0 1 0 0 -3 A3.5 3.5 0 1 1 -2 -2"
+                          fill="none" stroke="var(--cream)" stroke-width="1.9" stroke-linecap="round" opacity=".85"/>
+                </g>
+
+                <!-- Flor lateral -->
+                <g class="i-flower" style="--d:.98s" transform="translate(170 138) scale(.86)">
+                    <g fill="var(--accent)">
+                        <ellipse cx="0" cy="-13" rx="8" ry="11.5"/>
+                        <ellipse cx="12" cy="-4" rx="8" ry="11.5" transform="rotate(72 12 -4)"/>
+                        <ellipse cx="8" cy="11" rx="8" ry="11.5" transform="rotate(144 8 11)"/>
+                        <ellipse cx="-8" cy="11" rx="8" ry="11.5" transform="rotate(216 -8 11)"/>
+                        <ellipse cx="-12" cy="-4" rx="8" ry="11.5" transform="rotate(288 -12 -4)"/>
+                    </g>
+                    <circle r="5.4" fill="var(--gold)"/>
+                </g>
+
+                <!-- Capullos -->
+                <g class="i-flower" style="--d:1.1s" transform="translate(90 162)">
+                    <ellipse rx="6" ry="8.5" fill="#E6BCC3" stroke="var(--accent-dark)" stroke-width="1.3"/>
+                </g>
+                <g class="i-flower" style="--d:1.18s" transform="translate(151 168)">
+                    <ellipse rx="5.4" ry="7.6" fill="#E6BCC3" stroke="var(--accent-dark)" stroke-width="1.3"/>
+                </g>
+            </svg>
+        </div>
+        <p class="intro-word">Botanica Studio</p>
+        <span class="intro-skip">toca para entrar</span>
+    </div>
+
+
+    <a class="saltar" href="#contenido">Saltar al contenido</a>
+
     <!-- URGENCY BAR -->
     <div class="urgency-bar">
-        <strong>ENVÍO GRATIS</strong> en CDMX en compras +$599
+        <strong>ENVÍO GRATIS</strong> en CDMX en compras +$799
         <span class="separator hide-mobile">|</span>
-        <span class="hide-mobile">Pedí antes de las <strong class="timer" id="cutoffTime">2:00 PM</strong> y recibe <strong>HOY</strong></span>
+        <span class="hide-mobile">Pide antes de las <strong class="timer" id="cutoffTime">2:00 PM</strong> y recibe <strong>HOY</strong></span>
     </div>
 
     <!-- NAV -->
     <nav>
         <div class="nav-inner">
-            <a href="#" class="logo">Botanica Studio</a>
+            <a href="#" class="logo"><svg class="logo-mark" viewBox="0 0 44 44" aria-hidden="true" focusable="false">
+                    <g class="lm-leaves" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+                        <path class="lm-stem" d="M22 40 V24"/>
+                        <path class="lm-leaf" d="M22 34 C15 34 11 30 11 25 C18 25 22 29 22 34 Z"/>
+                        <path class="lm-leaf" d="M22 30 C29 30 33 26 33 21 C26 21 22 25 22 30 Z"/>
+                    </g>
+                    <g class="lm-bloom" fill="currentColor">
+                        <ellipse cx="22" cy="10" rx="4.1" ry="5.6"/>
+                        <ellipse cx="29" cy="15" rx="4.1" ry="5.6" transform="rotate(72 29 15)"/>
+                        <ellipse cx="26" cy="23" rx="4.1" ry="5.6" transform="rotate(144 26 23)"/>
+                        <ellipse cx="18" cy="23" rx="4.1" ry="5.6" transform="rotate(216 18 23)"/>
+                        <ellipse cx="15" cy="15" rx="4.1" ry="5.6" transform="rotate(288 15 15)"/>
+                    </g>
+                    <circle class="lm-core" cx="22" cy="16" r="3.4" fill="var(--gold)"/>
+                </svg><span class="logo-text">Botanica Studio</span></a>
             <ul class="nav-center" id="navLinks">
                 <li><a href="#tienda">Tienda</a></li>
                 <li><a href="#ocasiones">Ocasiones</a></li>
+                <li><a href="/eventos">Eventos</a></li>
                 <li><a href="#como-funciona">Envíos</a></li>
                 <li><a href="#testimonios">Reseñas</a></li>
             </ul>
@@ -1653,6 +2468,8 @@
         </div>
     </nav>
 
+    <main id="contenido">
+
     <!-- HERO -->
     <section class="hero">
         <div class="hero-text">
@@ -1662,14 +2479,14 @@
                 </div>
                 <p><strong>2,500+ clientes</strong> ya confían en nosotros</p>
             </div>
-            <h1>Haz que cada momento sea <em>inolvidable</em></h1>
+            <h1 class="hero-title">Haz que cada momento sea <em>inolvidable<svg class="ink" viewBox="0 0 300 18" preserveAspectRatio="none" aria-hidden="true"><path d="M4 12 C60 4, 120 3, 172 8 C214 12, 258 13, 296 7" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/></svg></em></h1>
             <p class="hero-desc">Arreglos florales artesanales con flores frescas del día. Entrega el mismo día en CDMX y área metropolitana. Sorprende a quien más quieres.</p>
             <div class="hero-actions">
                 <a href="#tienda" class="btn btn-fill">
                     Elegir mi arreglo
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
-                <a href="https://wa.me/525554097367?text=Hola%20%F0%9F%91%8B%20Me%20gustar%C3%ADa%20un%20arreglo%20floral%20personalizado" class="btn btn-wa" target="_blank" rel="noopener">
+                <a href="https://wa.me/525554097367?text=Hola%20%F0%9F%91%8B%20Me%20gustar%C3%ADa%20un%20arreglo%20floral%20personalizado" class="btn btn-wa-soft" target="_blank" rel="noopener">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                     Pedir personalizado
                 </a>
@@ -1692,13 +2509,13 @@
         <div class="hero-visual">
             <div class="hero-img">
                 <div class="live-badge"><span class="live-dot"></span> <span id="liveViewers">12</span> personas viendo</div>
-                <img src="https://images.unsplash.com/photo-1487530811176-3780de880c2d?w=600&h=800&fit=crop" alt="Ramo de rosas premium">
+                <img src="/images/hero/principal.jpg" alt="Ramo en tonos rosa envuelto en papel, listo para regalar">
             </div>
             <div class="hero-img">
-                <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?w=400&h=400&fit=crop" alt="Arreglo floral elegante">
+                <img src="/images/hero/tulipanes.jpg" alt="Rosas en tono blush">
             </div>
             <div class="hero-img">
-                <img src="https://images.unsplash.com/photo-1490750967868-88aa4f44baee?w=400&h=400&fit=crop" alt="Flores de temporada">
+                <img src="/images/hero/girasoles.jpg" alt="Rosas color marfil">
             </div>
         </div>
     </section>
@@ -1740,39 +2557,39 @@
             </div>
             <div class="cat-grid fade-in">
                 <div class="cat-card" onclick="filterProducts('ramos')">
-                    <img src="https://images.unsplash.com/photo-1563241527-3004b7be0ffd?w=400&h=530&fit=crop" alt="Ramos">
+                    <img loading="lazy" src="/images/categorias/ramos.jpg" alt="Categoría Ramos — ramo de rosas en tonos durazno">
                     <div class="cat-card-overlay"></div>
                     <span class="cat-count">12 productos</span>
                     <div class="cat-card-label">
                         <h3>Ramos</h3>
-                        <p>Desde $299 MXN</p>
+                        <p>Desde $599 MXN</p>
                     </div>
                 </div>
                 <div class="cat-card" onclick="filterProducts('arreglos')">
-                    <img src="https://images.unsplash.com/photo-1567696911980-2eed69a46042?w=400&h=530&fit=crop" alt="Arreglos Florales">
+                    <img loading="lazy" src="/images/categorias/arreglos.jpg" alt="Categoría Arreglos Florales — peonías rosas sobre fondo claro">
                     <div class="cat-card-overlay"></div>
                     <span class="cat-count">8 productos</span>
                     <div class="cat-card-label">
                         <h3>Arreglos Florales</h3>
-                        <p>Desde $450 MXN</p>
+                        <p>Desde $999 MXN</p>
                     </div>
                 </div>
                 <div class="cat-card" onclick="filterProducts('plantas')">
-                    <img src="https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?w=400&h=530&fit=crop" alt="Plantas">
+                    <img loading="lazy" src="/images/categorias/plantas.jpg" alt="Categoría Plantas — planta verde en maceta blanca minimalista">
                     <div class="cat-card-overlay"></div>
                     <span class="cat-count">6 productos</span>
                     <div class="cat-card-label">
                         <h3>Plantas</h3>
-                        <p>Desde $220 MXN</p>
+                        <p>Desde $679 MXN</p>
                     </div>
                 </div>
                 <div class="cat-card" onclick="filterProducts('gifts')">
-                    <img src="https://images.unsplash.com/photo-1549488344-cbb6c34cf08b?w=400&h=530&fit=crop" alt="Regalos">
+                    <img loading="lazy" src="/images/categorias/regalos.jpg" alt="Categoría Regalos y Combos — regalo envuelto en tonos blush con listón">
                     <div class="cat-card-overlay"></div>
                     <span class="cat-count">5 productos</span>
                     <div class="cat-card-label">
                         <h3>Regalos & Combos</h3>
-                        <p>Desde $550 MXN</p>
+                        <p>Desde $1,099 MXN</p>
                     </div>
                 </div>
             </div>
@@ -1891,42 +2708,42 @@
             </div>
             <div class="occasion-grid fade-in">
                 <div class="occasion-card">
-                    <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=500&h=300&fit=crop" alt="Cumpleaños">
+                    <img loading="lazy" src="/images/ocasiones/cumpleanos.jpg" alt="Flores para cumpleaños — ramo colorido de flores silvestres">
                     <div class="occasion-overlay">
                         <h3>Cumpleaños</h3>
                         <p>Sorprende con color y alegría</p>
                     </div>
                 </div>
                 <div class="occasion-card">
-                    <img src="https://images.unsplash.com/photo-1494972308805-463bc619d34e?w=500&h=300&fit=crop" alt="Aniversario">
+                    <img loading="lazy" src="/images/ocasiones/aniversario.jpg" alt="Flores para aniversario — rosas rojas de tallo largo">
                     <div class="occasion-overlay">
                         <h3>Aniversario & Romance</h3>
                         <p>Rosas y arreglos que enamoran</p>
                     </div>
                 </div>
                 <div class="occasion-card">
-                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=500&h=300&fit=crop" alt="Corporativo">
+                    <img loading="lazy" src="/images/ocasiones/corporativo.jpg" alt="Arreglo corporativo — lirios blancos elegantes">
                     <div class="occasion-overlay">
                         <h3>Corporativo</h3>
                         <p>Elegancia para oficinas y eventos</p>
                     </div>
                 </div>
                 <div class="occasion-card">
-                    <img src="https://images.unsplash.com/photo-1455659817273-f96807779a8a?w=500&h=300&fit=crop" alt="Agradecimiento">
+                    <img loading="lazy" src="/images/ocasiones/agradecimiento.jpg" alt="Flores de agradecimiento — girasoles amarillos">
                     <div class="occasion-overlay">
                         <h3>Agradecimiento</h3>
                         <p>Flores que dicen "gracias"</p>
                     </div>
                 </div>
                 <div class="occasion-card">
-                    <img src="https://images.unsplash.com/photo-1508610048659-a06b669e3321?w=500&h=300&fit=crop" alt="Día de las Madres">
+                    <img loading="lazy" src="/images/ocasiones/dia-de-las-madres.jpg" alt="Flores para el Día de las Madres — rosas de jardín en tono rosa">
                     <div class="occasion-overlay">
                         <h3>Día de las Madres</h3>
                         <p>Lo mejor para la mejor</p>
                     </div>
                 </div>
                 <div class="occasion-card">
-                    <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=500&h=300&fit=crop" alt="Solo porque sí">
+                    <img loading="lazy" src="/images/ocasiones/solo-porque-si.jpg" alt="Flores solo porque sí — ramo primaveral en tonos rosa">
                     <div class="occasion-overlay">
                         <h3>Solo porque sí</h3>
                         <p>Los mejores detalles no necesitan razón</p>
@@ -2016,19 +2833,19 @@
             </div>
             <div class="ig-grid fade-in">
                 <a class="ig-item" href="https://instagram.com/botanicastudio.mx" target="_blank" rel="noopener">
-                    <img src="https://images.unsplash.com/photo-1487530811176-3780de880c2d?w=300&h=300&fit=crop" alt="Instagram post">
+                    <img loading="lazy" src="/images/instagram/01.jpg" alt="Publicación de Instagram: Peonías rosas en tonos pastel">
                 </a>
                 <a class="ig-item" href="https://instagram.com/botanicastudio.mx" target="_blank" rel="noopener">
-                    <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?w=300&h=300&fit=crop" alt="Instagram post">
+                    <img loading="lazy" src="/images/instagram/02.jpg" alt="Publicación de Instagram: Rosas color crema y blush">
                 </a>
                 <a class="ig-item" href="https://instagram.com/botanicastudio.mx" target="_blank" rel="noopener">
-                    <img src="https://images.unsplash.com/photo-1490750967868-88aa4f44baee?w=300&h=300&fit=crop" alt="Instagram post">
+                    <img loading="lazy" src="/images/instagram/03.jpg" alt="Publicación de Instagram: Rama floral delicada sobre fondo claro">
                 </a>
                 <a class="ig-item" href="https://instagram.com/botanicastudio.mx" target="_blank" rel="noopener">
-                    <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=300&h=300&fit=crop" alt="Instagram post">
+                    <img loading="lazy" src="/images/instagram/04.jpg" alt="Publicación de Instagram: Peonías color marfil">
                 </a>
                 <a class="ig-item" href="https://instagram.com/botanicastudio.mx" target="_blank" rel="noopener">
-                    <img src="https://images.unsplash.com/photo-1494972308805-463bc619d34e?w=300&h=300&fit=crop" alt="Instagram post">
+                    <img loading="lazy" src="/images/instagram/05.jpg" alt="Publicación de Instagram: Rosas en tono rosa viejo">
                 </a>
             </div>
         </div>
@@ -2038,50 +2855,60 @@
     <section class="final-cta">
         <div class="final-cta-inner fade-in">
             <h2>10% OFF en tu primer pedido</h2>
-            <p>Suscríbete y recibe tu código de descuento exclusivo + tips y ofertas semanales.</p>
-            <form class="final-cta-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='&#10003; Listo!'; this.querySelector('input').value='';">
-                <input type="email" placeholder="tu@correo.com" required>
+            <p>Déjanos tu correo y te mandamos tu código de descuento por WhatsApp.</p>
+            <form class="final-cta-form" onsubmit="suscribir(event)">
+                <input type="email" name="email" placeholder="tu@correo.com" required>
                 <button type="submit">Quiero mi 10%</button>
             </form>
             <p class="cta-guarantee">Sin spam. Cancela cuando quieras. Solo cosas bonitas.</p>
         </div>
     </section>
 
+    </main>
+
     <!-- FOOTER -->
     <footer>
         <div class="footer-grid">
             <div class="footer-brand">
-                <a href="#" class="logo">Botanica Studio</a>
+                <a href="#" class="logo"><svg class="logo-mark" viewBox="0 0 44 44" aria-hidden="true" focusable="false">
+                    <g class="lm-leaves" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+                        <path class="lm-stem" d="M22 40 V24"/>
+                        <path class="lm-leaf" d="M22 34 C15 34 11 30 11 25 C18 25 22 29 22 34 Z"/>
+                        <path class="lm-leaf" d="M22 30 C29 30 33 26 33 21 C26 21 22 25 22 30 Z"/>
+                    </g>
+                    <g class="lm-bloom" fill="currentColor">
+                        <ellipse cx="22" cy="10" rx="4.1" ry="5.6"/>
+                        <ellipse cx="29" cy="15" rx="4.1" ry="5.6" transform="rotate(72 29 15)"/>
+                        <ellipse cx="26" cy="23" rx="4.1" ry="5.6" transform="rotate(144 26 23)"/>
+                        <ellipse cx="18" cy="23" rx="4.1" ry="5.6" transform="rotate(216 18 23)"/>
+                        <ellipse cx="15" cy="15" rx="4.1" ry="5.6" transform="rotate(288 15 15)"/>
+                    </g>
+                    <circle class="lm-core" cx="22" cy="16" r="3.4" fill="var(--gold)"/>
+                </svg><span class="logo-text">Botanica Studio</span></a>
                 <p>Florería en Ciudad de México. Arreglos florales artesanales, ramos y plantas con envío a domicilio el mismo día. Haz que cada momento cuente.</p>
                 <div class="footer-social">
                     <a href="https://instagram.com/botanicastudio.mx" target="_blank" rel="noopener" aria-label="Instagram">
                         <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-                    </a>
-                    <a href="#" aria-label="Facebook">
-                        <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-                    </a>
-                    <a href="#" aria-label="TikTok">
-                        <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
                     </a>
                 </div>
             </div>
             <div>
                 <h4>Tienda</h4>
                 <ul>
-                    <li><a href="#">Ramos</a></li>
-                    <li><a href="#">Arreglos Florales</a></li>
-                    <li><a href="#">Plantas</a></li>
-                    <li><a href="#">Regalos & Combos</a></li>
-                    <li><a href="#">Lo más vendido</a></li>
+                    <li><a href="#tienda" onclick="filterProducts('ramos')">Ramos</a></li>
+                    <li><a href="#tienda" onclick="filterProducts('arreglos')">Arreglos Florales</a></li>
+                    <li><a href="#tienda" onclick="filterProducts('plantas')">Plantas</a></li>
+                    <li><a href="#tienda" onclick="filterProducts('gifts')">Regalos &amp; Combos</a></li>
+                    <li><a href="#tienda" onclick="filterProducts('todos')">Lo más vendido</a></li>
                 </ul>
             </div>
             <div>
                 <h4>Información</h4>
                 <ul>
-                    <li><a href="#">Zonas de Envío</a></li>
-                    <li><a href="#">Preguntas Frecuentes</a></li>
-                    <li><a href="#">Términos y Condiciones</a></li>
-                    <li><a href="#">Aviso de Privacidad</a></li>
+                    <li><a href="/envios">Zonas de Envío</a></li>
+                    <li><a href="/preguntas-frecuentes">Preguntas Frecuentes</a></li>
+                    <li><a href="/terminos">Términos y Condiciones</a></li>
+                    <li><a href="/aviso-privacidad">Aviso de Privacidad</a></li>
                 </ul>
             </div>
             <div>
@@ -2089,10 +2916,6 @@
                 <div class="footer-contact-item">
                     <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
                     <a href="https://wa.me/525554097367" target="_blank" rel="noopener">55 5409 7367</a>
-                </div>
-                <div class="footer-contact-item">
-                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                    hola@botanicastudio.mx
                 </div>
                 <div class="footer-contact-item">
                     <svg viewBox="0 0 24 24" fill="none">
@@ -2120,6 +2943,111 @@
         </div>
     </footer>
 
+
+    <!-- ═══ DATOS DE ENTREGA ═══
+         Paso entre el carrito y el pago. Antes se podía pagar sin decir
+         a dónde llevar las flores. -->
+    <div class="entrega-overlay" id="entregaOverlay" onclick="cerrarEntrega()"></div>
+    <div class="entrega-panel" id="entregaPanel" role="dialog" aria-modal="true" aria-labelledby="entregaTitulo">
+        <div class="entrega-head">
+            <div>
+                <h3 id="entregaTitulo">Datos de entrega</h3>
+                <p>Para que las flores lleguen a tiempo y al lugar correcto.</p>
+            </div>
+            <button class="entrega-close" onclick="cerrarEntrega()" aria-label="Cerrar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+            </button>
+        </div>
+
+        <form class="entrega-body" id="entregaForm" novalidate>
+
+            <fieldset class="ent-grupo">
+                <legend>¿Quién recibe?</legend>
+                <label class="ent-campo">
+                    <span>Nombre de quien recibe <b>*</b></span>
+                    <input type="text" name="recibeNombre" autocomplete="name" maxlength="80" required>
+                </label>
+                <label class="ent-campo">
+                    <span>Su teléfono <b>*</b></span>
+                    <input type="tel" name="recibeTel" inputmode="numeric" placeholder="10 dígitos" maxlength="20" required>
+                    <em class="ent-ayuda">El repartidor le marca si no encuentra el domicilio.</em>
+                </label>
+            </fieldset>
+
+            <fieldset class="ent-grupo">
+                <legend>¿A dónde la llevamos?</legend>
+                <label class="ent-campo">
+                    <span>Dirección completa <b>*</b></span>
+                    <input type="text" name="direccion" id="entregaDireccion" autocomplete="off"
+                           placeholder="Calle, número, colonia, alcaldía, CP" maxlength="220" required>
+                    <em class="ent-ayuda" id="entregaMapaAyuda">Escribe la dirección completa.</em>
+                </label>
+                <div class="ent-mapa" id="entregaMapa" hidden></div>
+                <label class="ent-campo">
+                    <span>Referencias</span>
+                    <input type="text" name="referencias" maxlength="220"
+                           placeholder="Portón negro, entre Ámsterdam y Michoacán, depto 3">
+                    <em class="ent-ayuda">Lo que le dirías a un taxista. Esto evita entregas fallidas.</em>
+                </label>
+            </fieldset>
+
+            <fieldset class="ent-grupo">
+                <legend>¿Cuándo?</legend>
+                <div class="ent-fila">
+                    <label class="ent-campo">
+                        <span>Fecha <b>*</b></span>
+                        <input type="date" name="fecha" id="entregaFecha" required>
+                    </label>
+                    <label class="ent-campo">
+                        <span>Horario <b>*</b></span>
+                        <select name="franja" required>
+                            <option value="">Elige…</option>
+                            <option value="9-13">Mañana · 9:00 a 13:00</option>
+                            <option value="13-17">Tarde · 13:00 a 17:00</option>
+                            <option value="17-21">Noche · 17:00 a 21:00</option>
+                        </select>
+                    </label>
+                </div>
+            </fieldset>
+
+            <fieldset class="ent-grupo">
+                <legend>Mensaje para la tarjeta</legend>
+                <label class="ent-campo">
+                    <textarea name="dedicatoria" rows="3" maxlength="300"
+                              placeholder="Va escrito a mano en la tarjeta que acompaña el arreglo."></textarea>
+                </label>
+            </fieldset>
+
+            <fieldset class="ent-grupo">
+                <legend>Tus datos</legend>
+                <div class="ent-fila">
+                    <label class="ent-campo">
+                        <span>Tu nombre <b>*</b></span>
+                        <input type="text" name="compraNombre" autocomplete="name" maxlength="80" required>
+                    </label>
+                    <label class="ent-campo">
+                        <span>Tu teléfono <b>*</b></span>
+                        <input type="tel" name="compraTel" inputmode="numeric" placeholder="10 dígitos" maxlength="20" required>
+                    </label>
+                </div>
+                <label class="ent-campo">
+                    <span>Tu correo</span>
+                    <input type="email" name="compraEmail" autocomplete="email" maxlength="120" placeholder="Para mandarte el comprobante">
+                </label>
+            </fieldset>
+
+            <p class="ent-error" id="entregaError" role="alert" hidden></p>
+        </form>
+
+        <div class="entrega-foot">
+            <div class="ent-total"><span>Total a pagar</span><strong id="entregaTotal">$0 MXN</strong></div>
+            <button class="btn btn-fill ent-continuar" id="entregaSubmit" onclick="enviarEntrega(event)">
+                Continuar al pago
+            </button>
+            <button class="ent-wa" onclick="checkoutWA(event)">o mándanos el pedido por WhatsApp</button>
+        </div>
+    </div>
+
     <!-- WHATSAPP FLOAT -->
     <a href="https://wa.me/525554097367?text=Hola%20%F0%9F%91%8B%20Me%20interesa%20un%20arreglo%20floral" class="wa-float" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
@@ -2135,7 +3063,7 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </button>
         </div>
-        <div class="cart-free-shipping" id="cartShippingBar">Te faltan <strong>$599</strong> para envío GRATIS</div>
+        <div class="cart-free-shipping" id="cartShippingBar">Te faltan <strong>$799</strong> para envío GRATIS</div>
         <div class="cart-items" id="cartItems">
             <div class="cart-empty" id="cartEmpty">
                 <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">&#127801;</div>
@@ -2155,35 +3083,62 @@
         </div>
     </div>
 
-    <!-- MercadoPago SDK -->
-    <script src="https://sdk.mercadopago.com/js/v2"></script>
 
     <script>
-    // ══════════════════════════════════════════════
-    // CONFIGURACIÓN — Pon aquí tu Public Key de MercadoPago
-    // La obtienes en: mercadopago.com.mx/developers/panel/app
-    // ══════════════════════════════════════════════
-    const MP_PUBLIC_KEY = 'TU_PUBLIC_KEY_AQUI';  // Reemplaza con tu clave
-    const API_URL = '';  // Dejar vacío si el backend está en el mismo dominio (Vercel)
+    const API_URL = '';  // Vacío = el backend vive en el mismo dominio (Vercel)
 
     // ── PRODUCTS DATA ──
+    // OJO: los precios de aquí son sólo para MOSTRAR. Lo que se cobra sale de
+    // api/_catalog.js. Si cambias un precio aquí, cámbialo allá también y corre:
+    //   node scripts/check-precios.js
     const products = [
-        { id:1, name:"Ramo Atardecer", cat:"ramos", desc:"Rosas, claveles y follaje en tonos cálidos. El favorito de nuestros clientes.", price:450, oldPrice:null, img:"https://images.unsplash.com/photo-1487530811176-3780de880c2d?w=400&h=400&fit=crop", badge:"popular", badgeText:"Más vendido", rating:4.9, reviews:127, stock:null },
-        { id:2, name:"Box Elegance Premium", cat:"arreglos", desc:"Rosas, lisianthus y eucalipto en caja redonda de lujo. Incluye tarjeta.", price:890, oldPrice:1100, img:"https://images.unsplash.com/photo-1567696911980-2eed69a46042?w=400&h=400&fit=crop", badge:"sale", badgeText:"-19%", rating:4.8, reviews:89, stock:3 },
-        { id:3, name:"Ramo Silvestre", cat:"ramos", desc:"Flores de campo con lavanda y margaritas. Fresco y natural.", price:350, oldPrice:null, img:"https://images.unsplash.com/photo-1563241527-3004b7be0ffd?w=400&h=400&fit=crop", badge:null, badgeText:null, rating:4.7, reviews:64, stock:null },
-        { id:4, name:"Monstera Deliciosa", cat:"plantas", desc:"La reina tropical en maceta de cerámica artesanal. Purifica el aire.", price:520, oldPrice:null, img:"https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?w=400&h=400&fit=crop", badge:null, badgeText:null, rating:4.9, reviews:43, stock:null },
-        { id:5, name:"50 Rosas Rojas Premium", cat:"ramos", desc:"50 rosas de tallo largo. El clásico que nunca falla. Impacto garantizado.", price:1200, oldPrice:null, img:"https://images.unsplash.com/photo-1494972308805-463bc619d34e?w=400&h=400&fit=crop", badge:"popular", badgeText:"Best Seller", rating:5.0, reviews:203, stock:null },
-        { id:6, name:"Box de Tulipanes", cat:"arreglos", desc:"20 tulipanes holandeses en caja de madera con listón de seda.", price:750, oldPrice:null, img:"https://images.unsplash.com/photo-1561181286-d3fee7d55364?w=400&h=400&fit=crop", badge:"new", badgeText:"Nuevo", rating:4.8, reviews:31, stock:5 },
-        { id:7, name:"Combo Sorpresa", cat:"gifts", desc:"Ramo premium + chocolates artesanales + tarjeta personalizada.", price:680, oldPrice:null, img:"https://images.unsplash.com/photo-1549488344-cbb6c34cf08b?w=400&h=400&fit=crop", badge:null, badgeText:null, rating:4.9, reviews:76, stock:null },
-        { id:8, name:"Snake Plant", cat:"plantas", desc:"Sansevieria en maceta minimal. Prácticamente indestructible.", price:320, oldPrice:null, img:"https://images.unsplash.com/photo-1593691509543-c55fb32d8de5?w=400&h=400&fit=crop", badge:null, badgeText:null, rating:4.7, reviews:38, stock:null },
-        { id:9, name:"Arreglo Corporativo", cat:"arreglos", desc:"Lirios, rosas blancas y follaje fino. Elegancia para la oficina.", price:650, oldPrice:null, img:"https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=400&h=400&fit=crop", badge:null, badgeText:null, rating:4.8, reviews:52, stock:null },
-        { id:10, name:"Combo Aniversario VIP", cat:"gifts", desc:"Arreglo de rosas + vino tinto + vela aromática + chocolates.", price:1450, oldPrice:1700, img:"https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&h=400&fit=crop", badge:"sale", badgeText:"-15%", rating:5.0, reviews:94, stock:2 },
-        { id:11, name:"Mini Suculentas Set x6", cat:"plantas", desc:"6 suculentas variadas en macetitas de barro artesanal mexicano.", price:380, oldPrice:null, img:"https://images.unsplash.com/photo-1508022713622-df2d8fb7b4cd?w=400&h=400&fit=crop", badge:null, badgeText:null, rating:4.6, reviews:29, stock:null },
-        { id:12, name:"Ramo Girasoles", cat:"ramos", desc:"Girasoles, gerberas y alstroemeria. Pura alegría en cada pétalo.", price:420, oldPrice:null, img:"https://images.unsplash.com/photo-1490750967868-88aa4f44baee?w=400&h=400&fit=crop", badge:"new", badgeText:"Nuevo", rating:4.8, reviews:47, stock:null },
+        { id:1, name:"Ramo Atardecer", cat:"ramos", desc:"Rosas, claveles y follaje en tonos cálidos. El favorito de nuestros clientes.", price:749, oldPrice:null, img:"/images/productos/ramo-atardecer.jpg", badge:"popular", badgeText:"Más vendido", rating:4.9, reviews:127, stock:null },
+        { id:2, name:"Box Elegance Premium", cat:"arreglos", desc:"Rosas inglesas, lisianthus y eucalipto dólar en caja redonda de lujo. Incluye tarjeta.", price:1699, oldPrice:null, img:"/images/productos/box-elegance-premium.jpg", badge:null, badgeText:null, rating:4.8, reviews:89, stock:3 },
+        { id:3, name:"Ramo Silvestre", cat:"ramos", desc:"Flores de campo con lavanda y margaritas. Fresco y natural.", price:599, oldPrice:null, img:"/images/productos/ramo-silvestre.jpg", badge:null, badgeText:null, rating:4.7, reviews:64, stock:null },
+        { id:4, name:"Monstera Deliciosa", cat:"plantas", desc:"La reina tropical en maceta de cerámica artesanal. Purifica el aire.", price:749, oldPrice:null, img:"/images/productos/monstera-deliciosa.jpg", badge:null, badgeText:null, rating:4.9, reviews:43, stock:null },
+        { id:5, name:"50 Rosas Rojas Premium", cat:"ramos", desc:"50 rosas de tallo largo. El clásico que nunca falla. Impacto garantizado.", price:1699, oldPrice:null, img:"/images/productos/50-rosas-rojas.jpg", badge:"popular", badgeText:"Best Seller", rating:5.0, reviews:203, stock:null },
+        { id:6, name:"Box de Tulipanes", cat:"arreglos", desc:"20 tulipanes holandeses en caja de madera con listón de seda.", price:1599, oldPrice:null, img:"/images/productos/box-tulipanes.jpg", badge:"new", badgeText:"Nuevo", rating:4.8, reviews:31, stock:5 },
+        { id:7, name:"Combo Sorpresa", cat:"gifts", desc:"Ramo premium + chocolates artesanales + tarjeta personalizada.", price:1099, oldPrice:null, img:"/images/productos/combo-sorpresa.jpg", badge:null, badgeText:null, rating:4.9, reviews:76, stock:null },
+        { id:8, name:"Snake Plant", cat:"plantas", desc:"Sansevieria en maceta minimal. Prácticamente indestructible.", price:679, oldPrice:null, img:"/images/productos/snake-plant.jpg", badge:null, badgeText:null, rating:4.7, reviews:38, stock:null },
+        { id:9, name:"Arreglo Corporativo", cat:"arreglos", desc:"Lirios, rosas blancas y follaje fino. Elegancia para la oficina. Incluye jarrón.", price:999, oldPrice:null, img:"/images/productos/arreglo-corporativo.jpg", badge:null, badgeText:null, rating:4.8, reviews:52, stock:null },
+        { id:10, name:"Combo Aniversario VIP", cat:"gifts", desc:"Arreglo de rosas rojas, vino tinto, dos copas, vela aromática y chocolates Ferrero.", price:2189, oldPrice:null, img:"/images/productos/combo-aniversario-vip.jpg", badge:null, badgeText:null, rating:5.0, reviews:94, stock:2 },
+        { id:11, name:"Mini Suculentas Set x6", cat:"plantas", desc:"6 suculentas variadas en macetitas de barro artesanal mexicano.", price:699, oldPrice:null, img:"/images/productos/mini-suculentas.jpg", badge:null, badgeText:null, rating:4.6, reviews:29, stock:null },
+        { id:12, name:"Ramo Girasoles", cat:"ramos", desc:"Girasoles con alstroemeria y eucalipto dólar. Pura alegría en cada pétalo.", price:699, oldPrice:null, img:"/images/productos/ramo-girasoles.jpg", badge:"new", badgeText:"Nuevo", rating:4.8, reviews:47, stock:null },
     ];
 
-    let cart = [];
-    const FREE_SHIPPING = 599;
+    // ── CARRITO PERSISTENTE ──
+    // Antes vivía sólo en memoria: recargar la página lo vaciaba, y con
+    // ello se perdía la venta. Ahora se guarda en el navegador.
+    //
+    // Sólo se guardan id y cantidad. Nombres, precios e imágenes se
+    // vuelven a leer del catálogo al cargar, así un carrito guardado hace
+    // dos semanas no resucita un precio viejo.
+    const CARRITO_KEY = 'bs_carrito_v1';
+
+    function guardarCarrito() {
+        try {
+            localStorage.setItem(CARRITO_KEY, JSON.stringify(
+                cart.map(function (i) { return { id: i.id, qty: i.qty }; })
+            ));
+        } catch (e) { /* modo privado o sin espacio: seguimos sin guardar */ }
+    }
+
+    function leerCarrito() {
+        try {
+            const crudo = JSON.parse(localStorage.getItem(CARRITO_KEY) || '[]');
+            if (!Array.isArray(crudo)) return [];
+            return crudo.reduce(function (acc, g) {
+                const p = products.find(function (x) { return x.id === g.id; });
+                const qty = parseInt(g.qty, 10);
+                // Si el producto ya no existe en el catálogo, se descarta.
+                if (p && qty > 0) acc.push(Object.assign({}, p, { qty: Math.min(qty, 20) }));
+                return acc;
+            }, []);
+        } catch (e) { return []; }
+    }
+
+    let cart = leerCarrito();
+    const FREE_SHIPPING = 799;
     const SHIPPING = 99;
     const WA = '525554097367';
 
@@ -2194,7 +3149,6 @@
         grid.innerHTML = '';
 
         filtered.forEach(p => {
-            const viewers = Math.floor(Math.random() * 12) + 3;
             const card = document.createElement('div');
             card.className = 'product-card fade-in visible';
             card.innerHTML = `
@@ -2203,7 +3157,6 @@
                     <button class="product-wishlist" onclick="event.stopPropagation(); this.classList.toggle('liked');" aria-label="Favorito">
                         <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
                     </button>
-                    <div class="product-viewers"><span class="eye">&#128065;</span> ${viewers} viendo ahora</div>
                     <img src="${p.img}" alt="${p.name}" loading="lazy">
                 </div>
                 <div class="product-body">
@@ -2265,6 +3218,7 @@
     }
 
     function updateCart() {
+        guardarCarrito();
         const totalItems = cart.reduce((s, i) => s + i.qty, 0);
         const subtotal = cart.reduce((s, i) => s + (i.price * i.qty), 0);
         const shipping = subtotal >= FREE_SHIPPING ? 0 : SHIPPING;
@@ -2308,7 +3262,7 @@
             const el = document.createElement('div');
             el.className = 'cart-item';
             el.innerHTML = `
-                <div class="cart-item-img"><img src="${item.img}" alt="${item.name}"></div>
+                <div class="cart-item-img"><img loading="lazy" src="${item.img}" alt="${item.name}"></div>
                 <div class="cart-item-info">
                     <h4>${item.name}</h4>
                     <p>$${(item.price * item.qty).toLocaleString()} MXN</p>
@@ -2343,42 +3297,194 @@
         }
     }
 
-    async function checkout(e) {
+    // ══════════════════════════════════════════════════════════
+    // CHECKOUT — ahora pasa por los datos de entrega
+    // Antes iba directo a MercadoPago y se podía pagar sin decir
+    // a dónde llevar las flores.
+    // ══════════════════════════════════════════════════════════
+
+    function checkout(e) {
+        if (e) e.preventDefault();
+        if (cart.length === 0) return;
+        abrirEntrega();
+    }
+
+    function abrirEntrega() {
+        const panel = document.getElementById('entregaPanel');
+        const overlay = document.getElementById('entregaOverlay');
+
+        // Fecha mínima = hoy en CDMX (no la del reloj del visitante,
+        // que puede estar en otro huso).
+        const hoy = hoyCDMX();
+        const fecha = document.getElementById('entregaFecha');
+        fecha.min = hoy;
+        // Si la pestaña quedó abierta de un día para otro, la fecha vieja
+        // se sustituye en lugar de quedarse ofreciendo el día de ayer.
+        if (!fecha.value || fecha.value < hoy) fecha.value = hoy;
+
+        document.getElementById('entregaTotal').textContent =
+            document.getElementById('cartTotal').textContent;
+
+        // Si alguien escribe una fecha pasada a mano, se corrige sola.
+        fecha.onchange = function () {
+            const min = hoyCDMX();
+            if (fecha.value && fecha.value < min) {
+                fecha.value = min;
+                const caja = document.getElementById('entregaError');
+                caja.textContent = 'Esa fecha ya pasó. La ajustamos a hoy.';
+                caja.hidden = false;
+            }
+        };
+
+        toggleCart(false);
+        overlay.classList.add('open');
+        panel.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        cargarMapa();
+        setTimeout(function () { panel.querySelector('input').focus(); }, 320);
+    }
+
+    function cerrarEntrega() {
+        document.getElementById('entregaOverlay').classList.remove('open');
+        document.getElementById('entregaPanel').classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', function (ev) {
+        if (ev.key === 'Escape') cerrarEntrega();
+    });
+
+    // ── Validación en el navegador ──
+    // El servidor vuelve a validar todo. Esto es sólo para que el
+    // cliente vea el error al instante y no después de un viaje de red.
+    function hoyCDMX() {
+        return new Date().toLocaleDateString('en-CA', { timeZone: 'America/Mexico_City' });
+    }
+
+    function validarEntrega(d) {
+        const soloDigitos = function (t) { return (t || '').replace(/\D/g, ''); };
+        if (d.recibeNombre.length < 2)          return ['recibeNombre', 'Falta el nombre de quien recibe'];
+        if (soloDigitos(d.recibeTel).length !== 10) return ['recibeTel', 'El teléfono de quien recibe debe tener 10 dígitos'];
+        if (d.direccion.length < 10)            return ['direccion', 'Escribe la dirección completa: calle, número, colonia y CP'];
+        if (!d.fecha)                           return ['fecha', 'Elige la fecha de entrega'];
+        // Las fechas en formato AAAA-MM-DD se comparan bien como texto.
+        if (d.fecha < hoyCDMX())                return ['fecha', 'Esa fecha ya pasó. Elige hoy o un día posterior.'];
+        if (!d.franja)                          return ['franja', 'Elige el horario de entrega'];
+        if (d.compraNombre.length < 2)          return ['compraNombre', 'Falta tu nombre'];
+        if (soloDigitos(d.compraTel).length !== 10) return ['compraTel', 'Tu teléfono debe tener 10 dígitos'];
+        if (d.compraEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(d.compraEmail))
+            return ['compraEmail', 'Revisa tu correo'];
+        return null;
+    }
+
+    async function enviarEntrega(e) {
         e.preventDefault();
-        const btn = e.target.closest('.btn') || e.target;
-        const originalText = btn.innerHTML;
-        btn.innerHTML = 'Procesando...';
-        btn.style.pointerEvents = 'none';
-        btn.style.opacity = '0.7';
+        const form = document.getElementById('entregaForm');
+        const btn = document.getElementById('entregaSubmit');
+        const cajaError = document.getElementById('entregaError');
+
+        form.querySelectorAll('.mal').forEach(function (el) { el.classList.remove('mal'); });
+        cajaError.hidden = true;
+
+        const fd = new FormData(form);
+        const entrega = {};
+        fd.forEach(function (v, k) { entrega[k] = String(v).trim(); });
+        entrega.mapa = form.dataset.mapa || '';
+
+        const falla = validarEntrega(entrega);
+        if (falla) {
+            const campo = form.querySelector('[name="' + falla[0] + '"]');
+            if (campo) { campo.classList.add('mal'); campo.focus(); }
+            cajaError.textContent = falla[1];
+            cajaError.hidden = false;
+            cajaError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            return;
+        }
+
+        const textoOriginal = btn.textContent;
+        btn.textContent = 'Procesando…';
+        btn.disabled = true;
 
         try {
-            const response = await fetch(`${API_URL}/api/create-preference`, {
+            const res = await fetch(`${API_URL}/api/create-preference`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    items: cart.map(item => ({
-                        id: item.id,
-                        name: item.name,
-                        description: item.desc,
-                        qty: item.qty,
-                        price: item.price,
-                    })),
+                    items: cart.map(function (i) { return { id: i.id, qty: i.qty }; }),
+                    entrega: entrega,
                 }),
             });
 
-            const data = await response.json();
-
-            if (data.init_point) {
-                window.location.href = data.init_point;
-            } else {
-                throw new Error('No init_point received');
-            }
+            const data = await res.json();
+            if (data.init_point) { window.location.href = data.init_point; return; }
+            throw new Error(data.error || 'Sin init_point');
         } catch (error) {
             console.error('Payment error:', error);
-            alert('Hubo un error al procesar el pago. Intenta de nuevo o pide por WhatsApp.');
-            btn.innerHTML = originalText;
-            btn.style.pointerEvents = '';
-            btn.style.opacity = '';
+            btn.textContent = textoOriginal;
+            btn.disabled = false;
+            cajaError.textContent = 'No pudimos abrir el pago. Intenta de nuevo, o mándanos el pedido por WhatsApp con el botón de abajo.';
+            cajaError.hidden = false;
+        }
+    }
+
+    // ── Google Maps (opcional) ──
+    // Si no hay clave configurada, la dirección se escribe a mano y todo
+    // lo demás funciona igual. El mapa es una ayuda, no un requisito.
+    let mapaCargado = false;
+    async function cargarMapa() {
+        if (mapaCargado) return;
+        mapaCargado = true;
+        try {
+            const r = await fetch(`${API_URL}/api/config`);
+            const { mapsKey } = await r.json();
+            if (!mapsKey) return;
+
+            window.initEntregaMapa = function () {
+                const input = document.getElementById('entregaDireccion');
+                const cajaMapa = document.getElementById('entregaMapa');
+                const form = document.getElementById('entregaForm');
+                const cdmx = { lat: 19.4326, lng: -99.1332 };
+
+                cajaMapa.hidden = false;
+                const mapa = new google.maps.Map(cajaMapa, {
+                    center: cdmx, zoom: 11, mapTypeControl: false,
+                    streetViewControl: false, fullscreenControl: false,
+                });
+                const pin = new google.maps.Marker({ map: mapa, draggable: true });
+
+                function fijar(lat, lng) {
+                    form.dataset.mapa = lat.toFixed(6) + ',' + lng.toFixed(6);
+                }
+
+                const auto = new google.maps.places.Autocomplete(input, {
+                    componentRestrictions: { country: 'mx' },
+                    fields: ['formatted_address', 'geometry'],
+                });
+                auto.addListener('place_changed', function () {
+                    const p = auto.getPlace();
+                    if (!p.geometry) return;
+                    mapa.setCenter(p.geometry.location);
+                    mapa.setZoom(17);
+                    pin.setPosition(p.geometry.location);
+                    fijar(p.geometry.location.lat(), p.geometry.location.lng());
+                });
+                pin.addListener('dragend', function () {
+                    const pos = pin.getPosition();
+                    fijar(pos.lat(), pos.lng());
+                });
+
+                document.getElementById('entregaMapaAyuda').textContent =
+                    'Empieza a escribir y elige tu dirección. Puedes arrastrar el pin para ajustar el punto exacto.';
+            };
+
+            const s = document.createElement('script');
+            s.src = 'https://maps.googleapis.com/maps/api/js?key=' +
+                    encodeURIComponent(mapsKey) + '&libraries=places&language=es&region=MX&callback=initEntregaMapa';
+            s.async = true;
+            s.onerror = function () { console.warn('Google Maps no cargó; la dirección se escribe a mano.'); };
+            document.head.appendChild(s);
+        } catch (err) {
+            console.warn('Sin mapa:', err);
         }
     }
 
@@ -2390,6 +3496,56 @@
         const shipping = subtotal >= FREE_SHIPPING ? 0 : SHIPPING;
         msg += `\nSubtotal: $${subtotal.toLocaleString()}\nEnvío: ${shipping === 0 ? 'GRATIS' : '$' + shipping}\nTotal: $${(subtotal + shipping).toLocaleString()} MXN`;
         window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    // ── NEWSLETTER ──
+    // Antes este formulario sólo decía "Listo!" y tiraba el correo a la basura:
+    // el cliente nunca recibía su 10% y tú nunca te enterabas del lead.
+    // Mientras no haya lista de correos, lo mandamos por WhatsApp, que sí llega.
+    function suscribir(e) {
+        e.preventDefault();
+        const form = e.target;
+        const email = form.querySelector('input[name="email"]').value.trim();
+        if (!email) return;
+
+        const msg = `Hola! Quiero mi 10% de descuento en mi primer pedido.\nMi correo es: ${email}`;
+        window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`, '_blank');
+
+        form.querySelector('button').textContent = '✓ Te escribimos';
+        form.querySelector('input').value = '';
+    }
+
+    // ── INTRO ──
+    (function () {
+        const root = document.documentElement;
+        const intro = document.getElementById('intro');
+        if (!intro || !root.classList.contains('intro-pending')) return;
+
+        let cerrada = false;
+        function cerrar() {
+            if (cerrada) return;
+            cerrada = true;
+            try { sessionStorage.setItem('bs_intro', '1'); } catch (e) {}
+            intro.classList.add('out');
+            root.classList.remove('intro-pending');
+            setTimeout(function () { intro.remove(); }, 800);
+        }
+
+        // Se va sola…
+        setTimeout(cerrar, 2750);
+        // …o antes, si el usuario ya quiere entrar.
+        ['click', 'keydown', 'wheel', 'touchstart'].forEach(function (ev) {
+            window.addEventListener(ev, cerrar, { once: true, passive: true });
+        });
+        // Red de seguridad: pase lo que pase, a los 4.5s no queda nada encima.
+        setTimeout(cerrar, 4500);
+    })();
+
+    // ── ANIMACIONES DE ENTRADA ──
+    // Se activan sólo aquí. Si este script no corre, la página se ve
+    // completa igual: nada depende de que una animación termine.
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('anim');
     }
 
     // ── COUNTDOWN ──
@@ -2428,6 +3584,7 @@
 
     // ── INIT ──
     renderProducts();
+    if (cart.length) updateCart();
     </script>
 
 </body>
