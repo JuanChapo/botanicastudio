@@ -2197,9 +2197,36 @@
             .esq { width: 96px; }
             .intro-art svg { width: 58vw; }
         }
-    </style>
+    
+        /* ═══ FLORES SVG ═══ */
+        .producto-imagen {
+            width: 100%;
+            height: 280px;
+            background: var(--accent-light);
+            border-radius: 12px 12px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .producto-imagen svg {
+            width: 80%;
+            height: 80%;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+        }
+        
+        .producto-imagen:hover svg {
+            filter: drop-shadow(0 6px 12px rgba(0,0,0,0.15)) saturate(1.1);
+            transform: scale(1.05);
+            transition: all 0.3s ease;
+        }
+</style>
 </head>
 <body>
+<!-- 🌸 Imágenes de flores SVG agregadas el 25 sept 2026 -->
+
 
     <!-- ═══ INTRO ═══
          Sólo se muestra si el script del <head> la enciende. Si el JS
