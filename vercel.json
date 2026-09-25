@@ -1,9 +1,22 @@
 {
+  "buildCommand": "npm run build",
+  "public": "public",
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/$1" },
-    { "source": "/gracias", "destination": "/gracias.html" },
-    { "source": "/error", "destination": "/error.html" },
-    { "source": "/pendiente", "destination": "/pendiente.html" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/api/:path*",
+      "destination": "/api/:path*"
+    },
+    {
+      "source": "/panel",
+      "destination": "/panel/index.html"
+    },
+    {
+      "source": "/panel/:path*",
+      "destination": "/panel/index.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
   ]
 }
