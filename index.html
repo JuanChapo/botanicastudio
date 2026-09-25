@@ -2197,7 +2197,11 @@
             .esq { width: 96px; }
             .intro-art svg { width: 58vw; }
         }
-    </style>
+    
+        img[src*="productos"], img[src*="flores"] {
+            background: linear-gradient(135deg, #FF69B4 0%, #C41E3A 100%);
+        }
+        </style>
 </head>
 <body>
 
@@ -2557,7 +2561,7 @@
             </div>
             <div class="cat-grid fade-in">
                 <div class="cat-card" onclick="filterProducts('ramos')">
-                    <img loading="lazy" src="/images/categorias/ramos.jpg" alt="Categoría Ramos — ramo de rosas en tonos durazno">
+                    <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 120" style="width:100%; height:100%;"><defs><radialGradient id="rosaGrad" cx="40%" cy="40%"><stop offset="0%" style="stop-color:#FF69B4;stop-opacity:1" /><stop offset="100%" style="stop-color:#C41E3A;stop-opacity:1" /></radialGradient></defs><circle cx="50" cy="40" r="35" fill="url(#rosaGrad)"/><circle cx="45" cy="35" r="20" fill="#FF1493"/><circle cx="50" cy="30" r="18" fill="#FF69B4" opacity="0.8"/><circle cx="55" cy="35" r="16" fill="#FF1493"/><path d="M50 75 Q45 85 40 100 M50 75 Q55 85 60 100" stroke="#2D5016" stroke-width="2" fill="none"/><ellipse cx="35" cy="90" rx="6" ry="12" fill="#3A6B35" transform="rotate(-30 35 90)"/><ellipse cx="65" cy="90" rx="6" ry="12" fill="#3A6B35" transform="rotate(30 65 90)"/></svg></div>
                     <div class="cat-card-overlay"></div>
                     <span class="cat-count">12 productos</span>
                     <div class="cat-card-label">
@@ -2566,7 +2570,7 @@
                     </div>
                 </div>
                 <div class="cat-card" onclick="filterProducts('arreglos')">
-                    <img loading="lazy" src="/images/categorias/arreglos.jpg" alt="Categoría Arreglos Florales — peonías rosas sobre fondo claro">
+                    <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 120" style="width:100%; height:100%;"><defs><radialGradient id="girasol" cx="50%" cy="50%"><stop offset="0%" style="stop-color:#FFF44F;stop-opacity:1" /><stop offset="70%" style="stop-color:#FFD700;stop-opacity:1" /><stop offset="100%" style="stop-color:#FFA500;stop-opacity:1" /></radialGradient></defs><circle cx="50" cy="15" r="10" fill="#FFD700"/><circle cx="70" cy="20" r="10" fill="#FFD700"/><circle cx="80" cy="35" r="10" fill="#FFD700"/><circle cx="75" cy="55" r="10" fill="#FFD700"/><circle cx="60" cy="70" r="10" fill="#FFD700"/><circle cx="40" cy="70" r="10" fill="#FFD700"/><circle cx="25" cy="55" r="10" fill="#FFD700"/><circle cx="20" cy="35" r="10" fill="#FFD700"/><circle cx="30" cy="20" r="10" fill="#FFD700"/><circle cx="50" cy="40" r="18" fill="url(#girasol)"/><circle cx="45" cy="35" r="2" fill="#8B6914"/><circle cx="55" cy="35" r="2" fill="#8B6914"/><circle cx="45" cy="45" r="2" fill="#8B6914"/><circle cx="55" cy="45" r="2" fill="#8B6914"/><circle cx="50" cy="40" r="1.5" fill="#5C4A0A"/><path d="M50 58 Q48 75 45 100" stroke="#2D5016" stroke-width="2" fill="none"/><ellipse cx="38" cy="85" rx="5" ry="10" fill="#3A6B35" transform="rotate(-25 38 85)"/><ellipse cx="55" cy="80" rx="5" ry="10" fill="#3A6B35" transform="rotate(35 55 80)"/></svg></div>
                     <div class="cat-card-overlay"></div>
                     <span class="cat-count">8 productos</span>
                     <div class="cat-card-label">
@@ -2575,7 +2579,7 @@
                     </div>
                 </div>
                 <div class="cat-card" onclick="filterProducts('plantas')">
-                    <img loading="lazy" src="/images/categorias/plantas.jpg" alt="Categoría Plantas — planta verde en maceta blanca minimalista">
+                    <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 120" style="width:100%; height:100%;"><defs><linearGradient id="tulipanGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#FF8C00;stop-opacity:1" /><stop offset="100%" style="stop-color:#FF4500;stop-opacity:1" /></linearGradient></defs><ellipse cx="50" cy="25" rx="12" ry="25" fill="url(#tulipanGrad)"/><ellipse cx="38" cy="38" rx="11" ry="24" fill="#FF7F50" transform="rotate(-35 38 38)"/><ellipse cx="62" cy="38" rx="11" ry="24" fill="#FF7F50" transform="rotate(35 62 38)"/><ellipse cx="50" cy="28" rx="4" ry="8" fill="#CC5500" opacity="0.6"/><path d="M50 50 Q48 70 45 100" stroke="#2D5016" stroke-width="2" fill="none"/><path d="M50 50 Q52 70 55 100" stroke="#2D5016" stroke-width="2" fill="none"/><ellipse cx="35" cy="75" rx="4" ry="15" fill="#3A6B35" transform="rotate(-40 35 75)"/><ellipse cx="65" cy="78" rx="4" ry="15" fill="#3A6B35" transform="rotate(40 65 78)"/></svg></div>
                     <div class="cat-card-overlay"></div>
                     <span class="cat-count">6 productos</span>
                     <div class="cat-card-label">
@@ -2584,7 +2588,7 @@
                     </div>
                 </div>
                 <div class="cat-card" onclick="filterProducts('gifts')">
-                    <img loading="lazy" src="/images/categorias/regalos.jpg" alt="Categoría Regalos y Combos — regalo envuelto en tonos blush con listón">
+                    <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" style="width:100%; height:100%;"><rect x="20" y="30" width="60" height="50" fill="#C6A664" stroke="#8B7355" stroke-width="2"/><path d="M50 30 L50 15 M35 22 L65 22" stroke="#C41E3A" stroke-width="3" fill="none"/><circle cx="50" cy="18" r="4" fill="#C41E3A"/><path d="M35 35 L65 35 L60 60 L40 60 Z" fill="#FFD700" opacity="0.6"/></svg></div>
                     <div class="cat-card-overlay"></div>
                     <span class="cat-count">5 productos</span>
                     <div class="cat-card-label">
