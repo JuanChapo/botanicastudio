@@ -1,22 +1,3 @@
 {
-  "buildCommand": "npm run build",
-  "public": "public",
-  "rewrites": [
-    {
-      "source": "/api/:path*",
-      "destination": "/api/:path*"
-    },
-    {
-      "source": "/panel",
-      "destination": "/panel/index.html"
-    },
-    {
-      "source": "/panel/:path*",
-      "destination": "/panel/index.html"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
-  ]
+  "buildCommand": "npm run build"
 }
