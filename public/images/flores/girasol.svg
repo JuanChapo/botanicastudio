@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 120">
+  <defs>
+    <radialGradient id="girasol" cx="50%" cy="50%">
+      <stop offset="0%" style="stop-color:#FFF44F;stop-opacity:1" />
+      <stop offset="70%" style="stop-color:#FFD700;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFA500;stop-opacity:1" />
+    </radialGradient>
+  </defs>
+  <circle cx="50" cy="15" r="10" fill="#FFD700"/>
+  <circle cx="70" cy="20" r="10" fill="#FFD700"/>
+  <circle cx="80" cy="35" r="10" fill="#FFD700"/>
+  <circle cx="75" cy="55" r="10" fill="#FFD700"/>
+  <circle cx="60" cy="70" r="10" fill="#FFD700"/>
+  <circle cx="40" cy="70" r="10" fill="#FFD700"/>
+  <circle cx="25" cy="55" r="10" fill="#FFD700"/>
+  <circle cx="20" cy="35" r="10" fill="#FFD700"/>
+  <circle cx="30" cy="20" r="10" fill="#FFD700"/>
+  <circle cx="50" cy="40" r="18" fill="url(#girasol)"/>
+  <circle cx="45" cy="35" r="2" fill="#8B6914"/>
+  <circle cx="55" cy="35" r="2" fill="#8B6914"/>
+  <circle cx="45" cy="45" r="2" fill="#8B6914"/>
+  <circle cx="55" cy="45" r="2" fill="#8B6914"/>
+  <circle cx="50" cy="40" r="1.5" fill="#5C4A0A"/>
+  <path d="M50 58 Q48 75 45 100" stroke="#2D5016" stroke-width="2" fill="none"/>
+  <ellipse cx="38" cy="85" rx="5" ry="10" fill="#3A6B35" transform="rotate(-25 38 85)"/>
+  <ellipse cx="55" cy="80" rx="5" ry="10" fill="#3A6B35" transform="rotate(35 55 80)"/>
+</svg>
