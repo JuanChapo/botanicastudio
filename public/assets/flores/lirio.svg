@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 120">
+  <defs>
+    <radialGradient id="lirioGrad">
+      <stop offset="0%" style="stop-color:#DDA0DD;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#9932CC;stop-opacity:1" />
+    </radialGradient>
+  </defs>
+  <!-- Pétalos superiores -->
+  <ellipse cx="50" cy="20" rx="10" ry="22" fill="url(#lirioGrad)"/>
+  <ellipse cx="32" cy="32" rx="9" ry="21" fill="#DA70D6" transform="rotate(-60 32 32)"/>
+  <ellipse cx="68" cy="32" rx="9" ry="21" fill="#DA70D6" transform="rotate(60 68 32)"/>
+  <!-- Pétalos inferiores -->
+  <ellipse cx="28" cy="50" rx="8" ry="20" fill="#BA55D3" transform="rotate(-45 28 50)"/>
+  <ellipse cx="72" cy="50" rx="8" ry="20" fill="#BA55D3" transform="rotate(45 72 50)"/>
+  <ellipse cx="50" cy="60" rx="8" ry="18" fill="#9932CC"/>
+  <!-- Centro -->
+  <circle cx="50" cy="42" r="8" fill="#FFB6C1" opacity="0.7"/>
+  <!-- Estambres -->
+  <line x1="48" y1="42" x2="46" y2="50" stroke="#FF69B4" stroke-width="1"/>
+  <line x1="50" y1="42" x2="50" y2="52" stroke="#FF69B4" stroke-width="1"/>
+  <line x1="52" y1="42" x2="54" y2="50" stroke="#FF69B4" stroke-width="1"/>
+  <!-- Tallo -->
+  <path d="M50 60 Q48 80 45 100" stroke="#2D5016" stroke-width="2" fill="none"/>
+  <ellipse cx="40" cy="85" rx="4" ry="12" fill="#3A6B35" transform="rotate(-30 40 85)"/>
+</svg>
