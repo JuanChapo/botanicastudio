@@ -1,0 +1,38 @@
+IMÁGENES DE BOTANICA STUDIO
+═══════════════════════════
+
+ESTRUCTURA
+  hero/        3 imágenes de la portada
+  productos/   12 imágenes, una por producto (mismo nombre que el producto)
+  categorias/  4 tarjetas de categoría
+  ocasiones/   6 tarjetas de ocasión
+  instagram/   5 miniaturas de la sección de Instagram
+
+⚠️ IMPORTANTE: SON FOTOS DE STOCK, NO SON TUS PRODUCTOS
+Todas vienen de Unsplash (licencia libre para uso comercial, sin
+atribución obligatoria). Sirven para que la tienda se vea bien HOY,
+pero muestran arreglos que tú no hiciste.
+
+Si un cliente compra el "Box Elegance Premium" viendo esta foto y
+recibe algo distinto, tienes un problema: contracargos, malas reseñas
+y una queja válida ante PROFECO. Reemplázalas por fotos reales en
+cuanto puedas — es la mejor inversión de tiempo que puedes hacer.
+
+CÓMO REEMPLAZARLAS
+1. Toma la foto del arreglo real.
+2. Recórtala cuadrada (1:1) para productos, 3:4 para categorías.
+3. Guárdala con el MISMO nombre de archivo, en la MISMA carpeta.
+   No hay que tocar el HTML: las rutas ya apuntan ahí.
+
+CÓMO TOMAR BUENAS FOTOS (con el celular basta)
+- Luz de ventana, de lado. Nunca flash: aplana las flores.
+- Fondo liso y claro: una pared blanca o una cartulina.
+- El arreglo llenando el encuadre, un poco de aire alrededor.
+- Misma luz y mismo fondo en todas → el catálogo se ve profesional.
+- Formato JPG, máximo 700x700 px, menos de 200 KB.
+
+POR QUÉ ESTÁN AQUÍ Y NO ENLAZADAS A UNSPLASH
+Antes el sitio enlazaba directo a Unsplash. Unsplash reasignó varios
+IDs y la tienda terminó mostrando llaves de cerveza en el "Box Elegance
+Premium" y un castillo en el "Combo Aniversario VIP". Autoalojadas,
+eso no puede volver a pasar.
