@@ -69,7 +69,6 @@ export default async function handler(req, res) {
         payer: {
           name: d.compraNombre,
           email: d.compraEmail || undefined,
-          phone: { area_code: '', number: d.compraTel },
         },
         shipments: { cost: shippingCost, mode: 'not_specified' },
         // Los datos de entrega viajan con la preferencia. Así el
