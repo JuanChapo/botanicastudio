@@ -103,7 +103,16 @@ export default async function handler(req, res) {
     // Log detallado del lado servidor (visible en los logs de Vercel),
     // pero sin filtrar nada de esto al navegador.
     console.error('MercadoPago error:', error?.message, error?.cause ?? error);
-    return res.status(500).json({ error: 'Error creating payment preference' });
+    // DIAGNOSTICO TEMPORAL: exponemos el motivo exacto del error de
+    // MercadoPago para depurar el 500 persistente. Se revierte en cuanto
+    // encontremos la causa. No incluye ningún token ni credencial.
+    const causa = error?.cause;
+    const detalle = Array.isArray(causa) ? causa : (causa ? [causa] : []);
+    return res.status(500).json({
+      error: 'Error creating payment preference',
+      debug_message: error?.message || null,
+      debug_cause: detalle,
+    });
   }
 }
 
