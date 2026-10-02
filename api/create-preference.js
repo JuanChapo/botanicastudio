@@ -19,7 +19,15 @@ if (req.method === 'OPTIONS') return res.status(200).end();
 
 if (!ACCESS_TOKEN) {
     console.error('FALTA MERCADOPAGO_ACCESS_TOKEN en las variables de entorno de Vercel');
-    return res.status(500).json({ error: 'payment_not_configured' });
+    return res.status(500).json({
+        error: 'payment_not_configured',
+        debug_env_info: {
+            has_key: Object.prototype.hasOwnProperty.call(process.env, 'MERCADOPAGO_ACCESS_TOKEN'),
+            value_type: typeof process.env.MERCADOPAGO_ACCESS_TOKEN,
+            value_length: typeof process.env.MERCADOPAGO_ACCESS_TOKEN === 'string' ? process.env.MERCADOPAGO_ACCESS_TOKEN.length : null,
+            is_empty_string: process.env.MERCADOPAGO_ACCESS_TOKEN === '',
+        },
+    });
 }
 
 try {
@@ -116,7 +124,7 @@ try {
             hyphen_count: (ACCESS_TOKEN.match(/-/g) || []).length,
             has_MP_ACCESS_TOKEN_var: Object.prototype.hasOwnProperty.call(process.env, 'MP_ACCESS_TOKEN'),
             has_MERCADOPAGO_ACCESS_TOKEN_var: Object.prototype.hasOwnProperty.call(process.env, 'MERCADOPAGO_ACCESS_TOKEN'),
-            source_var: 'MERCADOPAGO_ACCESS_TOKEN',
+            source_var: process.env.MP_ACCESS_TOKEN ? 'MP_ACCESS_TOKEN' : 'MERCADOPAGO_ACCESS_TOKEN',
         },
     });
 }
