@@ -1,44 +1,48 @@
 {
-  "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "/api/$1"
-    },
-    {
-      "source": "/gracias",
-      "destination": "/gracias.html"
-    },
-    {
-      "source": "/error",
-      "destination": "/error.html"
-    },
-    {
-      "source": "/pendiente",
-      "destination": "/pendiente.html"
-    },
-    {
-      "source": "/envios",
-      "destination": "/envios.html"
-    },
-    {
-      "source": "/preguntas-frecuentes",
-      "destination": "/preguntas-frecuentes.html"
-    },
-    {
-      "source": "/terminos",
-      "destination": "/terminos.html"
-    },
-    {
-      "source": "/aviso-privacidad",
-      "destination": "/aviso-privacidad.html"
-    },
-    {
-      "source": "/eventos",
-      "destination": "/eventos.html"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
-  ]
+    "rewrites": [
+          {
+                  "source": "/api/(.*)",
+                  "destination": "/api/$1"
+          },
+          {
+                  "source": "/panel",
+                  "destination": "/panel.html"
+          },
+          {
+                  "source": "/gracias",
+                  "destination": "/gracias.html"
+          },
+          {
+                  "source": "/error",
+                  "destination": "/error.html"
+          },
+          {
+                  "source": "/pendiente",
+                  "destination": "/pendiente.html"
+          },
+          {
+                  "source": "/envios",
+                  "destination": "/envios.html"
+          },
+          {
+                  "source": "/preguntas-frecuentes",
+                  "destination": "/preguntas-frecuentes.html"
+          },
+          {
+                  "source": "/terminos",
+                  "destination": "/terminos.html"
+          },
+          {
+                  "source": "/aviso-privacidad",
+                  "destination": "/aviso-privacidad.html"
+          },
+          {
+                  "source": "/eventos",
+                  "destination": "/eventos.html"
+          },
+          {
+                  "source": "/(.*)",
+                  "destination": "/index.html"
+          }
+    ]
 }
