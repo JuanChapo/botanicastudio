@@ -219,6 +219,52 @@
   .vacio{padding:40px 18px;text-align:center;color:var(--texto-sua);font-size:14px;}
   .dedicatoria{font-style:italic;color:var(--texto-sua);}
 
+  .toolbar{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;align-items:center;}
+  .toolbar input[type="search"]{
+    flex:1;min-width:180px;
+    padding:9px 12px;
+    border:1px solid var(--borde);
+    border-radius:10px;
+    font-size:13.5px;
+  }
+  .toolbar input[type="search"]:focus{outline:none;border-color:var(--verde-500);}
+  .toolbar label.chk{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--texto-sua);white-space:nowrap;cursor:pointer;}
+  .toolbar button.secundario{
+    padding:9px 14px;
+    border-radius:10px;
+    border:1px solid var(--borde);
+    background:#fff;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+    color:var(--verde-700);
+    white-space:nowrap;
+  }
+  .toolbar button.secundario:hover{background:var(--verde-100);}
+
+  .badge-entrega{
+    display:inline-flex;align-items:center;gap:5px;
+    padding:4px 9px;border-radius:999px;
+    font-size:11.5px;font-weight:600;
+    border:1px solid transparent;cursor:pointer;
+  }
+  .badge-entrega.pendiente{background:#fdf1e6;color:var(--naranja);border-color:#f3dcb8;}
+  .badge-entrega.entregado{background:#eaf5ec;color:var(--verde-700);border-color:#cfe6d2;}
+
+  tr.nuevo-pedido{animation:resalte 2.4s ease-out 1;}
+  @keyframes resalte{ from{background:#fff6da;} to{background:transparent;} }
+
+  .toast{
+    position:fixed;bottom:22px;right:22px;
+    background:var(--verde-900);color:#fff;
+    padding:12px 18px;border-radius:12px;
+    font-size:13.5px;
+    box-shadow:0 8px 22px rgba(0,0,0,.22);
+    display:none;z-index:50;max-width:280px;
+  }
+  .toast.visible{display:block;animation:entrada .25s ease-out;}
+  @keyframes entrada{from{transform:translateY(8px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+
   @media (max-width:640px){
     table, thead, tbody, th, td, tr{display:block;}
     thead{display:none;}
@@ -268,6 +314,12 @@
         <button data-dias="90">90 días</button>
       </div>
 
+      <div class="toolbar">
+        <input type="search" id="buscar" placeholder="Buscar por nombre, teléfono, email o producto…" />
+        <label class="chk"><input type="checkbox" id="chk-pendientes" /> Solo entregas pendientes</label>
+        <button type="button" class="secundario" id="btn-exportar">Exportar CSV</button>
+      </div>
+
       <div class="stats">
         <div class="stat-card">
           <div class="label">Pedidos</div>
@@ -301,6 +353,7 @@
               <th>Entrega</th>
               <th>Compró</th>
               <th>Total</th>
+              <th>Estado</th>
             </tr>
           </thead>
           <tbody id="tabla-body"></tbody>
@@ -310,6 +363,8 @@
     </main>
   </div>
 
+  <div class="toast" id="toast"></div>
+
 <script>
 (function () {
   'use strict';
@@ -317,10 +372,92 @@
   var SESSION_KEY = 'bs_admin_session';
   var SESSION_HORAS = 24;
   var AUTO_REFRESH_MS = 30000;
+  var ENTREGAS_KEY = 'bs_entregas';
   var diasActual = 30;
   var refrescoTimer = null;
+  var todosPedidos = [];
+  var idsVistos = null;
+  var primeraCarga = true;
 
   var FRANJAS = { '9-13': '9:00 a 13:00', '13-17': '13:00 a 17:00', '17-21': '17:00 a 21:00' };
+
+  function leerEntregas() {
+    try { return JSON.parse(localStorage.getItem(ENTREGAS_KEY) || '{}'); }
+    catch (e) { return {}; }
+  }
+
+  function marcarEntrega(id, entregado) {
+    var m = leerEntregas();
+    if (entregado) m[id] = true; else delete m[id];
+    try { localStorage.setItem(ENTREGAS_KEY, JSON.stringify(m)); } catch (e) {}
+  }
+
+  function mostrarToast(msg) {
+    var t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('visible');
+    clearTimeout(t._timer);
+    t._timer = setTimeout(function () { t.classList.remove('visible'); }, 4500);
+  }
+
+  function pedirNotificaciones() {
+    try {
+      if ('Notification' in window && Notification.permission === 'default') {
+        Notification.requestPermission();
+      }
+    } catch (e) {}
+  }
+
+  function aplicarFiltros() {
+    var q = (document.getElementById('buscar').value || '').trim().toLowerCase();
+    var soloPendientes = document.getElementById('chk-pendientes').checked;
+    var entregas = leerEntregas();
+
+    return todosPedidos.filter(function (o) {
+      if (soloPendientes && entregas[o.id]) return false;
+      if (!q) return true;
+      var campos = [o.recibe_nombre, o.recibe_tel, o.compra_nombre, o.compra_tel, o.compra_email, o.direccion]
+        .concat((o.productos || []).map(function (p) { return p.title; }));
+      return campos.some(function (c) { return c && String(c).toLowerCase().indexOf(q) !== -1; });
+    });
+  }
+
+  function refrescarVista(nuevosIds) {
+    var filtrados = aplicarFiltros();
+    renderStats(filtrados);
+    renderTabla(filtrados, nuevosIds || []);
+  }
+
+  function csvEscape(v) {
+    var s = String(v == null ? '' : v).replace(/"/g, '""');
+    return '"' + s + '"';
+  }
+
+  function exportarCSV() {
+    var filtrados = aplicarFiltros();
+    var encabezados = ['Fecha pago', 'Producto(s)', 'Recibe', 'Teléfono recibe', 'Dirección', 'Entrega', 'Compró', 'Teléfono compró', 'Email compró', 'Total', 'Neto', 'Estado entrega'];
+    var entregas = leerEntregas();
+    var filas = filtrados.map(function (o) {
+      var fecha = o.fecha_pago ? new Date(o.fecha_pago).toLocaleString('es-MX') : '';
+      var productos = (o.productos || []).map(function (p) { return p.title + ' x' + p.quantity; }).join(' | ');
+      var entrega = [o.fecha_entrega, FRANJAS[o.franja] || o.franja].filter(Boolean).join(' · ');
+      return [
+        fecha, productos, o.recibe_nombre || '', o.recibe_tel || '', o.direccion || '', entrega,
+        o.compra_nombre || '', o.compra_tel || '', o.compra_email || '',
+        o.total || 0, o.neto != null ? o.neto : '', entregas[o.id] ? 'Entregado' : 'Pendiente'
+      ].map(csvEscape).join(',');
+    });
+    var csv = [encabezados.map(csvEscape).join(',')].concat(filas).join('\r\n');
+    var blob = new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8;' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'pedidos-botanica-' + new Date().toISOString().slice(0, 10) + '.csv';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
 
   function money(n) {
     return '$' + Number(n || 0).toLocaleString('es-MX', { maximumFractionDigits: 2 });
@@ -357,6 +494,9 @@
   function mostrarDashboard(password) {
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('dashboard').style.display = 'block';
+    idsVistos = null;
+    primeraCarga = true;
+    pedirNotificaciones();
     cargarPedidos(password);
     if (refrescoTimer) clearInterval(refrescoTimer);
     refrescoTimer = setInterval(function () { cargarPedidos(password); }, AUTO_REFRESH_MS);
@@ -385,9 +525,12 @@
     });
   }
 
-  function renderTabla(orders) {
+  function renderTabla(orders, nuevosIds) {
     var body = document.getElementById('tabla-body');
     var vacio = document.getElementById('tabla-vacio');
+    var nuevosSet = {};
+    (nuevosIds || []).forEach(function (id) { nuevosSet[id] = true; });
+    var entregas = leerEntregas();
     body.innerHTML = '';
 
     if (!orders.length) {
@@ -398,6 +541,7 @@
 
     orders.forEach(function (o) {
       var tr = document.createElement('tr');
+      if (nuevosSet[o.id]) tr.className = 'nuevo-pedido';
 
       var fecha = o.fecha_pago ? new Date(o.fecha_pago).toLocaleString('es-MX', {
         day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit'
@@ -434,13 +578,19 @@
       var totalHtml = '<span class="pedido-total">' + money(o.total) + '</span>';
       if (o.neto != null) totalHtml += '<br><span class="pedido-neto">neto ' + money(o.neto) + '</span>';
 
+      var entregado = !!entregas[o.id];
+      var estadoHtml = '<button type="button" class="badge-entrega ' + (entregado ? 'entregado' : 'pendiente') +
+        '" data-id="' + escapeHtml(o.id) + '" data-entregado="' + (entregado ? '1' : '0') + '">' +
+        (entregado ? '✓ Entregado' : '⏳ Pendiente') + '</button>';
+
       tr.innerHTML =
         '<td data-label="Fecha pago">' + fecha + '</td>' +
         '<td data-label="Producto(s)">' + productos + '</td>' +
         '<td data-label="Recibe">' + recibeHtml + '</td>' +
         '<td data-label="Entrega">' + entrega + '</td>' +
         '<td data-label="Compró">' + compraHtml + '</td>' +
-        '<td data-label="Total">' + totalHtml + '</td>';
+        '<td data-label="Total">' + totalHtml + '</td>' +
+        '<td data-label="Estado">' + estadoHtml + '</td>';
 
       body.appendChild(tr);
     });
@@ -458,8 +608,29 @@
       .then(function (res) {
         if (!res.ok) throw new Error(res.data && res.data.error || 'error');
         var orders = res.data.orders || [];
-        renderStats(orders);
-        renderTabla(orders);
+
+        if (idsVistos === null) {
+          idsVistos = {};
+          orders.forEach(function (o) { idsVistos[o.id] = true; });
+        }
+
+        var nuevos = primeraCarga ? [] : orders.filter(function (o) { return !idsVistos[o.id]; });
+        orders.forEach(function (o) { idsVistos[o.id] = true; });
+        primeraCarga = false;
+
+        todosPedidos = orders;
+        refrescarVista(nuevos.map(function (o) { return o.id; }));
+
+        if (nuevos.length) {
+          var msg = nuevos.length === 1 ? '🌸 1 pedido nuevo' : '🌸 ' + nuevos.length + ' pedidos nuevos';
+          mostrarToast(msg);
+          try {
+            if ('Notification' in window && Notification.permission === 'granted') {
+              new Notification('Botanica Studio', { body: msg });
+            }
+          } catch (e) {}
+        }
+
         document.getElementById('ultima-act').textContent =
           'Actualizado ' + new Date().toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' });
         setSync('ok');
@@ -519,6 +690,18 @@
     btn.classList.add('activo');
     var pw = leerSesion();
     if (pw) cargarPedidos(pw);
+  });
+
+  document.getElementById('buscar').addEventListener('input', function () { refrescarVista(); });
+  document.getElementById('chk-pendientes').addEventListener('change', function () { refrescarVista(); });
+  document.getElementById('btn-exportar').addEventListener('click', exportarCSV);
+
+  document.getElementById('tabla-body').addEventListener('click', function (e) {
+    var btn = e.target.closest('button[data-id]');
+    if (!btn) return;
+    var entregadoAhora = btn.getAttribute('data-entregado') === '1';
+    marcarEntrega(btn.getAttribute('data-id'), !entregadoAhora);
+    refrescarVista();
   });
 
   // ───────── arranque ─────────
