@@ -1,714 +1,790 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Panel — Botanica Studio</title>
-<meta name="robots" content="noindex, nofollow" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Pedidos · Botanica Studio</title>
 <style>
-  :root{
-    --verde-900:#1f2d22;
-    --verde-700:#2f5233;
-    --verde-500:#4c7a52;
-    --verde-100:#eef5ef;
-    --verde-050:#f6faf7;
-    --borde:#d7e3da;
-    --texto:#243226;
-    --texto-sua:#64746a;
-    --rosa:#d98ba3;
-    --rojo:#c0392b;
-    --naranja:#c67c1f;
-    --blanco:#ffffff;
-    --sombra:0 2px 10px rgba(31,45,34,.07);
+  :root {
+    --bg: #f6f3ef;
+    --card: #ffffff;
+    --ink: #1d2722;
+    --muted: #6b756f;
+    --line: #e6e0d8;
+    --brand: #2f5d4e;
+    --brand-soft: #e8f1ec;
+    --accent: #c75b7e;
+    --accent-soft: #fbeef3;
+    --ok: #2e9d5b;
+    --warn: #b87412;
+    --warn-soft: #fbf1e0;
+    --bad: #c94444;
+    --radius: 14px;
+    --shadow: 0 1px 2px rgba(20, 30, 25, .06), 0 4px 14px rgba(20, 30, 25, .05);
   }
-  *{box-sizing:border-box;}
-  body{
-    margin:0;
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    background:var(--verde-050);
-    color:var(--texto);
-  }
-
-  /* ───────── Login ───────── */
-  #login-screen{
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:24px;
-    background:radial-gradient(circle at 20% 15%, #e9f3ea 0%, var(--verde-050) 45%, #eef1ec 100%);
-  }
-  .login-logo{
-    width:56px;height:56px;
-    margin:0 auto 16px;
-    border-radius:16px;
-    background:linear-gradient(135deg, var(--verde-700), var(--verde-500));
-    display:flex;align-items:center;justify-content:center;
-    font-size:26px;
-    box-shadow:0 6px 16px rgba(47,82,51,.28);
-  }
-  .login-card{
-    background:var(--blanco);
-    border:1px solid var(--borde);
-    border-radius:18px;
-    padding:40px 34px;
-    width:100%;
-    max-width:370px;
-    box-shadow:0 10px 30px rgba(31,45,34,.09);
-    text-align:center;
-  }
-  .login-card h1{
-    font-size:19px;
-    margin:0 0 4px;
-    color:var(--verde-900);
-    font-weight:700;
-    letter-spacing:-.01em;
-  }
-  .login-card p.sub{
-    margin:0 0 24px;
-    color:var(--texto-sua);
-    font-size:13.5px;
-  }
-  .login-card input{
-    width:100%;
-    padding:12px 14px;
-    border:1px solid var(--borde);
-    border-radius:10px;
-    font-size:15px;
-    margin-bottom:12px;
-  }
-  .login-card input:focus{
-    outline:none;
-    border-color:var(--verde-500);
-  }
-  .login-card button{
-    width:100%;
-    padding:12px 14px;
-    border:none;
-    border-radius:10px;
-    background:linear-gradient(135deg, var(--verde-700), var(--verde-500));
-    color:#fff;
-    font-size:15px;
-    font-weight:600;
-    cursor:pointer;
-    box-shadow:0 4px 12px rgba(47,82,51,.25);
-  }
-  .login-card button:hover{filter:brightness(1.05);}
-  .login-card button:disabled{opacity:.6;cursor:default;box-shadow:none;}
-  .login-error{
-    color:var(--rojo);
-    font-size:13px;
-    margin:-4px 0 12px;
-    min-height:16px;
-  }
-
-  /* ───────── Dashboard ───────── */
-  #dashboard{display:none;}
-  header.top{
-    background:linear-gradient(120deg, var(--verde-900), var(--verde-700));
-    color:#fff;
-    padding:18px 24px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    flex-wrap:wrap;
-    gap:10px;
-    box-shadow:0 2px 12px rgba(0,0,0,.08);
-  }
-  header.top h1{
-    font-size:17px;
-    margin:0;
-    display:flex;
-    align-items:center;
-    gap:10px;
-    font-weight:700;
-    letter-spacing:-.01em;
-  }
-  .sync-dot{
-    width:9px;height:9px;border-radius:50%;
-    background:#8fd19e;
-    display:inline-block;
-    transition:background .25s;
-  }
-  .sync-dot.cargando{background:#e8b74a;}
-  .sync-dot.error{background:#e06a5d;}
-  header.top .acciones{display:flex;gap:8px;align-items:center;}
-  header.top button{
-    background:rgba(255,255,255,.14);
-    border:1px solid rgba(255,255,255,.3);
-    color:#fff;
-    padding:8px 14px;
-    border-radius:8px;
-    font-size:13px;
-    cursor:pointer;
-  }
-  header.top button:hover{background:rgba(255,255,255,.22);}
-
-  main{max-width:1080px;margin:0 auto;padding:20px;}
-
-  .filtros{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap;}
-  .filtros button{
-    padding:8px 16px;
-    border-radius:999px;
-    border:1px solid var(--borde);
-    background:#fff;
-    font-size:13.5px;
-    cursor:pointer;
-    color:var(--texto);
-  }
-  .filtros button.activo{
-    background:var(--verde-700);
-    border-color:var(--verde-700);
-    color:#fff;
-  }
-
-  .stats{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
-    gap:12px;
-    margin-bottom:22px;
-  }
-  .stat-card{
-    background:#fff;
-    border:1px solid var(--borde);
-    border-radius:14px;
-    padding:16px 18px;
-    box-shadow:var(--sombra);
-  }
-  .stat-card .label{font-size:12.5px;color:var(--texto-sua);margin-bottom:6px;}
-  .stat-card .valor{font-size:22px;font-weight:700;color:var(--verde-900);}
-
-  .tabla-wrap{
-    background:#fff;
-    border:1px solid var(--borde);
-    border-radius:14px;
-    overflow:hidden;
-    box-shadow:var(--sombra);
-  }
-  .tabla-header{
-    padding:14px 18px;
-    border-bottom:1px solid var(--borde);
-    font-size:14px;
-    font-weight:600;
-    color:var(--verde-900);
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-  }
-  table{width:100%;border-collapse:collapse;font-size:13.5px;}
-  th{
-    text-align:left;
-    padding:10px 14px;
-    background:var(--verde-100);
-    color:var(--verde-900);
-    font-size:11.5px;
-    text-transform:uppercase;
-    letter-spacing:.03em;
-    white-space:nowrap;
-  }
-  td{
-    padding:12px 14px;
-    border-top:1px solid var(--borde);
-    vertical-align:top;
-  }
-  tr:hover td{background:var(--verde-050);}
-  .pedido-total{font-weight:700;color:var(--verde-900);}
-  .pedido-neto{font-size:12px;color:var(--texto-sua);}
-  a.enlace{color:var(--verde-700);text-decoration:none;}
-  a.enlace:hover{text-decoration:underline;}
-  .vacio{padding:40px 18px;text-align:center;color:var(--texto-sua);font-size:14px;}
-  .dedicatoria{font-style:italic;color:var(--texto-sua);}
-
-  .toolbar{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;align-items:center;}
-  .toolbar input[type="search"]{
-    flex:1;min-width:180px;
-    padding:9px 12px;
-    border:1px solid var(--borde);
-    border-radius:10px;
-    font-size:13.5px;
-  }
-  .toolbar input[type="search"]:focus{outline:none;border-color:var(--verde-500);}
-  .toolbar label.chk{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--texto-sua);white-space:nowrap;cursor:pointer;}
-  .toolbar button.secundario{
-    padding:9px 14px;
-    border-radius:10px;
-    border:1px solid var(--borde);
-    background:#fff;
-    font-size:13px;
-    font-weight:600;
-    cursor:pointer;
-    color:var(--verde-700);
-    white-space:nowrap;
-  }
-  .toolbar button.secundario:hover{background:var(--verde-100);}
-
-  .badge-entrega{
-    display:inline-flex;align-items:center;gap:5px;
-    padding:4px 9px;border-radius:999px;
-    font-size:11.5px;font-weight:600;
-    border:1px solid transparent;cursor:pointer;
-  }
-  .badge-entrega.pendiente{background:#fdf1e6;color:var(--naranja);border-color:#f3dcb8;}
-  .badge-entrega.entregado{background:#eaf5ec;color:var(--verde-700);border-color:#cfe6d2;}
-
-  tr.nuevo-pedido{animation:resalte 2.4s ease-out 1;}
-  @keyframes resalte{ from{background:#fff6da;} to{background:transparent;} }
-
-  .toast{
-    position:fixed;bottom:22px;right:22px;
-    background:var(--verde-900);color:#fff;
-    padding:12px 18px;border-radius:12px;
-    font-size:13.5px;
-    box-shadow:0 8px 22px rgba(0,0,0,.22);
-    display:none;z-index:50;max-width:280px;
-  }
-  .toast.visible{display:block;animation:entrada .25s ease-out;}
-  @keyframes entrada{from{transform:translateY(8px);opacity:0;}to{transform:translateY(0);opacity:1;}}
-
-  @media (max-width:640px){
-    table, thead, tbody, th, td, tr{display:block;}
-    thead{display:none;}
-    tr{border-top:1px solid var(--borde);padding:12px 14px;}
-    td{border:none;padding:3px 0;}
-    td::before{
-      content:attr(data-label);
-      display:block;
-      font-size:10.5px;
-      text-transform:uppercase;
-      color:var(--texto-sua);
-      letter-spacing:.03em;
-      margin-bottom:1px;
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #121714;
+      --card: #1b221e;
+      --ink: #eef3ef;
+      --muted: #9aa69f;
+      --line: #2c3630;
+      --brand: #7fc4a6;
+      --brand-soft: #1f2e27;
+      --accent: #f08aab;
+      --accent-soft: #33212a;
+      --ok: #5fcf8c;
+      --warn: #e7ab4e;
+      --warn-soft: #33281a;
+      --bad: #ef7a7a;
+      --shadow: none;
     }
   }
+  :root[data-theme="dark"] {
+    --bg: #121714;
+    --card: #1b221e;
+    --ink: #eef3ef;
+    --muted: #9aa69f;
+    --line: #2c3630;
+    --brand: #7fc4a6;
+    --brand-soft: #1f2e27;
+    --accent: #f08aab;
+    --accent-soft: #33212a;
+    --ok: #5fcf8c;
+    --warn: #e7ab4e;
+    --warn-soft: #33281a;
+    --bad: #ef7a7a;
+    --shadow: none;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font: 15px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    min-height: 100vh;
+  }
+  button, input { font: inherit; color: inherit; }
+  .hidden { display: none !important; }
+  .muted { color: var(--muted); }
+
+  /* ── Login ───────────────────────────────────────── */
+  .login {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 16px;
+  }
+  .login-card {
+    width: 100%;
+    max-width: 360px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    box-shadow: var(--shadow);
+  }
+  .login-card h1 { margin: 0 0 4px; font-size: 20px; }
+  .login-card p { margin: 0 0 18px; color: var(--muted); }
+  .field { display: grid; gap: 6px; margin-bottom: 14px; }
+  .field label { font-size: 13px; color: var(--muted); }
+  .input {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--bg);
+    color: var(--ink);
+  }
+  .input:focus { outline: 2px solid var(--brand); outline-offset: 1px; }
+  .btn {
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: var(--card);
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .btn:hover { border-color: var(--brand); }
+  .btn-primary { background: var(--brand); border-color: var(--brand); color: #fff; width: 100%; }
+  .btn-primary:hover { filter: brightness(1.08); }
+  .btn-ghost { background: transparent; }
+  .error { color: var(--bad); min-height: 1.4em; margin: 10px 0 0; font-size: 14px; }
+
+  /* ── App shell ───────────────────────────────────── */
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 16px; }
+  .top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .brand h1 { margin: 0; font-size: 20px; }
+  .brand small { color: var(--muted); }
+  .top-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .sync { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); margin-right: 4px; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--muted); display: inline-block; }
+  .dot.ok { background: var(--ok); box-shadow: 0 0 0 3px color-mix(in srgb, var(--ok) 25%, transparent); }
+  .dot.loading { background: var(--warn); }
+  .dot.error { background: var(--bad); }
+
+  /* ── Stats ───────────────────────────────────────── */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .stat:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  @media (min-width: 760px) {
+    .stats { grid-template-columns: repeat(5, 1fr); }
+    .stat:last-child:nth-child(odd) { grid-column: auto; }
+  }
+  .stat {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    box-shadow: var(--shadow);
+  }
+  .stat .k { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+  .stat .v { font-size: 22px; font-weight: 650; margin-top: 2px; }
+  .stat .s { font-size: 12px; color: var(--muted); }
+
+  /* ── Toolbar ─────────────────────────────────────── */
+  .toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  .seg {
+    display: inline-flex;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 3px;
+  }
+  .seg button {
+    border: 0;
+    background: transparent;
+    padding: 7px 11px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: var(--muted);
+  }
+  .seg button[aria-pressed="true"] { background: var(--brand); color: #fff; }
+  .search { flex: 1 1 220px; min-width: 180px; }
+  .check { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; cursor: pointer; user-select: none; }
+  .check input { width: 16px; height: 16px; accent-color: var(--brand); }
+
+  .notice {
+    background: var(--warn-soft);
+    color: var(--warn);
+    border-radius: 10px;
+    padding: 9px 12px;
+    margin-bottom: 12px;
+    font-size: 14px;
+  }
+
+  /* ── Cards ───────────────────────────────────────── */
+  .list {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 900px) { .list { grid-template-columns: 1fr 1fr; } }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--warn);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    box-shadow: var(--shadow);
+    display: grid;
+    gap: 8px;
+  }
+  .card.done { border-left-color: var(--ok); opacity: .8; }
+  .card.new { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .card-head strong { font-size: 16px; }
+  .pill {
+    border: 0;
+    border-radius: 999px;
+    padding: 5px 11px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .pill-warn { background: var(--warn-soft); color: var(--warn); }
+  .pill-ok { background: var(--brand-soft); color: var(--ok); }
+  .row { display: grid; grid-template-columns: 92px 1fr; gap: 8px; font-size: 14px; }
+  .row .label { color: var(--muted); }
+  .row a { color: var(--brand); }
+  .products { margin: 0; padding-left: 18px; }
+  .dedic {
+    background: var(--accent-soft);
+    color: var(--ink);
+    border-radius: 10px;
+    padding: 8px 10px;
+    font-size: 14px;
+    font-style: italic;
+  }
+  .totals {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-top: 1px dashed var(--line);
+    padding-top: 8px;
+    margin-top: 2px;
+  }
+  .totals .total { font-size: 18px; font-weight: 700; }
+  .totals .neto { font-size: 13px; color: var(--muted); }
+
+  .empty {
+    text-align: center;
+    color: var(--muted);
+    padding: 40px 12px;
+    border: 1px dashed var(--line);
+    border-radius: var(--radius);
+  }
+  .foot { margin: 18px 0 8px; font-size: 12px; color: var(--muted); text-align: center; }
+
+  .toast {
+    position: fixed;
+    left: 50%;
+    bottom: 18px;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--ink);
+    color: var(--bg);
+    padding: 10px 16px;
+    border-radius: 10px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s, transform .2s;
+    max-width: calc(100% - 32px);
+    font-size: 14px;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 </style>
 </head>
 <body>
 
-  <!-- ───────── Pantalla de acceso ───────── -->
-  <div id="login-screen">
-    <form class="login-card" id="login-form" autocomplete="off">
-      <div class="login-logo">🌿</div>
-      <h1>Botanica Studio</h1>
-      <p class="sub">Panel de pedidos — acceso solo para administradores</p>
-      <input type="password" id="password" placeholder="Contraseña" autocomplete="current-password" required />
-      <div class="login-error" id="login-error"></div>
-      <button type="submit" id="login-btn">Entrar</button>
-    </form>
-  </div>
+<!-- ═══ LOGIN ═══ -->
+<section id="login" class="login">
+  <form class="login-card" id="loginForm" autocomplete="off">
+    <h1>Panel de pedidos</h1>
+    <p>Botanica Studio · acceso del equipo</p>
+    <div class="field">
+      <label for="pw">Contraseña</label>
+      <input class="input" id="pw" type="password" required autofocus>
+    </div>
+    <button class="btn btn-primary" id="loginBtn" type="submit">Entrar</button>
+    <p class="error" id="loginError" role="alert"></p>
+  </form>
+</section>
 
-  <!-- ───────── Dashboard ───────── -->
-  <div id="dashboard">
+<!-- ═══ APP ═══ -->
+<div id="app" class="hidden">
+  <div class="wrap">
+
     <header class="top">
-      <h1><span class="sync-dot" id="sync-dot"></span> Botanica Studio — Panel de pedidos</h1>
-      <div class="acciones">
-        <button id="btn-refrescar">Actualizar</button>
-        <button id="btn-salir">Cerrar sesión</button>
+      <div class="brand">
+        <h1>Pedidos</h1>
+        <small>Botanica Studio MX · cobros de MercadoPago</small>
+      </div>
+      <div class="top-actions">
+        <span class="sync" id="sync"><span class="dot" id="dot"></span><span id="syncText">Conectando…</span></span>
+        <button class="btn hidden" id="btnNotif" type="button">Activar avisos</button>
+        <button class="btn" id="btnRefresh" type="button">Actualizar</button>
+        <button class="btn btn-ghost" id="btnLogout" type="button">Salir</button>
       </div>
     </header>
 
-    <main>
-      <div class="filtros" id="filtros">
-        <button data-dias="1">Hoy</button>
-        <button data-dias="7">7 días</button>
-        <button data-dias="30" class="activo">30 días</button>
-        <button data-dias="90">90 días</button>
+    <section class="stats" aria-label="Resumen">
+      <div class="stat">
+        <div class="k">Pedidos</div>
+        <div class="v" id="sCount">0</div>
+        <div class="s" id="sPending">0 por entregar</div>
       </div>
+      <div class="stat">
+        <div class="k">Ingresos</div>
+        <div class="v" id="sTotal">$0</div>
+        <div class="s">total cobrado</div>
+      </div>
+      <div class="stat">
+        <div class="k">Neto</div>
+        <div class="v" id="sNeto">$0</div>
+        <div class="s">después de comisión</div>
+      </div>
+      <div class="stat">
+        <div class="k">Ticket promedio</div>
+        <div class="v" id="sTicket">$0</div>
+        <div class="s">por pedido</div>
+      </div>
+      <div class="stat">
+        <div class="k">Periodo</div>
+        <div class="v" id="sPeriod">Hoy</div>
+        <div class="s" id="sRange">&nbsp;</div>
+      </div>
+    </section>
 
-      <div class="toolbar">
-        <input type="search" id="buscar" placeholder="Buscar por nombre, teléfono, email o producto…" />
-        <label class="chk"><input type="checkbox" id="chk-pendientes" /> Solo entregas pendientes</label>
-        <button type="button" class="secundario" id="btn-exportar">Exportar CSV</button>
+    <div class="toolbar">
+      <div class="seg" role="group" aria-label="Periodo">
+        <button type="button" data-days="1" data-today="1" aria-pressed="true">Hoy</button>
+        <button type="button" data-days="7" aria-pressed="false">7 días</button>
+        <button type="button" data-days="30" aria-pressed="false">30 días</button>
+        <button type="button" data-days="90" aria-pressed="false">90 días</button>
       </div>
+      <input class="input search" id="search" type="search" placeholder="Buscar por nombre, teléfono, dirección, producto…">
+      <label class="check"><input type="checkbox" id="onlyPending"> Solo por entregar</label>
+      <button class="btn" id="btnCsv" type="button">Exportar CSV</button>
+    </div>
 
-      <div class="stats">
-        <div class="stat-card">
-          <div class="label">Pedidos</div>
-          <div class="valor" id="stat-pedidos">—</div>
-        </div>
-        <div class="stat-card">
-          <div class="label">Ingresos</div>
-          <div class="valor" id="stat-ingresos">—</div>
-        </div>
-        <div class="stat-card">
-          <div class="label">Ganancia neta*</div>
-          <div class="valor" id="stat-ganancia">—</div>
-        </div>
-        <div class="stat-card">
-          <div class="label">Ticket promedio</div>
-          <div class="valor" id="stat-ticket">—</div>
-        </div>
-      </div>
+    <p class="notice hidden" id="notice" role="status"></p>
 
-      <div class="tabla-wrap">
-        <div class="tabla-header">
-          <span>Pedidos</span>
-          <span id="ultima-act" style="font-weight:400;color:var(--texto-sua);font-size:12px;"></span>
-        </div>
-        <table>
-          <thead>
-            <tr>
-              <th>Fecha pago</th>
-              <th>Producto(s)</th>
-              <th>Recibe</th>
-              <th>Entrega</th>
-              <th>Compró</th>
-              <th>Total</th>
-              <th>Estado</th>
-            </tr>
-          </thead>
-          <tbody id="tabla-body"></tbody>
-        </table>
-        <div class="vacio" id="tabla-vacio" style="display:none;">Sin pedidos en este período.</div>
-      </div>
-    </main>
+    <main class="list" id="list" aria-live="polite"></main>
+    <p class="empty hidden" id="empty">No hay pedidos con estos filtros.</p>
+
+    <p class="foot">Se actualiza sola cada 30 segundos. Los estados "Pendiente / Entregado" se guardan en este navegador.</p>
   </div>
+</div>
 
-  <div class="toast" id="toast"></div>
+<div class="toast" id="toast" role="status"></div>
 
 <script>
 (function () {
   'use strict';
 
-  var SESSION_KEY = 'bs_admin_session';
-  var SESSION_HORAS = 24;
-  var AUTO_REFRESH_MS = 30000;
-  var ENTREGAS_KEY = 'bs_entregas';
-  var diasActual = 30;
-  var refrescoTimer = null;
-  var todosPedidos = [];
-  var idsVistos = null;
-  var primeraCarga = true;
-
+  // ── Configuración ────────────────────────────────────────────
+  var API_ORDERS = '/api/orders';
+  var API_LOGIN = '/api/panel-login';
+  var REFRESH_MS = 30000;
+  var NEW_WINDOW_MS = 60 * 60 * 1000;   // un pedido cuenta como "nuevo" si se pagó hace menos de 1 h
+  var SESSION_KEY = 'bs_panel_pw';      // sessionStorage: se borra al cerrar la pestaña
+  var DELIVERY_KEY = 'bs_panel_entregas';
+  var TZ = 'America/Mexico_City';
   var FRANJAS = { '9-13': '9:00 a 13:00', '13-17': '13:00 a 17:00', '17-21': '17:00 a 21:00' };
 
-  function leerEntregas() {
-    try { return JSON.parse(localStorage.getItem(ENTREGAS_KEY) || '{}'); }
-    catch (e) { return {}; }
-  }
+  var MXN = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN', maximumFractionDigits: 0 });
+  var FECHA_HORA = new Intl.DateTimeFormat('es-MX', { timeZone: TZ, day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
+  var HORA = new Intl.DateTimeFormat('es-MX', { timeZone: TZ, hour: '2-digit', minute: '2-digit' });
+  var DIA_KEY = new Intl.DateTimeFormat('en-CA', { timeZone: TZ, year: 'numeric', month: '2-digit', day: '2-digit' });
 
-  function marcarEntrega(id, entregado) {
-    var m = leerEntregas();
-    if (entregado) m[id] = true; else delete m[id];
-    try { localStorage.setItem(ENTREGAS_KEY, JSON.stringify(m)); } catch (e) {}
-  }
+  // ── Estado ───────────────────────────────────────────────────
+  var state = {
+    pw: null,
+    days: 1,
+    today: true,
+    search: '',
+    onlyPending: false,
+    orders: [],
+    known: null,       // ids ya vistos (null = primera carga)
+    lastOk: null,
+    timer: null,
+    inFlight: false
+  };
 
-  function mostrarToast(msg) {
-    var t = document.getElementById('toast');
-    t.textContent = msg;
-    t.classList.add('visible');
-    clearTimeout(t._timer);
-    t._timer = setTimeout(function () { t.classList.remove('visible'); }, 4500);
-  }
+  // ── Utilidades ───────────────────────────────────────────────
+  function $(id) { return document.getElementById(id); }
 
-  function pedirNotificaciones() {
-    try {
-      if ('Notification' in window && Notification.permission === 'default') {
-        Notification.requestPermission();
-      }
-    } catch (e) {}
-  }
-
-  function aplicarFiltros() {
-    var q = (document.getElementById('buscar').value || '').trim().toLowerCase();
-    var soloPendientes = document.getElementById('chk-pendientes').checked;
-    var entregas = leerEntregas();
-
-    return todosPedidos.filter(function (o) {
-      if (soloPendientes && entregas[o.id]) return false;
-      if (!q) return true;
-      var campos = [o.recibe_nombre, o.recibe_tel, o.compra_nombre, o.compra_tel, o.compra_email, o.direccion]
-        .concat((o.productos || []).map(function (p) { return p.title; }));
-      return campos.some(function (c) { return c && String(c).toLowerCase().indexOf(q) !== -1; });
-    });
-  }
-
-  function refrescarVista(nuevosIds) {
-    var filtrados = aplicarFiltros();
-    renderStats(filtrados);
-    renderTabla(filtrados, nuevosIds || []);
-  }
-
-  function csvEscape(v) {
-    var s = String(v == null ? '' : v).replace(/"/g, '""');
-    return '"' + s + '"';
-  }
-
-  function exportarCSV() {
-    var filtrados = aplicarFiltros();
-    var encabezados = ['Fecha pago', 'Producto(s)', 'Recibe', 'Teléfono recibe', 'Dirección', 'Entrega', 'Compró', 'Teléfono compró', 'Email compró', 'Total', 'Neto', 'Estado entrega'];
-    var entregas = leerEntregas();
-    var filas = filtrados.map(function (o) {
-      var fecha = o.fecha_pago ? new Date(o.fecha_pago).toLocaleString('es-MX') : '';
-      var productos = (o.productos || []).map(function (p) { return p.title + ' x' + p.quantity; }).join(' | ');
-      var entrega = [o.fecha_entrega, FRANJAS[o.franja] || o.franja].filter(Boolean).join(' · ');
-      return [
-        fecha, productos, o.recibe_nombre || '', o.recibe_tel || '', o.direccion || '', entrega,
-        o.compra_nombre || '', o.compra_tel || '', o.compra_email || '',
-        o.total || 0, o.neto != null ? o.neto : '', entregas[o.id] ? 'Entregado' : 'Pendiente'
-      ].map(csvEscape).join(',');
-    });
-    var csv = [encabezados.map(csvEscape).join(',')].concat(filas).join('\r\n');
-    var blob = new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8;' });
-    var url = URL.createObjectURL(blob);
-    var a = document.createElement('a');
-    a.href = url;
-    a.download = 'pedidos-botanica-' + new Date().toISOString().slice(0, 10) + '.csv';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
   }
 
   function money(n) {
-    return '$' + Number(n || 0).toLocaleString('es-MX', { maximumFractionDigits: 2 });
+    return typeof n === 'number' && isFinite(n) ? MXN.format(n) : '—';
   }
 
-  function leerSesion() {
-    try {
-      var raw = localStorage.getItem(SESSION_KEY);
-      if (!raw) return null;
-      var s = JSON.parse(raw);
-      if (!s || !s.password || !s.ts) return null;
-      if (Date.now() - s.ts > SESSION_HORAS * 3600 * 1000) {
-        localStorage.removeItem(SESSION_KEY);
-        return null;
-      }
-      return s.password;
-    } catch (e) { return null; }
+  function fmtFecha(iso) {
+    var d = iso ? new Date(iso) : null;
+    return d && !isNaN(d) ? FECHA_HORA.format(d) : '—';
   }
 
-  function guardarSesion(password) {
-    try {
-      localStorage.setItem(SESSION_KEY, JSON.stringify({ password: password, ts: Date.now() }));
-    } catch (e) {}
+  // fecha_entrega llega como "AAAA-MM-DD"; se arma en hora local para no correrla un día.
+  function fmtEntrega(ymd) {
+    if (!ymd || !/^\d{4}-\d{2}-\d{2}$/.test(ymd)) return ymd || '';
+    var p = ymd.split('-');
+    var d = new Date(Number(p[0]), Number(p[1]) - 1, Number(p[2]));
+    return d.toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long' });
   }
 
-  function cerrarSesion() {
-    try { localStorage.removeItem(SESSION_KEY); } catch (e) {}
-    if (refrescoTimer) clearInterval(refrescoTimer);
-    document.getElementById('dashboard').style.display = 'none';
-    document.getElementById('login-screen').style.display = 'flex';
-    document.getElementById('password').value = '';
+  function diaKey(date) {
+    return DIA_KEY.format(date);
   }
 
-  function mostrarDashboard(password) {
-    document.getElementById('login-screen').style.display = 'none';
-    document.getElementById('dashboard').style.display = 'block';
-    idsVistos = null;
-    primeraCarga = true;
-    pedirNotificaciones();
-    cargarPedidos(password);
-    if (refrescoTimer) clearInterval(refrescoTimer);
-    refrescoTimer = setInterval(function () { cargarPedidos(password); }, AUTO_REFRESH_MS);
+  function safeGet(key) {
+    try { return JSON.parse(localStorage.getItem(key) || '{}'); } catch (e) { return {}; }
+  }
+  function safeSet(key, value) {
+    try { localStorage.setItem(key, JSON.stringify(value)); } catch (e) { /* almacenamiento bloqueado: no pasa nada grave */ }
   }
 
-  function setSync(estado) {
-    var dot = document.getElementById('sync-dot');
-    dot.className = 'sync-dot' + (estado === 'ok' ? '' : ' ' + estado);
+  function entregas() { return safeGet(DELIVERY_KEY); }
+  function isDone(id) { return entregas()[id] === true; }
+
+  function toggleEntrega(id) {
+    var map = entregas();
+    if (map[id]) delete map[id]; else map[id] = true;
+    safeSet(DELIVERY_KEY, map);
+    render();
   }
 
-  function renderStats(orders) {
-    var pedidos = orders.length;
-    var ingresos = orders.reduce(function (s, o) { return s + (Number(o.total) || 0); }, 0);
-    var ganancia = orders.reduce(function (s, o) { return s + (o.neto != null ? Number(o.neto) : Number(o.total) || 0); }, 0);
-    var ticket = pedidos ? ingresos / pedidos : 0;
-
-    document.getElementById('stat-pedidos').textContent = pedidos;
-    document.getElementById('stat-ingresos').textContent = money(ingresos);
-    document.getElementById('stat-ganancia').textContent = money(ganancia);
-    document.getElementById('stat-ticket').textContent = money(ticket);
+  function showToast(msg) {
+    var t = $('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(showToast._t);
+    showToast._t = setTimeout(function () { t.classList.remove('show'); }, 3800);
   }
 
-  function escapeHtml(v) {
-    return String(v == null ? '' : v).replace(/[&<>"']/g, function (c) {
-      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+  function setNotice(msg) {
+    var n = $('notice');
+    if (msg) { n.textContent = msg; n.classList.remove('hidden'); }
+    else { n.textContent = ''; n.classList.add('hidden'); }
+  }
+
+  function setSync(status, text) {
+    $('dot').className = 'dot ' + status;
+    $('syncText').textContent = text;
+  }
+
+  function horaOk() {
+    return state.lastOk ? 'Actualizado ' + HORA.format(state.lastOk) : 'Sin datos aún';
+  }
+
+  // ── Filtros ──────────────────────────────────────────────────
+  function passesPeriod(o) {
+    if (!state.today) return true;
+    var d = new Date(o.fecha_pago || 0);
+    return !isNaN(d) && diaKey(d) === diaKey(new Date());
+  }
+
+  function passesSearch(o, q) {
+    if (!q) return true;
+    var productos = (o.productos || []).map(function (p) { return p.title || ''; }).join(' ');
+    var hay = [
+      o.id, o.recibe_nombre, o.recibe_tel, o.direccion, o.referencias,
+      o.compra_nombre, o.compra_tel, o.compra_email, o.dedicatoria, productos
+    ].join(' ').toLowerCase();
+    return hay.indexOf(q) !== -1;
+  }
+
+  // ── Render ───────────────────────────────────────────────────
+  function render() {
+    var q = state.search.trim().toLowerCase();
+    var matched = state.orders.filter(function (o) { return passesPeriod(o) && passesSearch(o, q); });
+    var shown = state.onlyPending ? matched.filter(function (o) { return !isDone(o.id); }) : matched;
+
+    // Resumen
+    var total = 0, neto = 0, pend = 0;
+    matched.forEach(function (o) {
+      total += Number(o.total) || 0;
+      if (typeof o.neto === 'number') neto += o.neto;
+      if (!isDone(o.id)) pend++;
     });
+    $('sCount').textContent = String(matched.length);
+    $('sPending').textContent = pend + ' por entregar';
+    $('sTotal').textContent = money(total);
+    $('sNeto').textContent = money(neto);
+    $('sTicket').textContent = matched.length ? money(total / matched.length) : money(0);
+    $('sPeriod').textContent = state.today ? 'Hoy' : state.days + ' días';
+    $('sRange').textContent = horaOk();
+
+    // Tarjetas
+    var list = $('list');
+    list.replaceChildren();
+    shown.forEach(function (o) { list.appendChild(buildCard(o)); });
+    $('empty').classList.toggle('hidden', shown.length > 0);
   }
 
-  function renderTabla(orders, nuevosIds) {
-    var body = document.getElementById('tabla-body');
-    var vacio = document.getElementById('tabla-vacio');
-    var nuevosSet = {};
-    (nuevosIds || []).forEach(function (id) { nuevosSet[id] = true; });
-    var entregas = leerEntregas();
-    body.innerHTML = '';
+  function row(label, value) {
+    var r = el('div', 'row');
+    r.appendChild(el('span', 'label', label));
+    if (value instanceof Node) r.appendChild(value);
+    else r.appendChild(el('span', '', value || '—'));
+    return r;
+  }
 
-    if (!orders.length) {
-      vacio.style.display = 'block';
-      return;
+  function telLink(tel) {
+    if (!tel) return el('span', '', '—');
+    var a = el('a', '', tel);
+    a.href = 'tel:' + String(tel).replace(/[^\d+]/g, '');
+    return a;
+  }
+
+  function buildCard(o) {
+    var done = isDone(o.id);
+    var card = el('article', 'card' + (done ? ' done' : '') + (o._nuevo ? ' new' : ''));
+
+    // Encabezado
+    var head = el('div', 'card-head');
+    head.appendChild(el('strong', '', '#' + o.id + ' · ' + fmtFecha(o.fecha_pago)));
+    var btn = el('button', 'pill ' + (done ? 'pill-ok' : 'pill-warn'), done ? 'Entregado ✓' : 'Pendiente');
+    btn.type = 'button';
+    btn.setAttribute('aria-label', (done ? 'Marcar como pendiente' : 'Marcar como entregado') + ' pedido ' + o.id);
+    btn.addEventListener('click', function () { toggleEntrega(o.id); });
+    head.appendChild(btn);
+    card.appendChild(head);
+
+    // Entrega
+    var franja = FRANJAS[o.franja] || o.franja || '';
+    var cuando = [fmtEntrega(o.fecha_entrega), franja].filter(Boolean).join(' · ');
+    card.appendChild(row('Entrega', cuando || 'Sin fecha'));
+
+    // Destinatario
+    var recibe = el('span', '');
+    recibe.appendChild(document.createTextNode(o.recibe_nombre || '—'));
+    if (o.recibe_tel) {
+      recibe.appendChild(document.createTextNode(' · '));
+      recibe.appendChild(telLink(o.recibe_tel));
     }
-    vacio.style.display = 'none';
+    card.appendChild(row('Recibe', recibe));
 
+    // Dirección + mapa
+    var dir = el('span', '');
+    dir.appendChild(document.createTextNode(o.direccion || '—'));
+    if (o.referencias) dir.appendChild(el('span', 'muted', ' · Ref: ' + o.referencias));
+    if (o.mapa) {
+      dir.appendChild(document.createTextNode(' '));
+      var mapa = el('a', '', 'Ver mapa');
+      mapa.href = 'https://maps.google.com/?q=' + encodeURIComponent(String(o.mapa));
+      mapa.target = '_blank';
+      mapa.rel = 'noopener noreferrer';
+      dir.appendChild(mapa);
+    }
+    card.appendChild(row('Dirección', dir));
+
+    // Productos
+    var ul = el('ul', 'products');
+    (o.productos || []).forEach(function (p) {
+      ul.appendChild(el('li', '', (p.quantity || 1) + '× ' + (p.title || 'Producto')));
+    });
+    if (!ul.childNodes.length) ul.appendChild(el('li', 'muted', 'Sin detalle de productos'));
+    card.appendChild(row('Productos', ul));
+
+    if (o.dedicatoria) card.appendChild(el('div', 'dedic', '“' + o.dedicatoria + '”'));
+
+    // Quien pagó
+    if (o.compra_nombre || o.compra_tel || o.compra_email) {
+      var comp = el('span', '');
+      comp.appendChild(document.createTextNode(o.compra_nombre || '—'));
+      if (o.compra_tel) { comp.appendChild(document.createTextNode(' · ')); comp.appendChild(telLink(o.compra_tel)); }
+      if (o.compra_email) {
+        comp.appendChild(document.createTextNode(' · '));
+        var mail = el('a', '', o.compra_email);
+        mail.href = 'mailto:' + encodeURIComponent(o.compra_email);
+        comp.appendChild(mail);
+      }
+      card.appendChild(row('Compró', comp));
+    }
+
+    // Totales
+    var tot = el('div', 'totals');
+    tot.appendChild(el('span', 'total', money(Number(o.total))));
+    tot.appendChild(el('span', 'neto', typeof o.neto === 'number' ? 'neto ' + money(o.neto) : ''));
+    card.appendChild(tot);
+
+    return card;
+  }
+
+  // ── Datos ────────────────────────────────────────────────────
+  function detectarNuevos(orders) {
+    var now = Date.now();
+    var first = state.known === null;
+    if (!state.known) state.known = new Set();
     orders.forEach(function (o) {
-      var tr = document.createElement('tr');
-      if (nuevosSet[o.id]) tr.className = 'nuevo-pedido';
-
-      var fecha = o.fecha_pago ? new Date(o.fecha_pago).toLocaleString('es-MX', {
-        day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit'
-      }) : '—';
-
-      var productos = (o.productos || []).map(function (p) {
-        return escapeHtml(p.title) + ' ×' + p.quantity;
-      }).join('<br>') || '—';
-
-      var entrega = [o.fecha_entrega, FRANJAS[o.franja] || o.franja].filter(Boolean).join(' · ') || '—';
-
-      var mapaUrl = o.mapa
-        ? 'https://maps.google.com/?q=' + encodeURIComponent(o.mapa)
-        : (o.direccion ? 'https://maps.google.com/?q=' + encodeURIComponent(o.direccion) : null);
-
-      var recibeHtml = escapeHtml(o.recibe_nombre) || '—';
-      if (o.recibe_tel) {
-        recibeHtml += '<br><a class="enlace" href="tel:' + escapeHtml(o.recibe_tel) + '">' + escapeHtml(o.recibe_tel) + '</a>';
+      var recien = now - new Date(o.fecha_pago || 0).getTime() < NEW_WINDOW_MS;
+      o._nuevo = false;
+      if (!first && !state.known.has(o.id) && recien) {
+        o._nuevo = true;
+        showToast('Nuevo pedido #' + o.id + ' · ' + money(Number(o.total)));
+        if ('Notification' in window && Notification.permission === 'granted') {
+          try { new Notification('Nuevo pedido #' + o.id, { body: money(Number(o.total)) + ' · ' + (o.recibe_nombre || '') }); } catch (e) {}
+        }
       }
-      if (o.direccion) {
-        recibeHtml += '<br><span style="color:var(--texto-sua);font-size:12px;">' + escapeHtml(o.direccion) + '</span>';
-      }
-      if (mapaUrl) {
-        recibeHtml += '<br><a class="enlace" href="' + mapaUrl + '" target="_blank" rel="noopener">Ver mapa</a>';
-      }
-      if (o.dedicatoria) {
-        recibeHtml += '<br><span class="dedicatoria">«' + escapeHtml(o.dedicatoria) + '»</span>';
-      }
-
-      var compraHtml = escapeHtml(o.compra_nombre) || '—';
-      if (o.compra_tel) compraHtml += '<br>' + escapeHtml(o.compra_tel);
-      if (o.compra_email) compraHtml += '<br><span style="color:var(--texto-sua);font-size:12px;">' + escapeHtml(o.compra_email) + '</span>';
-
-      var totalHtml = '<span class="pedido-total">' + money(o.total) + '</span>';
-      if (o.neto != null) totalHtml += '<br><span class="pedido-neto">neto ' + money(o.neto) + '</span>';
-
-      var entregado = !!entregas[o.id];
-      var estadoHtml = '<button type="button" class="badge-entrega ' + (entregado ? 'entregado' : 'pendiente') +
-        '" data-id="' + escapeHtml(o.id) + '" data-entregado="' + (entregado ? '1' : '0') + '">' +
-        (entregado ? '✓ Entregado' : '⏳ Pendiente') + '</button>';
-
-      tr.innerHTML =
-        '<td data-label="Fecha pago">' + fecha + '</td>' +
-        '<td data-label="Producto(s)">' + productos + '</td>' +
-        '<td data-label="Recibe">' + recibeHtml + '</td>' +
-        '<td data-label="Entrega">' + entrega + '</td>' +
-        '<td data-label="Compró">' + compraHtml + '</td>' +
-        '<td data-label="Total">' + totalHtml + '</td>' +
-        '<td data-label="Estado">' + estadoHtml + '</td>';
-
-      body.appendChild(tr);
+      state.known.add(o.id);
     });
   }
 
-  function cargarPedidos(password) {
-    setSync('cargando');
-    fetch('/api/orders?days=' + diasActual, {
-      headers: { 'X-Admin-Password': password }
-    })
-      .then(function (r) {
-        if (r.status === 401) { cerrarSesion(); throw new Error('sesión inválida'); }
-        return r.json().then(function (data) { return { ok: r.ok, data: data }; });
-      })
-      .then(function (res) {
-        if (!res.ok) throw new Error(res.data && res.data.error || 'error');
-        var orders = res.data.orders || [];
-
-        if (idsVistos === null) {
-          idsVistos = {};
-          orders.forEach(function (o) { idsVistos[o.id] = true; });
-        }
-
-        var nuevos = primeraCarga ? [] : orders.filter(function (o) { return !idsVistos[o.id]; });
-        orders.forEach(function (o) { idsVistos[o.id] = true; });
-        primeraCarga = false;
-
-        todosPedidos = orders;
-        refrescarVista(nuevos.map(function (o) { return o.id; }));
-
-        if (nuevos.length) {
-          var msg = nuevos.length === 1 ? '🌸 1 pedido nuevo' : '🌸 ' + nuevos.length + ' pedidos nuevos';
-          mostrarToast(msg);
-          try {
-            if ('Notification' in window && Notification.permission === 'granted') {
-              new Notification('Botanica Studio', { body: msg });
-            }
-          } catch (e) {}
-        }
-
-        document.getElementById('ultima-act').textContent =
-          'Actualizado ' + new Date().toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' });
-        setSync('ok');
-      })
-      .catch(function (err) {
-        console.error(err);
-        setSync('error');
+  async function load() {
+    if (!state.pw || state.inFlight) return;
+    state.inFlight = true;
+    setSync('loading', 'Actualizando…');
+    try {
+      var res = await fetch(API_ORDERS + '?days=' + state.days, {
+        headers: { 'x-admin-password': state.pw },
+        cache: 'no-store'
       });
+      if (res.status === 401) { logout('Tu sesión venció. Entra de nuevo.'); return; }
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      var data = await res.json();
+      var orders = Array.isArray(data.orders) ? data.orders : [];
+      detectarNuevos(orders);
+      state.orders = orders;
+      state.lastOk = new Date();
+      setSync('ok', 'En vivo · ' + HORA.format(state.lastOk));
+      setNotice('');
+      render();
+    } catch (err) {
+      setSync('error', 'Sin conexión');
+      setNotice('No pude traer los pedidos (' + err.message + '). Reintento en 30 segundos.');
+    } finally {
+      state.inFlight = false;
+    }
   }
 
-  // ───────── eventos ─────────
-  document.getElementById('login-form').addEventListener('submit', function (e) {
+  function startAutoRefresh() {
+    stopAutoRefresh();
+    state.timer = setInterval(function () { if (!document.hidden) load(); }, REFRESH_MS);
+  }
+  function stopAutoRefresh() {
+    if (state.timer) clearInterval(state.timer);
+    state.timer = null;
+  }
+
+  // ── Sesión ───────────────────────────────────────────────────
+  function showLogin(message) {
+    $('app').classList.add('hidden');
+    $('login').classList.remove('hidden');
+    $('loginError').textContent = message || '';
+    $('pw').value = '';
+    setTimeout(function () { $('pw').focus(); }, 0);
+  }
+
+  function showApp() {
+    $('login').classList.add('hidden');
+    $('app').classList.remove('hidden');
+    if ('Notification' in window && Notification.permission === 'default') {
+      $('btnNotif').classList.remove('hidden');
+    }
+    render();
+    load();
+    startAutoRefresh();
+  }
+
+  function logout(message) {
+    stopAutoRefresh();
+    state.pw = null;
+    state.orders = [];
+    state.known = null;
+    state.lastOk = null;
+    try { sessionStorage.removeItem(SESSION_KEY); } catch (e) {}
+    showLogin(message);
+  }
+
+  $('loginForm').addEventListener('submit', async function (e) {
     e.preventDefault();
-    var password = document.getElementById('password').value;
-    var btn = document.getElementById('login-btn');
-    var errEl = document.getElementById('login-error');
-    errEl.textContent = '';
+    var pw = $('pw').value;
+    var btn = $('loginBtn');
     btn.disabled = true;
-    btn.textContent = 'Entrando…';
-
-    fetch('/api/panel-login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ password: password })
-    })
-      .then(function (r) { return r.json().then(function (data) { return { ok: r.ok, data: data }; }); })
-      .then(function (res) {
-        if (res.ok && res.data.ok) {
-          guardarSesion(password);
-          mostrarDashboard(password);
-        } else if (res.data && res.data.error === 'panel_not_configured') {
-          errEl.textContent = 'El panel aún no está configurado (falta ADMIN_PASSWORD en Vercel)';
-        } else {
-          errEl.textContent = 'Contraseña incorrecta';
-        }
-      })
-      .catch(function () {
-        errEl.textContent = 'No se pudo conectar. Intenta de nuevo.';
-      })
-      .finally(function () {
-        btn.disabled = false;
-        btn.textContent = 'Entrar';
+    $('loginError').textContent = '';
+    try {
+      var res = await fetch(API_LOGIN, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ password: pw })
       });
+      if (res.status === 401) { $('loginError').textContent = 'Contraseña incorrecta.'; return; }
+      if (res.status === 500) { $('loginError').textContent = 'El panel todavía no está configurado en el servidor.'; return; }
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      state.pw = pw;
+      try { sessionStorage.setItem(SESSION_KEY, pw); } catch (err) {}
+      showApp();
+    } catch (err) {
+      $('loginError').textContent = 'No hay conexión con el servidor. Intenta de nuevo.';
+    } finally {
+      btn.disabled = false;
+    }
   });
 
-  document.getElementById('btn-salir').addEventListener('click', cerrarSesion);
-  document.getElementById('btn-refrescar').addEventListener('click', function () {
-    var pw = leerSesion();
-    if (pw) cargarPedidos(pw);
+  // ── Controles ────────────────────────────────────────────────
+  document.querySelectorAll('.seg button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      document.querySelectorAll('.seg button').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+      b.setAttribute('aria-pressed', 'true');
+      state.days = Number(b.dataset.days);
+      state.today = b.dataset.today === '1';
+      state.orders = [];
+      render();
+      load();
+    });
   });
 
-  document.getElementById('filtros').addEventListener('click', function (e) {
-    var btn = e.target.closest('button[data-dias]');
-    if (!btn) return;
-    diasActual = Number(btn.getAttribute('data-dias'));
-    document.querySelectorAll('#filtros button').forEach(function (b) { b.classList.remove('activo'); });
-    btn.classList.add('activo');
-    var pw = leerSesion();
-    if (pw) cargarPedidos(pw);
+  $('search').addEventListener('input', function (e) { state.search = e.target.value; render(); });
+  $('onlyPending').addEventListener('change', function (e) { state.onlyPending = e.target.checked; render(); });
+  $('btnRefresh').addEventListener('click', function () { load(); });
+  $('btnLogout').addEventListener('click', function () { logout(''); });
+
+  $('btnNotif').addEventListener('click', async function () {
+    try {
+      var perm = await Notification.requestPermission();
+      if (perm === 'granted') { $('btnNotif').classList.add('hidden'); showToast('Avisos activados'); }
+    } catch (e) {}
   });
 
-  document.getElementById('buscar').addEventListener('input', function () { refrescarVista(); });
-  document.getElementById('chk-pendientes').addEventListener('change', function () { refrescarVista(); });
-  document.getElementById('btn-exportar').addEventListener('click', exportarCSV);
-
-  document.getElementById('tabla-body').addEventListener('click', function (e) {
-    var btn = e.target.closest('button[data-id]');
-    if (!btn) return;
-    var entregadoAhora = btn.getAttribute('data-entregado') === '1';
-    marcarEntrega(btn.getAttribute('data-id'), !entregadoAhora);
-    refrescarVista();
+  document.addEventListener('visibilitychange', function () {
+    if (!document.hidden && state.pw) load();
   });
 
-  // ───────── arranque ─────────
-  var sesionActiva = leerSesion();
-  if (sesionActiva) {
-    mostrarDashboard(sesionActiva);
+  $('btnCsv').addEventListener('click', function () {
+    var q = state.search.trim().toLowerCase();
+    var rows = state.orders.filter(function (o) {
+      return passesPeriod(o) && passesSearch(o, q) && (!state.onlyPending || !isDone(o.id));
+    });
+    if (!rows.length) { showToast('No hay pedidos para exportar'); return; }
+
+    var cols = ['id', 'fecha_pago', 'fecha_entrega', 'franja', 'recibe_nombre', 'recibe_tel', 'direccion',
+                'referencias', 'productos', 'total', 'neto', 'dedicatoria', 'compra_nombre', 'compra_tel',
+                'compra_email', 'estado'];
+    var lines = [cols.join(',')];
+    rows.forEach(function (o) {
+      var producto = (o.productos || []).map(function (p) { return (p.quantity || 1) + 'x ' + (p.title || ''); }).join('; ');
+      var vals = [
+        o.id, o.fecha_pago, o.fecha_entrega, FRANJAS[o.franja] || o.franja, o.recibe_nombre, o.recibe_tel,
+        o.direccion, o.referencias, producto, o.total, o.neto, o.dedicatoria, o.compra_nombre, o.compra_tel,
+        o.compra_email, isDone(o.id) ? 'Entregado' : 'Pendiente'
+      ];
+      lines.push(vals.map(csvCell).join(','));
+    });
+
+    var blob = new Blob(['﻿' + lines.join('\r\n')], { type: 'text/csv;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'pedidos-' + diaKey(new Date()) + '.csv';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+  });
+
+  // Evita que Excel interprete celdas como fórmulas y escapa comillas.
+  function csvCell(v) {
+    var s = v == null ? '' : String(v);
+    if (/^[=+\-@\t\r]/.test(s)) s = "'" + s;
+    return '"' + s.replace(/"/g, '""') + '"';
   }
+
+  // ── Arranque ─────────────────────────────────────────────────
+  var saved = null;
+  try { saved = sessionStorage.getItem(SESSION_KEY); } catch (e) {}
+  if (saved) { state.pw = saved; showApp(); }
+  else showLogin('');
 })();
 </script>
 </body>
