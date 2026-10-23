@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500">
+  <defs>
+    <radialGradient id="pet1" cx="45%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#FFF7F9"/>
+      <stop offset="60%" stop-color="#F9C9D6"/>
+      <stop offset="100%" stop-color="#E88BA8"/>
+    </radialGradient>
+    <radialGradient id="pet2" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="70%" stop-color="#FBE0E8"/>
+      <stop offset="100%" stop-color="#F2A9C0"/>
+    </radialGradient>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FAF5F2"/>
+      <stop offset="100%" stop-color="#EFE6E1"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="500" fill="url(#bg)"/>
+  <!-- tallos y hojas -->
+  <path d="M200 300 Q196 370 205 450" stroke="#4E6B3A" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M190 330 Q140 300 118 250 Q160 262 192 318 Z" fill="#5C7F45"/>
+  <path d="M208 360 Q262 330 286 275 Q244 290 210 344 Z" fill="#6B8F4E"/>
+  <path d="M200 420 Q150 405 130 370 Q172 384 201 412 Z" fill="#4E7039"/>
+  <!-- pétalos exteriores -->
+  <g fill="url(#pet2)" opacity="0.95">
+    <ellipse cx="150" cy="190" rx="58" ry="52" transform="rotate(-30 150 190)"/>
+    <ellipse cx="250" cy="190" rx="58" ry="52" transform="rotate(30 250 190)"/>
+    <ellipse cx="200" cy="160" rx="60" ry="54"/>
+    <ellipse cx="170" cy="230" rx="60" ry="50" transform="rotate(-15 170 230)"/>
+    <ellipse cx="230" cy="230" rx="60" ry="50" transform="rotate(15 230 230)"/>
+  </g>
+  <!-- pétalos medios -->
+  <g fill="url(#pet1)">
+    <ellipse cx="185" cy="200" rx="44" ry="40" transform="rotate(-10 185 200)"/>
+    <ellipse cx="216" cy="200" rx="44" ry="40" transform="rotate(10 216 200)"/>
+    <ellipse cx="200" cy="222" rx="48" ry="36"/>
+  </g>
+  <!-- centro -->
+  <circle cx="200" cy="206" r="22" fill="#F7E7A6"/>
+  <circle cx="200" cy="206" r="22" fill="none" stroke="#E7C96A" stroke-width="2"/>
+  <g stroke="#D9B24E" stroke-width="2" stroke-linecap="round">
+    <line x1="200" y1="206" x2="192" y2="192"/>
+    <line x1="200" y1="206" x2="210" y2="190"/>
+    <line x1="200" y1="206" x2="208" y2="218"/>
+    <line x1="200" y1="206" x2="190" y2="216"/>
+  </g>
+  <circle cx="192" cy="192" r="3" fill="#B98A2E"/>
+  <circle cx="210" cy="190" r="3" fill="#B98A2E"/>
+  <circle cx="208" cy="218" r="3" fill="#B98A2E"/>
+  <circle cx="190" cy="216" r="3" fill="#B98A2E"/>
+</svg>

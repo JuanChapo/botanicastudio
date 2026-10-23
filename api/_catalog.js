@@ -24,6 +24,7 @@ export const CATALOG = {
   10: { name: 'Combo Aniversario VIP',   price: 2189 },
   11: { name: 'Mini Suculentas Set x6',  price: 699  },
   12: { name: 'Ramo Girasoles',          price: 699  },
+  14: { name: 'Peonías Premium',          price: 2499 },
 };
 
 // Envío — también autoritativo, por la misma razón.
