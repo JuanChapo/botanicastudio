@@ -2222,7 +2222,30 @@
             transform: scale(1.05);
             transition: all 0.3s ease;
         }
-</style>
+
+    /* ── SCROLL STORY (scroll-craft engine) ── */
+    .scroll-story { position: relative; padding: 110px 0; background: var(--cream, #faf7f2); overflow: hidden; }
+    .scroll-story .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    .scroll-story-head { text-align: center; margin-bottom: 70px; }
+    .scroll-story-head h2 { font-family: var(--serif, Georgia, serif); font-weight: 400; font-size: clamp(1.9rem, 3.4vw, 2.6rem); margin: 10px 0 0; }
+    .scroll-act { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; margin: 0 0 120px; }
+    .scroll-act:nth-of-type(even) .scroll-act-media { order: 2; }
+    .scroll-act-media { overflow: hidden; border-radius: 18px; aspect-ratio: 4 / 5; }
+    .scroll-act-media img { width: 100%; height: 115%; object-fit: cover; will-change: transform; }
+    .scroll-act-num { font-family: var(--serif, Georgia, serif); font-size: 0.95rem; letter-spacing: 0.18em; text-transform: uppercase; opacity: .7; }
+    .scroll-act h3 { font-family: var(--serif, Georgia, serif); font-weight: 400; font-size: clamp(1.6rem, 2.6vw, 2.1rem); margin: 10px 0 14px; }
+    .scroll-act p { line-height: 1.7; opacity: .85; margin: 0; max-width: 420px; }
+    .sc-ready [data-sc-in], .sc-ready [data-sc-stagger] > * { opacity: 0; transform: translateY(28px); transition: opacity .8s ease, transform .8s ease; }
+    [data-sc-in].sc-in, [data-sc-stagger] > .sc-in { opacity: 1; transform: none; }
+    @media (max-width: 800px) {
+        .scroll-act { grid-template-columns: 1fr; gap: 24px; margin-bottom: 80px; }
+        .scroll-act:nth-of-type(even) .scroll-act-media { order: 0; }
+        .scroll-act-media { aspect-ratio: 4 / 3; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        [data-sc-in], [data-sc-stagger] > * { opacity: 1; transform: none; transition: none; }
+    }
+    </style>
 </head>
 <body>
 <!-- 🌸 Imágenes de flores SVG agregadas el 25 sept 2026 -->
@@ -2775,6 +2798,49 @@
                         <h3>Solo porque sí</h3>
                         <p>Los mejores detalles no necesitan razón</p>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <!-- SCROLL STORY -->
+    <section class="scroll-story" aria-labelledby="scroll-story-title">
+        <div class="container">
+            <div class="scroll-story-head" data-sc-in>
+                <span class="section-label">Cómo llega tu pedido</span>
+                <h2 id="scroll-story-title">Del campo a tu puerta</h2>
+            </div>
+
+            <div class="scroll-act" data-sc-in>
+                <div class="scroll-act-media">
+                    <img src="/images/hero/girasoles.jpg" alt="Girasoles frescos del día" loading="lazy" data-sc-parallax="-0.08">
+                </div>
+                <div>
+                    <span class="scroll-act-num">01</span>
+                    <h3>Elegimos las flores del día</h3>
+                    <p>Seleccionamos cada tallo según su frescura, para que llegue en su mejor momento.</p>
+                </div>
+            </div>
+
+            <div class="scroll-act" data-sc-in>
+                <div class="scroll-act-media">
+                    <img src="/images/hero/tulipanes.jpg" alt="Tulipanes recién cortados" loading="lazy" data-sc-parallax="-0.08">
+                </div>
+                <div>
+                    <span class="scroll-act-num">02</span>
+                    <h3>Armamos cada arreglo a mano</h3>
+                    <p>Cada ramo se diseña y se arma de forma artesanal, sin prisas y sin fórmulas repetidas.</p>
+                </div>
+            </div>
+
+            <div class="scroll-act" data-sc-in>
+                <div class="scroll-act-media">
+                    <img src="/images/hero/principal.jpg" alt="Arreglo floral listo para entregar" loading="lazy" data-sc-parallax="-0.08">
+                </div>
+                <div>
+                    <span class="scroll-act-num">03</span>
+                    <h3>Llega el mismo día</h3>
+                    <p>Entrega el mismo día en CDMX y área metropolitana, lista para sorprender.</p>
                 </div>
             </div>
         </div>
@@ -3615,5 +3681,9 @@
     if (cart.length) updateCart();
     </script>
 
+    <script src="/scrollcraft/scrollcraft.js"></script>
+    <script>
+      if (window.ScrollCraft) ScrollCraft.mount(document.querySelector('.scroll-story'));
+    </script>
 </body>
 </html>
