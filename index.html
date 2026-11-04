@@ -360,6 +360,50 @@
             color: var(--text);
         }
         .hero-finder button { flex: 0 0 auto; }
+
+        .cart-upsell {
+            padding: 0.9rem 1.5rem;
+            border-top: 1px solid #F0E4E5;
+        }
+        .cart-upsell h4 {
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.6rem;
+            color: var(--text);
+        }
+        .cart-upsell-item {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            margin-bottom: 0.6rem;
+        }
+        .cart-upsell-item img {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+        .cart-upsell-item div { flex: 1; font-size: 0.78rem; color: var(--text-light); }
+        .cart-upsell-item strong { display: block; color: var(--text); font-weight: 500; }
+        .cart-upsell-item button {
+            font: inherit;
+            font-size: 0.72rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 100px;
+            border: 1px solid var(--accent);
+            background: none;
+            color: var(--accent);
+            cursor: pointer;
+        }
+
+        .preventa {
+            padding: 4rem 0;
+            background: var(--cream);
+            text-align: center;
+        }
+        .preventa h2 { margin-bottom: 0.8rem; }
+        .preventa p { color: var(--text-light); max-width: 560px; margin: 0 auto 1.2rem; }
+        .preventa .countdown { justify-content: center; }
         .hero-finder-msg {
             flex: 1 1 100%;
             margin: 0;
@@ -2828,6 +2872,21 @@
     </section>
 
     <!-- TESTIMONIALS -->
+    <!-- PREVENTA DÍA DE LAS MADRES (se activa desde PREVENTA_MADRES en el script) -->
+    <section class="preventa" id="preventaMadres" hidden>
+        <div class="container">
+            <span class="section-label">Preventa</span>
+            <h2>Día de las Madres</h2>
+            <p id="preventaTexto">Reserva tu arreglo con fecha de entrega asegurada.</p>
+            <div class="countdown" id="preventaCountdown">
+                <div class="countdown-item"><span class="num" id="pvDias">--</span><span class="label">Días</span></div>
+                <div class="countdown-item"><span class="num" id="pvHrs">--</span><span class="label">Horas</span></div>
+                <div class="countdown-item"><span class="num" id="pvMin">--</span><span class="label">Min</span></div>
+            </div>
+            <a href="#tienda" class="btn btn-fill">Reservar mi arreglo</a>
+        </div>
+    </section>
+
     <section class="testimonials" id="testimonios">
         <div class="container">
             <div class="section-header-center fade-in">
@@ -3145,6 +3204,7 @@
                 <a href="#tienda" class="btn btn-outline" style="margin-top: 1rem; font-size: 0.8rem;" onclick="toggleCart()">Ver productos</a>
             </div>
         </div>
+        <div class="cart-upsell" id="cartUpsell" hidden></div>
         <div class="cart-footer" id="cartFooter" style="display: none;">
             <div class="cart-total"><span>Subtotal</span><span id="cartSubtotal">$0</span></div>
             <div class="cart-total"><span>Envío</span><span id="cartShippingCost">$99</span></div>
@@ -3326,6 +3386,7 @@
             emptyEl.style.display = 'block';
             footerEl.style.display = 'none';
             itemsEl.querySelectorAll('.cart-item').forEach(e => e.remove());
+            renderUpsell();
             return;
         }
 
@@ -3358,6 +3419,7 @@
         document.getElementById('cartShippingCost').textContent = shipping === 0 ? 'GRATIS' : `$${shipping}`;
         document.getElementById('cartTotal').textContent = `$${total.toLocaleString()} MXN`;
         document.getElementById('cartTotalBtn').textContent = `$${total.toLocaleString()}`;
+        renderUpsell();
     }
 
     function toggleCart(forceOpen) {
@@ -3438,6 +3500,55 @@
         return new Date().toLocaleDateString('en-CA', { timeZone: 'America/Mexico_City' });
     }
 
+    // ── Preventa Día de las Madres ──
+    // Déjalo en activa:false hasta tener fechas reales. cierre = último día
+    // para pedir; entrega = fecha de entrega de la preventa (YYYY-MM-DD, CDMX).
+    const PREVENTA_MADRES = { activa: false, cierre: '2027-05-03', entrega: '2027-05-10' };
+
+    function iniciarPreventa() {
+        if (!PREVENTA_MADRES.activa) return;
+        const sec = document.getElementById('preventaMadres');
+        const cierreFin = new Date(PREVENTA_MADRES.cierre + 'T23:59:59-06:00');
+        if (new Date() > cierreFin) return;
+        sec.hidden = false;
+        const texto = document.getElementById('preventaTexto');
+        texto.textContent = 'Pide antes del ' + PREVENTA_MADRES.cierre + ' y tu arreglo llega el ' + PREVENTA_MADRES.entrega + ' en CDMX.';
+        const pintar = function () {
+            const ms = Math.max(0, cierreFin - new Date());
+            const d = Math.floor(ms / 86400000);
+            const h = Math.floor(ms / 3600000) % 24;
+            const m = Math.floor(ms / 60000) % 60;
+            document.getElementById('pvDias').textContent = d;
+            document.getElementById('pvHrs').textContent = String(h).padStart(2, '0');
+            document.getElementById('pvMin').textContent = String(m).padStart(2, '0');
+        };
+        pintar();
+        setInterval(pintar, 60000);
+    }
+
+    // ── Sugerencias en el carrito ──
+    function renderUpsell() {
+        const box = document.getElementById('cartUpsell');
+        if (!box) return;
+        const enCarrito = cart.map(c => c.id);
+        const candidatos = products
+            .filter(p => !enCarrito.includes(p.id) && p.stock !== 0)
+            .sort((a, b) => (a.cat === 'gifts' ? -1 : 0) - (b.cat === 'gifts' ? -1 : 0))
+            .slice(0, 2);
+        if (cart.length === 0 || candidatos.length === 0) {
+            box.hidden = true;
+            box.innerHTML = '';
+            return;
+        }
+        box.innerHTML = '<h4>Complementa tu pedido</h4>' + candidatos.map(p =>
+            `<div class="cart-upsell-item">
+                <img loading="lazy" src="${p.img}" alt="${p.name}">
+                <div><strong>${p.name}</strong>$${p.price.toLocaleString()} MXN</div>
+                <button onclick="addToCart(${p.id})">Agregar</button>
+            </div>`).join('');
+        box.hidden = false;
+    }
+
     // ── Buscador de fecha y colonia del hero (sólo CDMX) ──
     function leerEntregaGuardada() {
         try {
@@ -3477,6 +3588,8 @@
         fecha.value = g ? g.fecha : hoy;
         if (g) colonia.value = g.colonia;
     })();
+
+    iniciarPreventa();
 
     function validarEntrega(d) {
         const soloDigitos = function (t) { return (t || '').replace(/\D/g, ''); };
