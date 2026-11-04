@@ -330,6 +330,43 @@
             margin-bottom: 1.5rem;
         }
 
+        .hero-finder {
+            display: flex;
+            gap: 0.6rem;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+            padding: 0.9rem;
+            background: var(--white);
+            border-radius: 18px;
+            box-shadow: 0 6px 24px rgba(43, 34, 38, 0.08);
+            max-width: 560px;
+        }
+        .hero-finder label {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            font-size: 0.72rem;
+            color: var(--text-light);
+            flex: 1 1 150px;
+        }
+        .hero-finder input {
+            font: inherit;
+            font-size: 0.9rem;
+            padding: 0.7rem 0.9rem;
+            border: 1px solid #E8DADB;
+            border-radius: 12px;
+            background: var(--cream);
+            color: var(--text);
+        }
+        .hero-finder button { flex: 0 0 auto; }
+        .hero-finder-msg {
+            flex: 1 1 100%;
+            margin: 0;
+            font-size: 0.8rem;
+            color: var(--accent);
+        }
+
         .btn {
             display: inline-flex;
             align-items: center;
@@ -2518,6 +2555,16 @@
                     Pedir personalizado
                 </a>
             </div>
+            <form class="hero-finder" id="heroFinder" onsubmit="buscarEntrega(event)">
+                <label>Fecha de entrega
+                    <input type="date" id="heroFecha" required>
+                </label>
+                <label>Colonia o alcaldía (CDMX)
+                    <input type="text" id="heroColonia" placeholder="Ej. Roma Norte" maxlength="80" autocomplete="off" required>
+                </label>
+                <button class="btn btn-fill" type="submit">Ver arreglos</button>
+                <p class="hero-finder-msg" id="heroFinderMsg" role="status" hidden></p>
+            </form>
             <div class="hero-guarantee">
                 <div class="guarantee-item">
                     <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
@@ -3349,6 +3396,8 @@
         // Si la pestaña quedó abierta de un día para otro, la fecha vieja
         // se sustituye en lugar de quedarse ofreciendo el día de ayer.
         if (!fecha.value || fecha.value < hoy) fecha.value = hoy;
+        const guardada = leerEntregaGuardada();
+        if (guardada && guardada.fecha >= hoy) fecha.value = guardada.fecha;
 
         document.getElementById('entregaTotal').textContent =
             document.getElementById('cartTotal').textContent;
@@ -3388,6 +3437,46 @@
     function hoyCDMX() {
         return new Date().toLocaleDateString('en-CA', { timeZone: 'America/Mexico_City' });
     }
+
+    // ── Buscador de fecha y colonia del hero (sólo CDMX) ──
+    function leerEntregaGuardada() {
+        try {
+            const g = JSON.parse(localStorage.getItem('bsEntrega') || 'null');
+            return g && g.fecha >= hoyCDMX() ? g : null;
+        } catch (err) { return null; }
+    }
+
+    function buscarEntrega(ev) {
+        ev.preventDefault();
+        const fecha = document.getElementById('heroFecha');
+        const colonia = document.getElementById('heroColonia');
+        const msg = document.getElementById('heroFinderMsg');
+        const hoy = hoyCDMX();
+        let error = '';
+        if (!fecha.value || fecha.value < hoy) error = 'Elige hoy o una fecha posterior.';
+        else if (colonia.value.trim().length < 3) error = 'Escribe tu colonia o alcaldía en CDMX.';
+        if (error) {
+            msg.textContent = error;
+            msg.hidden = false;
+            return;
+        }
+        const datos = { fecha: fecha.value, colonia: colonia.value.trim() };
+        try { localStorage.setItem('bsEntrega', JSON.stringify(datos)); } catch (err) {}
+        msg.textContent = 'Entregamos el ' + datos.fecha + ' en ' + datos.colonia + '. Elige tu arreglo.';
+        msg.hidden = false;
+        document.getElementById('tienda').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    (function initBuscadorEntrega() {
+        const hoy = hoyCDMX();
+        const fecha = document.getElementById('heroFecha');
+        const colonia = document.getElementById('heroColonia');
+        if (!fecha || !colonia) return;
+        fecha.min = hoy;
+        const g = leerEntregaGuardada();
+        fecha.value = g ? g.fecha : hoy;
+        if (g) colonia.value = g.colonia;
+    })();
 
     function validarEntrega(d) {
         const soloDigitos = function (t) { return (t || '').replace(/\D/g, ''); };
